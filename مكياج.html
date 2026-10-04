@@ -1,0 +1,1985 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>قولدن سنت | مكياج</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+  :root {
+    --primary-color: #111;
+    --accent-red: #c0392b;
+    --bg-light: #fafafa;
+    --border-color: #eee;
+    --tabby-tamara-border: #e55322;
+    --border-radius: 12px;
+    --transition: all 0.3s ease;
+  }
+  
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Tajawal', sans-serif;
+    color: var(--primary-color);
+    background: #fff;
+    overflow-x: hidden;
+  }
+  a { text-decoration: none; color: inherit; display: block; }
+  ul { list-style: none; }
+  img { display: block; width: 100%; height: auto; object-fit: cover; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+  .promo-banner { background: #5b1a8c; color: #fff; text-align: center; font-size: 13px; font-weight: 700; padding: 10px; }
+  .promo-banner span { text-decoration: underline; cursor: pointer; margin-right: 5px; }
+
+  .main-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 1px solid var(--border-color); max-width: 800px; margin: 0 auto; position: sticky; top: 0; background: #fff; z-index: 100;}
+  .header-actions { display: flex; gap: 18px; align-items: center; }
+  .action-btn { position: relative; display: flex; align-items: center; justify-content: center; }
+  .action-btn svg { width: 24px; height: 24px; stroke: var(--primary-color); fill: none; }
+  .action-btn.active svg { stroke: var(--accent-red); }
+  .basket-badge { position: absolute; top: -6px; left: -8px; background: var(--accent-red); color: #fff; font-size: 10px; font-weight: 800; border-radius: 50%; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; }
+  
+  .brand-logo { flex: 1; display: flex; justify-content: center; align-items: center; }
+  .brand-logo img { max-height: 38px; width: auto; object-fit: contain; }
+  .faq-content ul li a:hover { color: var(--accent-red); }
+  .menu-toggle { display: flex; align-items: center; justify-content: flex-end; min-width: 66px; }
+  .menu-toggle svg { width: 24px; height: 24px; stroke: var(--primary-color); }
+
+  .search-panel { display: none; max-width: 800px; margin: 0 auto; padding: 12px 16px; border-bottom: 1px solid var(--border-color); background: #fff; }
+  .search-panel.open { display: block; animation: fadeIn 0.25s; }
+  .search-panel input {
+    width: 100%; padding: 12px 18px; border: 1px solid #e6e6e6; border-radius: 30px;
+    font-family: inherit; font-size: 14px; font-weight: 500; outline: none;
+    background: #fafafa; color: #222; transition: var(--transition);
+  }
+  .search-panel input::placeholder { color: #bfbfbf; font-weight: 500; }
+  .search-panel input:focus { border-color: #111; background: #fff; }
+
+  .app-container { max-width: 800px; margin: 0 auto; padding: 0 16px; min-height: 70vh; }
+
+  .store-section { margin: 24px 0; }
+  .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+  .section-header h2 { font-size: 18px; font-weight: 800; }
+  .btn-outline { border: 1px solid #111; border-radius: 20px; padding: 4px 14px; font-size: 12px; font-weight: 700; }
+
+  .products-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+  }
+  @media (min-width: 600px) {
+      .products-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .empty-results { grid-column: 1 / -1; text-align: center; padding: 50px 10px; color: #999; font-weight: 700; font-size: 14px; }
+
+  .item-card {
+    position: relative; border: 1px solid #eee; border-radius: 12px; padding: 10px; text-align: center; background: #fff;
+    display: flex; flex-direction: column; width: 100%; height: 100%; transition: var(--transition);
+  }
+  .item-card:hover { transform: translateY(-3px); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+  .item-badge { position: absolute; top: 8px; left: 8px; background: #2fb99e; color: #fff; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px; z-index: 2; }
+  .item-img { width: 100%; aspect-ratio: 1/1; background: #fff; border-radius: 8px; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 8px; cursor: pointer;}
+  .item-img img { width: 90%; height: 90%; object-fit: contain; transition: var(--transition); }
+  .item-card:hover .item-img img { transform: scale(1.05); }
+  .item-prices { margin: 4px 0; font-weight: 800; font-size: 14px; }
+  .price-current { color: var(--accent-red); }
+  .price-old { color: #aaa; text-decoration: line-through; font-size: 12px; margin-inline-start: 6px; font-weight: 400; }
+  .item-brand { font-size: 11px; color: #555; font-weight: 700; margin-bottom: 4px; }
+  .item-name { font-size: 12px; font-weight: 500; color: #777; line-height: 1.4; height: 34px; overflow: hidden; margin-bottom: 12px; cursor: pointer;}
+  .btn-add { width: 100%; border: 1px solid #ddd; color: var(--primary-color); background: #fff; border-radius: 6px; padding: 8px; font-size: 13px; font-weight: 700; transition: 0.2s; margin-top: auto; }
+  .btn-add:hover { background: var(--primary-color); color: #fff; border-color: var(--primary-color); }
+
+  .product-page { display: none; padding: 20px 0; animation: fadeIn 0.3s; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .back-to-products { background: #f4f4f4; color: #333; padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 700; margin-bottom: 20px; display: inline-flex; align-items: center; gap: 6px; }
+  .back-to-products:hover { background: #e0e0e0; }
+  .product-details { display: grid; grid-template-columns: 1fr; gap: 24px; }
+  @media (min-width: 600px) { .product-details { grid-template-columns: 1fr 1fr; } }
+  .product-gallery { position: relative; }
+  .main-product-image { width: 100%; border-radius: var(--border-radius); border: 1px solid var(--border-color); margin-bottom: 12px; aspect-ratio: 1/1; object-fit: contain; padding: 10px; }
+  .product-thumbnails { display: flex; gap: 8px; flex-wrap: wrap; }
+  .product-thumbnail { width: 60px; height: 60px; object-fit: contain; border-radius: 8px; cursor: pointer; border: 2px solid var(--border-color); padding: 4px;}
+  .product-thumbnail.active { border-color: var(--primary-color); }
+  .product-title-detail { font-size: 1.4rem; margin-bottom: 8px; font-weight: 800; }
+  .product-price-detail { font-size: 1.5rem; font-weight: 800; color: var(--accent-red); margin-bottom: 16px; }
+  .product-description { font-size: 14px; color: #555; line-height: 1.6; margin-bottom: 24px; }
+  .product-options { margin-bottom: 16px; }
+  .option-title { font-weight: 700; font-size: 13px; margin-bottom: 8px; display: block; }
+  .option-values { display: flex; gap: 8px; flex-wrap: wrap; }
+  .option-value { padding: 6px 14px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 13px; cursor: pointer; transition: 0.2s; font-weight: 500;}
+  .option-value.selected { background: var(--primary-color); color: #fff; border-color: var(--primary-color); }
+  .size-note { font-size: 11.5px; color: #999; margin-top: 10px; font-weight: 500; }
+  #add-to-cart-detail { background: var(--primary-color); color: #fff; padding: 14px; font-size: 15px; border-radius: 8px; margin-bottom: 24px; }
+  #add-to-cart-detail:hover { background: #333; }
+  .product-table { width: 100%; border-collapse: collapse; margin-top: 20px; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; }
+  .product-table th, .product-table td { padding: 12px; text-align: right; border-bottom: 1px solid var(--border-color); font-size: 13px; }
+  .product-table th { background-color: var(--bg-light); font-weight: 700; width: 35%; }
+
+  .article-page { display: none; padding: 20px 0 40px; animation: fadeIn 0.3s; }
+  .article-body h1 { font-size: 1.45rem; font-weight: 800; margin-bottom: 14px; line-height: 1.5; }
+  .article-body h2 { font-size: 1.05rem; font-weight: 800; margin: 22px 0 8px; color: #111; }
+  .article-body p { font-size: 14px; line-height: 1.9; color: #4a4a4a; margin-bottom: 10px; }
+  .article-body ul { list-style: disc; padding-inline-start: 22px; margin-bottom: 12px; }
+  .article-body ol { list-style: decimal; padding-inline-start: 22px; margin-bottom: 12px; }
+  .article-body li { font-size: 14px; line-height: 1.9; color: #4a4a4a; margin-bottom: 4px; }
+  .article-body hr { border: none; border-top: 1px solid var(--border-color); margin: 24px 0; }
+
+  .tabby-tamara-strip { border: 2px solid var(--tabby-tamara-border); border-radius: 10px; margin: 24px 0 16px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; background: #fff; }
+  .tabby-tamara-strip .text-label { font-weight: 800; font-size: 15px; color: #000; }
+  .tabby-tamara-strip .logos { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 18px; letter-spacing: -0.5px; }
+  .tabby-logo { font-family: sans-serif; font-weight: 900; }
+  .tamara-logo { display: flex; align-items: center; gap: 4px; }
+  .tamara-logo span { font-size: 12px; background: #000; color: #fff; border-radius: 50%; width: 18px; height: 18px; display: inline-flex; align-items: center; justify-content: center; }
+
+  .features-grid-bottom { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px; }
+  .feature-box { background: #fcfcfc; border: 1px solid #eaeaea; border-radius: 10px; padding: 12px; display: flex; align-items: center; justify-content: space-between; position: relative; min-height: 65px; }
+  .feature-box .f-text { font-size: 12.5px; font-weight: 800; line-height: 1.3; color: #222; max-width: 70%; }
+  .feature-box .f-icon { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; }
+  .feature-box .f-icon svg { width: 26px; height: 26px; stroke: #000; stroke-width: 1.5; fill: none; }
+  .feature-badge { position: absolute; top: 6px; left: 6px; background: var(--accent-red); color: #fff; font-size: 9px; font-weight: 800; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+
+  .site-footer { border-top: 1px solid var(--border-color); margin-top: 30px; }
+  .faq-block { border-bottom: 1px solid var(--border-color); }
+  .faq-title { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; font-size: 14.5px; font-weight: 800; cursor: pointer; }
+  .faq-title .icon-arrow { transition: transform 0.3s; font-size: 12px; color: #555; }
+  .faq-block.active .icon-arrow { transform: rotate(180deg); }
+  .faq-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+  .faq-block.active .faq-content { max-height: 900px; padding-bottom: 16px; }
+  .faq-content ul li { padding: 8px 0; font-size: 13.5px; color: #555; font-weight: 500; border-bottom: 1px dashed #f5f5f5; }
+  .business-auth-badge { text-align: center; padding: 20px 0 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+  .business-auth-badge img { width: 60px; height: auto; object-fit: contain; }
+  .business-auth-badge span { font-size: 12px; color: #777; font-weight: 700; }
+  .copyright-bar { background: var(--bg-light); padding: 20px; font-size: 12px; color: #777; text-align: center; border-top: 1px solid var(--border-color); margin-top: 20px; }
+
+  .fab-up { position: fixed; bottom: 20px; left: 16px; width: 42px; height: 42px; border-radius: 50%; background: #333; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 60; }
+  .fab-up svg { width: 20px; height: 20px; stroke: #fff; fill: none; }
+  
+  /* ✅ تم رفع z-index للـ backdrop والـ drawer ليظهرا فوق الهيدر */
+  .backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 190; display: none; }
+  .backdrop.active { display: block; }
+  .drawer { position: fixed; top: 0; bottom: 0; right: -100%; width: min(320px, 85vw); background: #fff; z-index: 195; transition: right 0.3s ease; overflow-y: auto; display: flex; flex-direction: column; }
+  .drawer.show { right: 0; }
+  .drawer.left-side { right: auto; left: -100%; transition: left 0.3s ease; }
+  .drawer.left-side.show { left: 0; }
+  .drawer-header { display: flex; justify-content: space-between; align-items: center; padding: 16px; border-bottom: 1px solid var(--border-color); font-weight: 800; font-size: 16px; position: sticky; top: 0; background: #fff; z-index: 2; }
+  
+  .cart-container { padding: 16px; flex: 1; overflow-y: auto; }
+  .basket-item { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid #f2f2f2; align-items: center; }
+  .basket-item img { width: 55px; height: 55px; object-fit: contain; background: var(--bg-light); border-radius: 6px; border: 1px solid var(--border-color); }
+  .basket-info { flex: 1; }
+  .basket-title { font-size: 12.5px; font-weight: 700; line-height: 1.3; }
+  .basket-price { font-size: 13px; color: var(--accent-red); font-weight: 800; margin-top: 4px; }
+  .basket-remove { color: #999; font-size: 12px; text-decoration: underline; }
+  .basket-summary { padding: 16px; font-weight: 800; font-size: 15px; border-top: 2px solid var(--primary-color); position: sticky; bottom: 0; background: #fff; }
+
+  .alert-toast { position: fixed; bottom: 78px; left: 50%; transform: translateX(-50%); background: var(--primary-color); color: #fff; padding: 10px 24px; border-radius: 30px; font-size: 13px; font-weight: 700; z-index: 300; opacity: 0; pointer-events: none; transition: 0.3s; }
+  .alert-toast.visible { opacity: 1; bottom: 90px; }
+</style>
+</head>
+<body>
+
+<div class="promo-banner">اليوم فقط! خصم 15% | كود: JUL15 &nbsp; <span>تطبق الشروط</span></div>
+
+<header class="main-header">
+
+  <div class="header-actions">
+    <button class="action-btn" id="searchToggle" aria-label="بحث">
+      <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+    </button>
+
+    <button class="action-btn" onclick="toggleDrawer('cartDrawer')" aria-label="السلة">
+      <svg viewBox="0 0 24 24" stroke-width="2"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6L4 2H2"/><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/></svg>
+      <span class="basket-badge" id="basketCounter" style="display:none;">0</span>
+    </button>
+  </div>
+
+  <a class="brand-logo" href="#" onclick="showHome(event)">
+    <img src="https://images.ctfassets.net/23i1rgq9xnnb/6vBhFu5r54V7ELwYVv0nPO/7093a34dd46557c301117d54a14b0de7/GS-LOGO__3_.png?fm=avif&q=62&w=256" alt="شعار المتجر">
+  </a>
+
+  <button class="menu-toggle" onclick="toggleDrawer('mobileMenu')" aria-label="القائمة">
+    <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+  </button>
+</header>
+
+<div class="search-panel" id="searchPanel">
+  <input type="text" id="searchInput" placeholder="ابحث في قائمة مكياج..." autocomplete="off">
+</div>
+
+<div class="app-container">
+
+  <section class="store-section" id="products-section">
+    <div class="section-header">
+      <h2 id="products-title">كل مكياج</h2>
+    </div>
+    <div class="products-grid" id="featured-products">
+    </div>
+  </section>
+
+  <section class="product-page" id="product-page">
+    <button class="back-to-products" id="back-to-products">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      العودة للمنتجات
+    </button>
+    <div class="product-details" id="product-details">
+    </div>
+  </section>
+
+  <section class="article-page" id="article-page">
+    <button class="back-to-products" onclick="showHome(event)">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      العودة للرئيسية
+    </button>
+    <article class="article-body" id="article-body"></article>
+  </section>
+
+  <div class="tabby-tamara-strip">
+    <div class="logos">
+      <span class="tabby-logo">tabby</span>
+      <span class="tamara-logo"><span>♥</span> tamara</span>
+    </div>
+    <div class="text-label">وادفع لاحقاً</div>
+  </div>
+
+  <div class="features-grid-bottom">
+    <div class="feature-box">
+      <div class="f-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+      <div class="f-text">توصيل سريع<br>خلال 1-3 أيام</div>
+    </div>
+    <div class="feature-box">
+      <span class="feature-badge">%5</span>
+      <div class="f-icon"><svg viewBox="0 0 24 24"><path d="M20 12V8H6a2 2 0 01-2-2c0-1.1.9-2 2-2h12v4"/><path d="M4 6v12a2 2 0 002 2h14v-4"/><circle cx="18" cy="16" r="2"/></svg></div>
+      <div class="f-text">برنامــــــج<br>الكاش باك</div>
+    </div>
+    <div class="feature-box">
+      <div class="f-icon"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
+      <div class="f-text">منتجاتنا<br>أصلية 100%</div>
+    </div>
+    <div class="feature-box">
+      <div class="f-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+      <div class="f-text">إرجاع مجاني<br>وسهــــــــــــــل</div>
+    </div>
+  </div>
+
+<footer class="site-footer">
+    
+    <div class="faq-block active">
+      <div class="faq-title" onclick="this.parentElement.classList.toggle('active')">
+        <span>خدمة العملاء</span>
+        <span class="icon-arrow">▼</span>
+      </div>
+      <div class="faq-content">
+        <ul>
+          <li><a href="#" data-article="faq">الأسئلة الأكثر تكراراً (FAQ)</a></li>
+          <li><a href="#" data-article="payment">طرق الدفع (مدى، فيزا، تابي، تمارا، الدفع عند الاستلام)</a></li>
+          <li><a href="#" data-article="shipping">الشحن والتوصيل (التوصيل السريع للمملكة والخليج)</a></li>
+          <li><a href="#" data-article="returns">سياسة الاستبدال والاسترجاع (إرجاع مجاني خلال 14 يوم)</a></li>
+          <li><a href="#" data-article="tracking">تتبع شحنتك ومشترياتك</a></li>
+        </ul>
+        
+        <div class="business-auth-badge">
+          <a href="https://ecregistry.sa" target="_blank">
+            <img src="https://imagedelivery.net/nU9Yamkp250UHNYBIVAE6w/5bd6720d-f098-4559-5eea-457564de8100/public" alt="موثق لدى منصة الأعمال" onerror="this.src='https://assets.salla.cloud/themes/default/assets/images/sbc.png'">
+          </a>
+          <span>موثق لدى منصة الأعمال</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-block">
+      <div class="faq-title" onclick="this.parentElement.classList.toggle('active')">
+        <span>للشكاوى والمقترحات</span>
+        <span class="icon-arrow">▼</span>
+      </div>
+      <div class="faq-content">
+        <ul>
+          <li><strong>البريد الإلكتروني:</strong> <a href="mailto:care@goldenscent.com">care@goldenscent.com</a></li>
+          <li><strong>الواتساب المباشر:</strong> <a href="https://wa.me/966500000000" target="_blank">+966 50 000 0000</a></li>
+          <li><strong>الهاتف الموحد:</strong> <a href="tel:8001234567">800-123-4567</a></li>
+          <li><strong>أوقات العمل:</strong> يومياً من 9:00 صباحاً حتى 11:00 مساءً</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="faq-block">
+      <div class="faq-title" onclick="this.parentElement.classList.toggle('active')">
+        <span>عن قولدن سنت</span>
+        <span class="icon-arrow">▼</span>
+      </div>
+      <div class="faq-content">
+        <ul>
+          <li><a href="#" data-article="about">من نحن (قصة قولدن سنت وأهدافنا)</a></li>
+          <li><a href="#" data-article="authenticity">ضمان الأصالة (منتجات أصلية ومضمونة 100%)</a></li>
+          <li><a href="#" data-article="terms">الشروط والأحكام الخاصة بالموقع</a></li>
+          <li><a href="#" data-article="privacy">سياسة الخصوصية وحماية البيانات</a></li>
+          <li><a href="#" data-article="affiliate">برنامج التسويق بالعمولة (الأفلييت)</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+</div> 
+
+<div class="copyright-bar">جميع الحقوق محفوظة © GOLDEN SCENT 2026 | المملكة العربية السعودية</div>
+
+<button class="fab-up" onclick="window.scrollTo({top:0})"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg></button>
+
+<div class="backdrop" id="backdrop" onclick="closeDrawers()"></div>
+
+<div class="drawer left-side" id="mobileMenu">
+  <div class="drawer-header"><span>القائمة</span><button onclick="closeDrawers()">✕</button></div>
+  <div style="padding: 16px; display:flex; flex-direction:column; gap:16px; font-weight:700;">
+    <a href="#" data-filter="all">الرئيسية</a>
+    <a href="#" data-filter="all">كل مكياج</a>
+    <a href="#" data-filter="وجه">وجه</a>
+    <a href="#" data-filter="شفاه">شفاه</a>
+    <a href="#" data-filter="عيون">عيون</a>
+    <a href="#" data-filter="جمال كوري">جمال كوري</a>
+  </div>
+</div>
+
+<div class="drawer" id="cartDrawer">
+  <div class="drawer-header"><span>سلتي</span><button onclick="closeDrawers()">✕</button></div>
+  <div class="cart-container" id="basketItemsWrapper"></div>
+  <div class="basket-summary">الإجمالي: <span id="basketTotalPrice">0</span> ر.س</div>
+</div>
+
+<div class="alert-toast" id="systemToast"></div>
+
+<script>
+    /* ============================================================
+       بيانات المنتجات الأصلية (مكياج)
+       ============================================================ */
+    const products = [
+    {
+      "id": 1,
+      "name": "شارلوت تلبوري - احمر شفاه فاخر",
+      "price": "85 ر.س",
+      "originalPrice": "200 ر.س",
+      "image": "https://f.nooncdn.com/p/pzsku/Z89832513223E67B4B8B0Z/45/1750680489/99538b85-8999-4b16-8284-9e40662de637.jpg?format=webp&width=800",
+      "category": "مكياج",
+      "subcategory": "شفاه",
+      "brand": "شارلوت تلبوري",
+      "description": "✨ **ارتقِ بإطلالتك إلى مستوى جديد من الفخامة** مع احمر شفاه شارلوت تلبوري الفاخر. تركيبة فريدة تجمع بين العناية الفائقة والتغطية الممتازة تمنحك مظهرًا طبيعيًا وأنيقًا يناسب جميع المناسبات.",
+      "images": [
+        "https://f.nooncdn.com/p/pzsku/Z89832513223E67B4B8B0Z/45/1750680489/99538b85-8999-4b16-8284-9e40662de637.jpg?format=webp&width=800",
+        "https://f.nooncdn.com/p/pzsku/ZE594A171AEE2479A3978Z/45/1750680429/8390898e-1bf6-4748-a966-7c45379f845e.jpg?format=webp&width=800",
+        "https://f.nooncdn.com/p/pzsku/ZE594A171AEE2479A3978Z/45/1750680440/61a12eb7-dde9-4db2-a77f-f6a69b5f7532.jpg?format=webp&width=800"
+      ],
+      "colors": ["وردي فاتح", "أحمر وردي", "بيج فاتح", "بيج داكن", "عسلي", "كهرماني"],
+      "shades": ["1 Fair", "2 Medium", "3 Tan", "4 Deep", "5 Rich"],
+      "sizes": ["30ml", "50ml", "75ml"],
+      "الحجم": ["30ml", "50ml", "75ml"],
+      "النوع": "أحمر شفاه سائل"
+    },
+    {
+      "id": 2,
+      "name": "باليت ظلال عيون فلورمار - 003 صن سيت",
+      "price": "49 ر.س",
+      "image": "https://f.nooncdn.com/p/pzsku/Z42AFDE8EA99AFFD15A76Z/45/_/1738048155/9fe32a96-ed68-4c13-8b08-07082bf53ba6.jpg?format=webp&width=800",
+      "category": "مكياج",
+      "subcategory": "عيون",
+      "brand": "فلورمار",
+      "description": "🌅 **اكتشفي سحر ألوان غروب الشمس** مع باليت ظلال العيون فلورمار 003 صن سيت. ألوان مستوحاة من لوحة غروب الشمس الساحرة، من الدرجات الذهبية الدافئة إلى الألوان النارية البرتقالية والوردية.",
+      "images": [
+        "https://f.nooncdn.com/p/pzsku/Z42AFDE8EA99AFFD15A76Z/45/_/1738048155/9fe32a96-ed68-4c13-8b08-07082bf53ba6.jpg?format=webp&width=800",
+        "https://f.nooncdn.com/p/pzsku/Z42AFDE8EA99AFFD15A76Z/45/_/1715073416/b8b71637-7c91-4605-84d9-aede34ef6673.jpg?format=webp&width=800",
+        "https://f.nooncdn.com/p/pzsku/Z42AFDE8EA99AFFD15A76Z/45/_/1715073427/c7ecc672-392e-47a9-8b05-f45dab064067.jpg?format=webp&width=800"
+      ],
+      "colors": ["SUNSET", "GOLDEN HOUR", "TWILIGHT", "SUNRISE", "AFTERGLOW"],
+      "finishTypes": ["لامع", "معدني", "مات", "ساتين"],
+      "sizes": ["8 ألوان", "12 لون", "16 لون"],
+      "الحجم": ["8 ألوان", "12 لون", "16 لون"],
+      "النوع": "باليت ظلال عيون"
+    },
+    {
+      "id": 3,
+      "name": "بريب-ست-جلو الأصلي - بخاخ متعدد الاستخدامات",
+      "price": "49 ر.س",
+      "image": "https://f.nooncdn.com/p/pzsku/Z8FD85FB41DAB51B854D6Z/45/_/1738047829/4b88e186-e5f5-4536-9c7b-f529bdedfa1e.jpg?format=webp&width=800",
+      "category": "مكياج",
+      "subcategory": "وجه",
+      "brand": "ايكونيك لندن",
+      "description": "💎 **3 في 1 - منتج لا يمكن الاستغناء عنه** في روتين جمالك! بخاخ بريب-ست-جلو الأصلي من ايكونيك لندن هو الحل الأمثل لتحضير البشرة، تثبيت المكياج، وإضافة إشراقة طبيعية.",
+      "images": [
+        "https://f.nooncdn.com/p/pzsku/Z8FD85FB41DAB51B854D6Z/45/_/1738047829/4b88e186-e5f5-4536-9c7b-f529bdedfa1e.jpg?format=webp&width=800",
+        "https://f.nooncdn.com/p/pzsku/ZA11CC9B001F19DE6CA0CZ/45/_/1739402698/1e435ed0-b0c6-4918-b5f7-a271fdf30025.jpg?format=webp&width=800"
+      ],
+      "scents": ["اوريجينال بدون عطر", "جلو برائحة الورد", "روزي جلو برائحة الفواكة"],
+      "sizes": ["50ml", "100ml", "200ml"],
+      "الحجم": ["50ml", "100ml", "200ml"],
+      "النوع": "بخاخ متعدد الاستخدامات"
+    },
+    {
+      "id": 4,
+      "name": "باليت أساسيات البشرة إتش دي سكين - مجموعة احترافية",
+      "price": "49 ر.س",
+      "image": "https://f.nooncdn.com/p/pzsku/Z8DCAF45E0F491F491F56Z/45/_/1698936613/8e7ad1f5-0a27-474a-ab2f-d5ca1e299003.jpg?format=webp&width=800",
+      "category": "مكياج",
+      "subcategory": "وجه",
+      "brand": "فلورمار",
+      "description": "🎨 **استوديو مكياج متكامل في باليت واحدة**! باليت أساسيات البشرة إتش دي سكين تمنحك كل ما تحتاجينه لإطلالة احترافية. تحتوي على 6 ألوان كريمية للأساس و6 ألوان كريمية للخدود.",
+      "images": [
+        "https://f.nooncdn.com/p/pzsku/Z8DCAF45E0F491F491F56Z/45/_/1698936613/8e7ad1f5-0a27-474a-ab2f-d5ca1e299003.jpg?format=webp&width=800",
+        "https://f.nooncdn.com/p/pzsku/Z8DCAF45E0F491F491F56Z/45/_/1698936617/4ada1f94-46ce-4ee2-b789-e7b644d8b67e.jpg?format=webp&width=800",
+        "https://f.nooncdn.com/p/pzsku/Z8DCAF45E0F491F491F56Z/45/_/1702460248/9028d087-5fe3-47c0-b023-0da13728e27f.jpg?format=webp&width=800"
+      ],
+      "colorRange": ["فايرة إلى متوسطة", "متوسطة إلى غامقة", "غامقة إلى داكنة"],
+      "sizes": ["باليت صغيرة", "باليت متوسطة", "باليت كبيرة"],
+      "الحجم": ["باليت صغيرة", "باليت متوسطة", "باليت كبيرة"],
+      "النوع": "باليت مكياج متعددة الاستخدامات"
+    },
+    {
+      "id": 5,
+      "name": "بودرة الأساس المضغوطة إتش دي سكين",
+      "price": "60 ر.س",
+      "image": "https://f.nooncdn.com/p/pzsku/Z521A1AF54C8AA1D72782Z/45/1746747601/f649cc3b-8a80-4820-9288-7625b3cacd5a.jpg?format=webp&width=800",
+      "category": "مكياج",
+      "subcategory": "وجه",
+      "brand": "ميك اب فور ايفر",
+      "description": "📸 **بشرة كاملة الإعداد للكاميرا** مع بودرة الأساس المضغوطة إتش دي سكين من ميك أب فور إيفر. بودرة خفيفة الوزن تمنحك تغطية ممتازة وتعمل على تثبيت المكياج لساعات طويلة.",
+      "images": [
+        "https://f.nooncdn.com/p/pzsku/Z521A1AF54C8AA1D72782Z/45/1746747601/f649cc3b-8a80-4820-9288-7625b3cacd5a.jpg?format=webp&width=800",
+        "https://f.nooncdn.com/p/pzsku/Z521A1AF54C8AA1D72782Z/45/1746747602/dfeb7c20-13ff-4e5e-bc34-5cb3a1df461a.jpg?format=webp&width=800",
+        "https://f.nooncdn.com/p/pzsku/Z521A1AF54C8AA1D72782Z/45/1746747603/35e259e4-4132-4922-a3e6-c6a04ee40f07.jpg?format=webp&width=800"
+      ],
+      "shades": ["1N14 Beige", "1R02 Ivory", "1Y04 Yellow", "2N20 Buff", "3N32 Caramel", "4N54 Espresso"],
+      "sizes": ["9g", "12g", "15g"],
+      "الحجم": ["9g", "12g", "15g"],
+      "النوع": "بودرة أساس مضغوطة"
+    },
+    {
+      "id": 6,
+      "name": "بودرة بلاشر مضغوطة كايلي كوزماتيكس - 336 ونتر كيسد",
+      "price": "30 ر.س",
+      "image": "https://f.nooncdn.com/p/pzsku/ZFCEAFF4BFDB9F02097F8Z/45/1746488910/1dd9a5c0-fef4-481b-80ad-734e5d2802b5.jpg?format=webp&width=800",
+      "category": "مكياج",
+      "subcategory": "وجه",
+      "brand": "كايلي كوزماتيكس",
+      "description": "🌸 **لون خدود وردي طبيعي يدوم طوال اليوم** مع بودرة البلاشر المضغوطة من كايلي كوزماتيكس بدرجة ونتر كيسد. تركيبة نباتية تمنحك توهجًا صحيًا يشبه التورد الطبيعي.",
+      "images": [
+        "https://f.nooncdn.com/p/pzsku/ZFCEAFF4BFDB9F02097F8Z/45/1746488910/1dd9a5c0-fef4-481b-80ad-734e5d2802b5.jpg?format=webp&width=800",
+        "https://f.nooncdn.com/p/pzsku/ZFCEAFF4BFDB9F02097F8Z/45/1746488910/71295a62-dd5d-4a81-a881-d8cc132d1529.jpg?format=webp&width=800"
+      ],
+      "colors": ["وردي شتوي", "خوخي دافئ", "بني وردي", "وردي فاتح", "وردي متوسط"],
+      "sizes": ["5g", "8g", "12g"],
+      "الحجم": ["5g", "8g", "12g"],
+      "النوع": "بودرة بلاشر مضغوطة"
+    },
+    {
+      "id": 7,
+      "name": "بودرة بلاشر مضغوطة - بادي اون ذا بلوك",
+      "price": "30 ر.س",
+      "image": "https://f.nooncdn.com/p/pzsku/Z2F83A97BE5D28E9EED88Z/45/1746488223/f7026cec-4b59-4554-8e13-e044fc5b76a0.jpg?format=webp&width=800",
+      "category": "مكياج",
+      "subcategory": "وجه",
+      "brand": "ونتر كيسد",
+      "description": "💥 **لون خدود جريء يلفت الأنظار** مع بودرة البلاشر المضغوطة بادي اون ذا بلوك. صبغات غنية جدًا تمنحك لونًا مكثفًا ومشبعًا بلمسة واحدة فقط.",
+      "images": [
+        "https://f.nooncdn.com/p/pzsku/Z2F83A97BE5D28E9EED88Z/45/1746488223/f7026cec-4b59-4554-8e13-e044fc5b76a0.jpg?format=webp&width=800",
+        "https://f.nooncdn.com/p/pzsku/Z2F83A97BE5D28E9EED88Z/45/1746488222/9c5b50c2-0076-410c-a383-a0ed8fbac0da.jpg?format=webp&width=800"
+      ],
+      "colors": ["بادي اون ذا بلوك", "وردي فوشيا", "برتقالي محترق", "أحمر دافئ", "خوخي غامق"],
+      "sizes": ["6g", "9g", "12g"],
+      "الحجم": ["6g", "9g", "12g"],
+      "النوع": "بودرة بلاشر مضغوطة"
+    },
+    {
+      "id": 11,
+      "name": "بخاخ تثبيت مكياج MASK FIT - مقاوم للكمامات",
+      "price": "20 ر.س",
+      "image": "https://f.nooncdn.com/p/pzsku/Z41BC56A6B17C16CFD863Z/45/_/1739402684/1a9d777d-37c0-4ced-a2c5-9dcfa780d6bb.jpg?format=webp&width=800",
+      "category": "مكياج",
+      "subcategory": "وجه",
+      "brand": "ترتر",
+      "description": "🛡️ **حماية كاملة لمكياجك من التلطخ والانتقال**! بخاخ MASK FIT MAKE UP FIXER هو الحل الثوري للحفاظ على مكياجك مثاليًا طوال اليوم حتى مع ارتداء الكمامة.",
+      "images": [
+        "https://f.nooncdn.com/p/pzsku/Z41BC56A6B17C16CFD863Z/45/_/1739402684/1a9d777d-37c0-4ced-a2c5-9dcfa780d6bb.jpg?format=webp&width=800",
+        "https://f.nooncdn.com/p/pzsku/Z41BC56A6B17C16CFD863Z/45/_/1739402686/97bca349-6a46-4b36-9ea1-4b438f51dd28.jpg?format=webp&width=800"
+      ],
+      "sizes": ["80ml", "120ml", "200ml"],
+      "الحجم": ["80ml", "120ml", "200ml"],
+      "النوع": "بخاخ تثبيت مكياج"
+    },
+    {
+      "id": 28,
+      "name": "بلاشر سائل بلاش دروبس - فروستد بينك",
+      "price": "34 ر.س",
+      "image": "https://f.nooncdn.com/p/pzsku/Z67E9C5C251BB9F5CC401Z/45/1746747908/c2d88979-b16d-4a61-b862-b6981b87ee73.jpg?format=webp&width=800",
+      "category": "مكياج",
+      "subcategory": "وجه",
+      "brand": "روديال",
+      "description": "💖 **توهج خدود وردي ثلجي طبيعي**! بلاش دروبس الفروستد بينك هو بلاشر سائل يمنحك توهجًا صحيًا يشبه تورد الخدود في الطقس البارد.",
+      "images": [
+        "https://f.nooncdn.com/p/pzsku/Z67E9C5C251BB9F5CC401Z/45/1746747908/c2d88979-b16d-4a61-b862-b6981b87ee73.jpg?format=webp&width=800",
+        "https://f.nooncdn.com/p/pzsku/Z67E9C5C251BB9F5CC401Z/45/1746747909/b162b38d-1051-4ea6-b8d3-67c1f8b2955e.jpg?format=webp&width=800"
+      ],
+      "sizes": ["15ml", "30ml", "50ml"],
+      "الحجم": ["15ml", "30ml", "50ml"],
+      "النوع": "بلاشر سائل"
+    },
+    {
+      "id": 29,
+      "name": "خافي عيوب نيكس - دارك بيتش",
+      "price": "34 ر.س",
+      "image": "https://f.nooncdn.com/p/pzsku/Z8BC2E8D4EECD8066B65DZ/45/_/1742807571/972fcd42-ab36-4db1-b7a6-17c4a4645029.jpg?format=webp&width=800",
+      "category": "مكياج",
+      "subcategory": "وجه",
+      "brand": "نيكس",
+      "description": "🎯 **تغطية دقيقة واحترافية لكل العيوب**! خافي العيوب المصحح من نيكس بدرجة دارك بيتش يخفي الهالات السوداء، البثور، الاحمرار، والعيوب الأخرى.",
+      "images": [
+        "https://f.nooncdn.com/p/pzsku/Z8BC2E8D4EECD8066B65DZ/45/_/1742807571/972fcd42-ab36-4db1-b7a6-17c4a4645029.jpg?format=webp&width=800",
+        "https://f.nooncdn.com/p/pzsku/Z8BC2E8D4EECD8066B65DZ/45/_/1742807518/cb60f501-28f4-43f0-9f7b-c7bc46d0e538.jpg?format=webp&width=800"
+      ],
+      "sizes": ["5ml", "10ml", "15ml"],
+      "الحجم": ["5ml", "10ml", "15ml"],
+      "النوع": "خافي عيوب"
+    },
+    {
+      "id": 30,
+      "name": "أحمر شفاه سائل سوبر ستاي فينيل - ثبات 16 ساعة",
+      "price": "19 ر.س",
+      "image": "https://f.nooncdn.com/p/pzsku/Z5DEF595D5381423F78C6Z/45/_/1695829853/0493951a-f1a6-41fd-9364-e1a09ed54f48.jpg?format=webp&width=800",
+      "category": "مكياج",
+      "subcategory": "شفاه",
+      "brand": "ميبلين نيويورك",
+      "description": "💋 **لمعة فينيل تدوم طوال اليوم**! أحمر الشفاه السائل سوبر ستاي فينيل يمنحك لونًا غنيًا ولمعة فينيلية تبقى مثالية حتى 16 ساعة.",
+      "images": [
+        "https://f.nooncdn.com/p/pzsku/Z5DEF595D5381423F78C6Z/45/_/1695829853/0493951a-f1a6-41fd-9364-e1a09ed54f48.jpg?format=webp&width=800",
+        "https://f.nooncdn.com/p/pzsku/Z5DEF595D5381423F78C6Z/45/_/1695829857/5364e571-e795-41ca-bde6-6545f2436233.jpg?format=webp&width=800"
+      ],
+      "sizes": ["5ml", "7ml", "10ml"],
+      "الحجم": ["5ml", "7ml", "10ml"],
+      "النوع": "أحمر شفاه سائل"
+    },
+    {
+      "id": 31,
+      "name": "أحمر شفاه روج ارتيست فور ايفر مت",
+      "price": "10 ر.س",
+      "image": "https://f.nooncdn.com/p/pzsku/Z0CC2BC442A8C17523F37Z/45/1746748369/f98f16b9-92af-47dc-9927-55d0ca3d8511.jpg?format=webp&width=800",
+      "category": "مكياج",
+      "subcategory": "شفاه",
+      "brand": "ميك اب فور ايفر",
+      "description": "🎨 **لمسة فنية تدوم طوال اليوم**! أحمر الشفاه روج ارتيست فور ايفر مت يأتي بعبوة مستوحاة من فرشاة المكياج الفنية، يمنحك لونًا ساتينيًا رائعًا.",
+      "images": [
+        "https://f.nooncdn.com/p/pzsku/Z0CC2BC442A8C17523F37Z/45/1746748369/f98f16b9-92af-47dc-9927-55d0ca3d8511.jpg?format=webp&width=800",
+        "https://f.nooncdn.com/p/pzsku/Z0CC2BC442A8C17523F37Z/45/1746748370/ab04f3f3-d4a2-47cf-bc14-ec4b941c65a0.jpg?format=webp&width=800"
+      ],
+      "sizes": ["3.5g", "5g", "7g"],
+      "الحجم": ["3.5g", "5g", "7g"],
+      "النوع": "أحمر شفاه كريمي"
+    },
+    {
+      "id": 32,
+      "name": "قلم تحديد شفاه لاستنغ مات",
+      "price": "12 ر.س",
+      "image": "https://f.nooncdn.com/p/pzsku/Z3D56E134396CC354DC90Z/45/_/1698990420/53aab4bd-fa2e-41ff-b93e-ef9627045c93.jpg?format=webp&width=800",
+      "category": "مكياج",
+      "subcategory": "شفاه",
+      "brand": "فلورمار",
+      "description": "✏️ **تحديد دقيق وثبات لا يتزعزع**! قلم تحديد الشفاه لاستنغ مات يتميز بقوامه الكريمي الذي يسمح باستخدام دقيق ودمج سلس.",
+      "images": [
+        "https://f.nooncdn.com/p/pzsku/Z3D56E134396CC354DC90Z/45/_/1698990420/53aab4bd-fa2e-41ff-b93e-ef9627045c93.jpg?format=webp&width=800",
+        "https://f.nooncdn.com/p/pzsku/Z3D56E134396CC354DC90Z/45/_/1698990421/82af006b-01f1-4eb8-9cb3-7fd7428ee8ed.jpg?format=webp&width=800"
+      ],
+      "sizes": ["1.2g", "1.5g", "2g"],
+      "الحجم": ["1.2g", "1.5g", "2g"],
+      "النوع": "قلم تحديد شفاه"
+    },
+    {
+      "id": 33,
+      "name": "باليت ظلال عيون ريفلوشن ري-لوديد",
+      "price": "49 ر.س",
+      "image": "https://f.nooncdn.com/p/pzsku/Z5F3597963C6A17F2BC20Z/45/_/1698990535/484f4d9e-2145-4c2d-b3ae-d70df992312a.jpg?format=webp&width=800",
+      "category": "مكياج",
+      "subcategory": "عيون",
+      "brand": "ريفلوشن",
+      "description": "🎨 **أساسيات must-have لكل محبة مكياج**! باليت ريفلوشن ري-لوديد بيزك ماتس تقدم مجموعة من الألوان الأساسية المطفية التي لا غنى عنها.",
+      "images": [
+        "https://f.nooncdn.com/p/pzsku/Z5F3597963C6A17F2BC20Z/45/_/1698990535/484f4d9e-2145-4c2d-b3ae-d70df992312a.jpg?format=webp&width=800",
+        "https://f.nooncdn.com/p/pzsku/Z5F3597963C6A17F2BC20Z/45/_/1698990536/9e337158-7b60-4e13-974b-6a414a2b63b1.jpg?format=webp&width=800"
+      ],
+      "sizes": ["12 لون", "16 لون", "20 لون"],
+      "الحجم": ["12 لون", "16 لون", "20 لون"],
+      "النوع": "باليت ظلال عيون"
+    },
+    {
+      "id": 34,
+      "name": "مجموعة غلام إسنشلز كيكو - استوديو مكياج متكامل",
+      "price": "170 ر.س",
+      "image": "https://f.nooncdn.com/p/pzsku/Z9D2995981291A7DBDAB8Z/45/1752909436/68da8b92-287f-4b8f-9b93-e8d14530073c.jpg?format=webp&width=800",
+      "category": "مكياج",
+      "subcategory": "وجه",
+      "brand": "كيكو ميلانو",
+      "description": "💄 **كل ما تحتاجينه في مجموعة واحدة**! مجموعة غلام إسنشلز من كيكو تقدم أفضل المنتجات الحاصلة على أعلى تقييم في مجموعة متكاملة.",
+      "images": [
+        "https://f.nooncdn.com/p/pzsku/Z9D2995981291A7DBDAB8Z/45/1752909436/68da8b92-287f-4b8f-9b93-e8d14530073c.jpg?format=webp&width=800",
+        "https://f.nooncdn.com/p/pzsku/Z9D2995981291A7DBDAB8Z/45/1752909291/4cedfb6c-223d-4815-ad1c-a32c0dce479f.jpg?format=webp&width=800"
+      ],
+      "sizes": ["مجموعة متوسطة", "مجموعة كبيرة", "مجموعة كاملة"],
+      "الحجم": ["مجموعة متوسطة", "مجموعة كبيرة", "مجموعة كاملة"],
+      "النوع": "مجموعة مكياج متكاملة"
+    },
+    {
+      "id": 35,
+      "name": "ملمع شفاه كلينيك بلاك هني",
+      "price": "49 ر.س",
+      "image": "https://f.nooncdn.com/p/pzsku/ZD5B8581771374C2EDD34Z/45/_/1694568359/64fd9af2-22ad-4f2b-af18-50a201587eef.jpg?format=webp&width=800",
+      "category": "مكياج",
+      "subcategory": "شفاه",
+      "brand": "كلينيك",
+      "description": "🌟 **الكلاسيكي الذي تعلق به الجميع**! ملمع شفاه كلينيك بلاك هني هو منتج iconي يجمع بين ترطيب البلسم ولمعة الملمع.",
+      "images": [
+        "https://f.nooncdn.com/p/pzsku/ZD5B8581771374C2EDD34Z/45/_/1694568359/64fd9af2-22ad-4f2b-af18-50a201587eef.jpg?format=webp&width=800",
+        "https://f.nooncdn.com/p/pzsku/ZD5B8581771374C2EDD34Z/45/_/1694568352/09dd2637-f89f-480d-bb35-fe792a3650b9.jpg?format=webp&width=800"
+      ],
+      "sizes": ["7ml", "15ml", "30ml"],
+      "الحجم": ["7ml", "15ml", "30ml"],
+      "النوع": "ملمع شفاه"
+    },
+    {
+      "id": 39,
+      "name": "مجموعة أحمر شفاه باور بترفلايز سوبر كيوت",
+      "price": "15 ر.س",
+      "image": "https://f.nooncdn.com/p/pzsku/Z3AA13B97064192396638Z/45/_/1745325943/d8e42c35-ccb6-4cfc-9b13-aa4b703e2e1c.jpg?format=webp&width=800",
+      "category": "مكياج",
+      "subcategory": "شفاه",
+      "brand": "ماد بيوتي",
+      "description": "🦋 **3 ألوان فراشة في مجموعة واحدة**! مجموعة أحمر شفاه باور بترفلايز سوبر كيوت تقدم ثلاثة ألوان ساحرة مستوحاة من أجنحة الفراشات.",
+      "images": [
+        "https://f.nooncdn.com/p/pzsku/Z3AA13B97064192396638Z/45/_/1745325943/d8e42c35-ccb6-4cfc-9b13-aa4b703e2e1c.jpg?format=webp&width=800",
+        "https://f.nooncdn.com/p/pzsku/Z3AA13B97064192396638Z/45/_/1745325948/6cb1c7d0-2d48-4dce-9081-f2b28b62a336.jpg?format=webp&width=800"
+      ],
+      "sizes": ["3 قطع", "5 قطع", "7 قطع"],
+      "الحجم": ["3 قطع", "5 قطع", "7 قطع"],
+      "النوع": "مجموعة أحمر شفاه"
+    },
+    {
+      "id": 40,
+      "name": "باليت ظلال عيون فلورمار - ألوان سوداء دراماتيكية",
+      "price": "49 ر.س",
+      "image": "https://f.nooncdn.com/p/pzsku/Z6199FA8E8139EA0A388CZ/45/1746684972/3178b2cb-b0bc-4108-beeb-5afc35f63cb1.jpg?format=webp&width=800",
+      "category": "مكياج",
+      "subcategory": "عيون",
+      "brand": "فلورمار",
+      "description": "🌑 **دراما وجرأة بألوان سوداء عميقة**! باليت ظلال عيون فلورمار تقدم مجموعة من الألوان السوداء والداكنة لإطلالات عيون دراماتيكية وجريئة.",
+      "images": [
+        "https://f.nooncdn.com/p/pzsku/Z6199FA8E8139EA0A388CZ/45/1746684972/3178b2cb-b0bc-4108-beeb-5afc35f63cb1.jpg?format=webp&width=800",
+        "https://f.nooncdn.com/p/pzsku/Z6199FA8E8139EA0A388CZ/45/1746684972/5bb7a825-efab-417a-8c01-12a0a18bf10e.jpg?format=webp&width=800"
+      ],
+      "sizes": ["8 ألوان", "12 لون", "16 لون"],
+      "الحجم": ["8 ألوان", "12 لون", "16 لون"],
+      "النوع": "باليت ظلال عيون"
+    },
+    {
+      "id": 41,
+      "name": "باليت ريفلوشن ألترا بلش اند كونتور - هوت سبايس",
+      "price": "50 ر.س",
+      "image": "https://f.nooncdn.com/p/pzsku/ZDBEA67E3C24DA3E12074Z/45/1746225173/0161a775-3a1f-4520-b8f5-02a5bafce0d8.jpg?format=webp&width=800",
+      "category": "مكياج",
+      "subcategory": "وجه",
+      "brand": "ريفلوشن",
+      "description": "🎨 **8 درجات احترافية في باليت واحدة متكاملة**! باليت ريفلوشن ألترا بلش اند كونتور تمنحك كل ما تحتاجينه من ألوان البلاشر والهايلايتر والكونتور.",
+      "images": [
+        "https://f.nooncdn.com/p/pzsku/ZDBEA67E3C24DA3E12074Z/45/1746225173/0161a775-3a1f-4520-b8f5-02a5bafce0d8.jpg?format=webp&width=800",
+        "https://f.nooncdn.com/p/pzsku/ZDBEA67E3C24DA3E12074Z/45/1746225172/97aaf096-4827-49eb-a193-abcb121584c0.jpg?format=webp&width=800"
+      ],
+      "sizes": ["8 درجات", "12 درجة", "16 درجة"],
+      "الحجم": ["8 درجات", "12 درجة", "16 درجة"],
+      "النوع": "باليت متعددة الاستخدامات"
+    },
+    {
+      "id": 42,
+      "name": "ستيك بلاشر فيلفت تاتش كريمي - جيرانيوم",
+      "price": "49 ر.س",
+      "image": "https://f.nooncdn.com/p/pzsku/ZD6511CA67B77C140F51EZ/45/_/1719229996/16f6d4ed-fdbf-4b64-b5ce-161c454305f6.jpg?format=webp&width=800",
+      "category": "مكياج",
+      "subcategory": "وجه",
+      "brand": "فلورمار",
+      "description": "💫 **لمسة خدود كريمية حريرية**! ستيك البلاشر فيلفت تاتش يتميز بقوامه الكريمي الناعم الذي يثبت على البشرة بسهولة وسلاسة.",
+      "images": [
+        "https://f.nooncdn.com/p/pzsku/ZD6511CA67B77C140F51EZ/45/_/1719229996/16f6d4ed-fdbf-4b64-b5ce-161c454305f6.jpg?format=webp&width=800",
+        "https://f.nooncdn.com/p/pzsku/ZD6511CA67B77C140F51EZ/45/_/1719230005/49a7b68c-a595-441f-a6e3-eff4d94eb98a.jpg?format=webp&width=800"
+      ],
+      "sizes": ["4g", "6g", "8g"],
+      "الحجم": ["4g", "6g", "8g"],
+      "النوع": "ستيك بلاشر كريمي"
+    },
+    {
+      "id": 43,
+      "name": "جل حواجب ذا براو غلو - ثبات 16 ساعة",
+      "price": "19 ر.س",
+      "image": "https://f.nooncdn.com/p/pzsku/ZEFDC3374CF50A827867BZ/45/1746620956/5f80f4c6-9975-489a-ba90-48375bdf95a1.jpg?format=webp&width=800",
+      "category": "مكياج",
+      "subcategory": "عيون",
+      "brand": "نيكس",
+      "description": "✂️ **تصفيف واحترافية لا تنتهي**! جل حواجب ذا براو غلو هو أول منتج تصفيف للحواجب بثبات قوي يصل إلى 16 ساعة.",
+      "images": [
+        "https://f.nooncdn.com/p/pzsku/ZEFDC3374CF50A827867BZ/45/1746620956/5f80f4c6-9975-489a-ba90-48375bdf95a1.jpg?format=webp&width=800",
+        "https://f.nooncdn.com/p/pzsku/ZEFDC3374CF50A827867BZ/45/1746620956/5b1f59b7-c2be-48de-a90e-a50113a3e625.jpg?format=webp&width=800"
+      ],
+      "sizes": ["5ml", "8ml", "12ml"],
+      "الحجم": ["5ml", "8ml", "12ml"],
+      "النوع": "جل حواجب"
+    },
+    {
+      "id": 44,
+      "name": "بخاخ تثبيت فيكس بلس الأصلي",
+      "price": "49 ر.س",
+      "image": "https://f.nooncdn.com/p/pzsku/Z1515735642C5BA2EE5D5Z/45/_/1728912703/c92a8480-b1f9-44fd-9b00-a7b382382043.jpg?format=webp&width=800",
+      "category": "مكياج",
+      "subcategory": "وجه",
+      "brand": "فلورمار",
+      "description": "🔒 **تثبيت واحترافية لا مثيل لها**! بخاخ تثبيت فيكس بلس الأصلي يحمي مكياجك طوال اليوم من العوامل الخارجية.",
+      "images": [
+        "https://f.nooncdn.com/p/pzsku/Z1515735642C5BA2EE5D5Z/45/_/1728912703/c92a8480-b1f9-44fd-9b00-a7b382382043.jpg?format=webp&width=800",
+        "https://f.nooncdn.com/p/pzsku/Z1515735642C5BA2EE5D5Z/45/_/1724320887/27775578-39c3-4919-b29c-a7fe24f65f0a.jpg?format=webp&width=800"
+      ],
+      "sizes": ["30ml", "50ml", "100ml"],
+      "الحجم": ["30ml", "50ml", "100ml"],
+      "النوع": "بخاخ تثبيت مكياج"
+    },
+    {
+      "id": 45,
+      "name": "بلاشر كريمي إنغلوت ستيج - راستي بينك",
+      "price": "12 ر.س",
+      "image": "https://f.nooncdn.com/p/pzsku/Z90B3090CAB18ED79B082Z/45/1752760981/09ce3eb1-0608-4eca-884a-ee55845fe952.jpg?format=webp&width=800",
+      "category": "مكياج",
+      "subcategory": "وجه",
+      "brand": "انجلوت",
+      "description": "🌹 **لون خدود وردي ترابي طبيعي**! البلاشر الكريمي إنغلوت ستيج بلون راستي بينك يمنحك توردًا طبيعيًا.",
+      "images": [
+        "https://f.nooncdn.com/p/pzsku/Z90B3090CAB18ED79B082Z/45/1752760981/09ce3eb1-0608-4eca-884a-ee55845fe952.jpg?format=webp&width=800",
+        "https://f.nooncdn.com/p/pzsku/Z90B3090CAB18ED79B082Z/45/1752760981/165745e7-ecb8-4001-9bdd-f3ebafca9a51.jpg?format=webp&width=800"
+      ],
+      "sizes": ["3g", "5g", "7g"],
+      "الحجم": ["3g", "5g", "7g"],
+      "النوع": "بلاشر كريمي"
+    },
+    {
+      "id": 46,
+      "name": "ملمع شفاه كاتريس شاين بومب - ليب لاكر 040",
+      "price": "49 ر.س",
+      "image": "https://f.nooncdn.com/p/pzsku/ZDF10B037D177C90C34D7Z/45/_/1742540595/2407f9b8-6faf-4fb7-af64-bee483a02099.jpg?format=webp&width=800",
+      "category": "مكياج",
+      "subcategory": "شفاه",
+      "brand": "فلورمار",
+      "description": "💎 **لمعة لاكر فائقة تمنح شفاهًا ممتلئة**! ملمع شفاه كاتريس شاين بومب ليب لاكر يمنحك لمعة عالية غير لزجة مع تأثير تضخيم للشفاه.",
+      "images": [
+        "https://f.nooncdn.com/p/pzsku/ZDF10B037D177C90C34D7Z/45/_/1742540595/2407f9b8-6faf-4fb7-af64-bee483a02099.jpg?format=webp&width=800",
+        "https://f.nooncdn.com/p/pzsku/ZDF10B037D177C90C34D7Z/45/_/1742540598/c925de19-45ea-451e-b0a1-9d35a572b632.jpg?format=webp&width=800"
+      ],
+      "sizes": ["6ml", "9ml", "12ml"],
+      "الحجم": ["6ml", "9ml", "12ml"],
+      "النوع": "ملمع شفاه"
+    },
+    {
+      "id": 47,
+      "name": "أحمر شفاه باودر كيس - مراكش واين",
+      "price": "49 ر.س",
+      "image": "https://f.nooncdn.com/p/pzsku/ZBDD5AB7E31F95DEA7D9CZ/45/_/1698934604/382e7e3e-14df-4d4c-afef-ec8bd81320dd.jpg?format=webp&width=800",
+      "category": "مكياج",
+      "subcategory": "شفاه",
+      "brand": "فلورمار",
+      "description": "🍷 **لون نبيذي جريء بلمسة ماتية أنيقة**! أحمر شفاه باودر كيس بدرجة مراكش واين يمنحك لونًا غنيًا ومكثفًا بلمسة نهائية ماتية مريحة.",
+      "images": [
+        "https://f.nooncdn.com/p/pzsku/ZBDD5AB7E31F95DEA7D9CZ/45/_/1698934604/382e7e3e-14df-4d4c-afef-ec8bd81320dd.jpg?format=webp&width=800",
+        "https://f.nooncdn.com/p/pzsku/ZBDD5AB7E31F95DEA7D9CZ/45/_/1698934607/1ec35109-0a2f-49cf-9f2c-dc7337ec2b78.jpg?format=webp&width=800"
+      ],
+      "sizes": ["3.5g", "5g", "7g"],
+      "الحجم": ["3.5g", "5g", "7g"],
+      "النوع": "أحمر شفاه ماتي"
+    },
+    {
+      "id": 48,
+      "name": "ملمع شفاه بوب بلاش - بلاك هني",
+      "price": "29 ر.س",
+      "image": "https://f.nooncdn.com/p/pzsku/ZE1B0B8BC360FA7F821E6Z/45/1755689513/0f6d216f-8113-486b-9be8-bba8d49e0b0e.jpg?format=webp&width=800",
+      "category": "مكياج",
+      "subcategory": "شفاه",
+      "brand": "فلورمار",
+      "description": "🌟 **الكلاسيكي الذي يحبه الجميع**! ملمع شفاه بوب بلاش بلاك هني هو منتج iconي يجمع بين ترطيب البلسم ولمعة الملمع.",
+      "images": [
+        "https://f.nooncdn.com/p/pzsku/ZE1B0B8BC360FA7F821E6Z/45/1755689513/0f6d216f-8113-486b-9be8-bba8d49e0b0e.jpg?format=webp&width=800",
+        "https://f.nooncdn.com/p/pzsku/ZE1B0B8BC360FA7F821E6Z/45/1755689525/03b954ea-11b2-4d07-90d9-6b6e4aed3c90.jpg?format=webp&width=800"
+      ],
+      "sizes": ["7ml", "15ml", "30ml"],
+      "الحجم": ["7ml", "15ml", "30ml"],
+      "النوع": "ملمع شفاه"
+    },
+    {
+      "id": 56,
+      "name": "مرطب شفاه فات اويل ميسد كول - ترطيب وتبريد",
+      "price": "49 ر.س",
+      "image": "https://f.nooncdn.com/p/pzsku/Z463557BEA32B4103B96FZ/45/1746621037/8e816eaf-f7a9-4c00-9267-b91292c48d16.jpg?format=webp&width=800",
+      "category": "عناية بالشفاه",
+      "subcategory": "شفاه",
+      "brand": "فلورمار",
+      "description": "❄️ **تبريد فوري وترطيب عميق للشفاه**! مرطب شفاه فات اويل ميسد كول يمنحك إحساسًا منعشًا مبردًا مع ترطيب مكثف للشفاه الجافة والمتشققة.",
+      "images": [
+        "https://f.nooncdn.com/p/pzsku/Z463557BEA32B4103B96FZ/45/1746621037/8e816eaf-f7a9-4c00-9267-b91292c48d16.jpg?format=webp&width=800",
+        "https://f.nooncdn.com/p/pzsku/Z463557BEA32B4103B96FZ/45/1746621037/b17ddfc0-8924-4bfd-9a81-52c4cfd3fb94.jpg?format=webp&width=800"
+      ],
+      "sizes": ["4g", "8g", "12g"],
+      "الحجم": ["4g", "8g", "12g"],
+      "النوع": "مرطب شفاه"
+    },
+    {
+      "id": 57,
+      "name": "أحمر شفاه نو اريفيرينت كولور ريتش - 176",
+      "price": "49 ر.س",
+      "image": "https://f.nooncdn.com/p/pzsku/Z6B43A10C02FEE8AB1B66Z/45/_/1731563295/4b15a90c-dc1b-43ec-9a1d-ae79825f1e2c.jpg?format=webp&width=800",
+      "category": "مكياج",
+      "subcategory": "شفاه",
+      "brand": "فلورمار",
+      "description": "💄 **لون غني يدوم طوال اليوم دون توقف**! أحمر شفاه نو اريفيرينت كولور ريتش يمنحك لونًا مكثفًا لا يمحى يبقى مثاليًا لساعات طويلة.",
+      "images": [
+        "https://f.nooncdn.com/p/pzsku/Z6B43A10C02FEE8AB1B66Z/45/_/1731563295/4b15a90c-dc1b-43ec-9a1d-ae79825f1e2c.jpg?format=webp&width=800",
+        "https://f.nooncdn.com/p/pzsku/Z6B43A10C02FEE8AB1B66Z/45/_/1731563388/2293e34d-adf5-4c03-8bf5-d9428663af2b.jpg?format=webp&width=800"
+      ],
+      "sizes": ["3.5g", "5g", "7g"],
+      "الحجم": ["3.5g", "5g", "7g"],
+      "النوع": "أحمر شفاه طويل الثبات"
+    },
+    {
+      "id": 58,
+      "name": "أحمر شفاه انجلوت مات - لون بني ماتي أنيق",
+      "price": "70 ر.س",
+      "image": "https://f.nooncdn.com/p/pzsku/Z373CA02F50FA004A60E7Z/45/1752735754/a0da7a4a-37d1-495f-9a78-95f8c4042576.jpg?format=webp&width=800",
+      "category": "مكياج",
+      "subcategory": "شفاه",
+      "brand": "انجلوت",
+      "description": "🤎 **أناقة البني الماتي لا تضاهى**! أحمر شفاه انجلوت مات يمنحك لونًا بنيًا ماتيًا أنيقًا يناسب جميع المناسبات.",
+      "images": [
+        "https://f.nooncdn.com/p/pzsku/Z373CA02F50FA004A60E7Z/45/1752735754/a0da7a4a-37d1-495f-9a78-95f8c4042576.jpg?format=webp&width=800",
+        "https://f.nooncdn.com/p/pzsku/Z373CA02F50FA004A60E7Z/45/1752735764/2095c1b1-900e-4ca5-b9a6-171b7c2ed213.jpg?format=webp&width=800"
+      ],
+      "sizes": ["3.5g", "4.5g", "5.5g"],
+      "الحجم": ["3.5g", "4.5g", "5.5g"],
+      "النوع": "أحمر شفاه ماتي"
+    },
+    {
+      "id": 59,
+      "name": "ملمع الشفاه والخدود بيلو توك - كولور اوف باشن",
+      "price": "190 ر.س",
+      "originalPrice": "200 ر.س",
+      "image": "https://f.nooncdn.com/p/pzsku/Z70800F1E6F75C7BD8E4BZ/45/_/1719220113/db206c02-7aa9-4c61-a0fa-baf8ab3516f2.jpg?format=webp&width=800",
+      "category": "مكياج",
+      "subcategory": "شفاه",
+      "brand": "شارلوت تلبوري",
+      "description": "✨ **لمسة شغف وردية ذهبية متعددة الاستخدامات**! ملمع الشفاه والخدود بيلو توك كولور اوف باشن يمنحك توهجًا ورديًا ذهبيًا يمكن استخدامه على الشفاه والخدود.",
+      "images": [
+        "https://f.nooncdn.com/p/pzsku/Z70800F1E6F75C7BD8E4BZ/45/_/1719220113/db206c02-7aa9-4c61-a0fa-baf8ab3516f2.jpg?format=webp&width=800",
+        "https://f.nooncdn.com/p/pzsku/Z70800F1E6F75C7BD8E4BZ/45/_/1719220153/4c76125c-1932-4860-a773-126ae231700c.jpg?format=webp&width=800"
+      ],
+      "sizes": ["2.5g", "4g", "6g"],
+      "الحجم": ["2.5g", "4g", "6g"],
+      "النوع": "ملمع متعدد الاستخدامات"
+    }
+    ];
+
+    /* ============================================================
+       منتجات جمال كوري (من ملف البيانات)
+       ============================================================ */
+    const koreanProducts = [
+      {
+        "id": 60,
+        "name": "SKIN1004 Madagascar Centella Travel Kit",
+        "price": "60 ر.س",
+        "originalPrice": "100 ر.س",
+        "image": "https://f.nooncdn.com/p/pzsku/ZC1698B2BB54F57D47951Z/45/_/1728481925/db8d8eb1-2064-4742-8af8-9bea178122ec.jpg?format=webp&width=800",
+        "badges": ["جمال كوري"],
+        "category": "العناية بالبشرة",
+        "subcategory": "طقم عناية",
+        "brand": "SKIN1004",
+        "isKorean": true,
+        "description": "طقم سفر متكامل من علامة SKIN1004 الرائدة، يحتوي على 5 منتجات مصغرة من خط Centella الشهير. مثالي للسفر أو لتجربة خط العناية بالبشرة. تركيبة مركزة من خلاصة نبات القنفذية من مدغشقر، تعمل على تهدئة البشرة، تقليل الاحمرار، ومحاربة علامات الشيخوخة.",
+        "images": [
+          "https://f.nooncdn.com/p/pzsku/ZC1698B2BB54F57D47951Z/45/_/1728481925/db8d8eb1-2064-4742-8af8-9bea178122ec.jpg?format=webp&width=800",
+          "https://f.nooncdn.com/p/pzsku/ZC1698B2BB54F57D47951Z/45/_/1728481923/d41c10e4-f4d2-4c0d-838c-252309b1ccd4.jpg?format=webp&width=800",
+          "https://f.nooncdn.com/p/pzsku/ZC1698B2BB54F57D47951Z/45/_/1728222625/06091bd3-0f8c-4209-95a5-7656f5c7eb3a.jpg?format=webp&width=800",
+          "https://f.nooncdn.com/p/pzsku/ZC1698B2BB54F57D47951Z/45/_/1742375973/7b9d347b-0847-47c4-be27-9cb5663a8468.jpg?format=webp&width=800"
+        ],
+        "colors": ["طقم كامل"],
+        "sizes": ["طقم سفر"],
+        "الحجم": ["طقم سفر"],
+        "النوع": "طقم عناية بالبشرة"
+      },
+      {
+        "id": 61,
+        "name": "Red Bean Refreshing Pore Mask - قناع البورفيري المنعش بالفاصوليا الحمراء",
+        "price": "12 ر.س",
+        "image": "https://f.nooncdn.com/p/pzsku/Z25850EF0FC8A86E28DB4Z/45/_/1729163206/1e980031-64d9-486f-9856-60ddbe364154.jpg?format=webp&width=800",
+        "badges": ["جمال كوري"],
+        "category": "العناية بالبشرة",
+        "subcategory": "أقنعة الوجه",
+        "brand": "Isntree",
+        "isKorean": true,
+        "description": "قناع طيني متقدم مصنوع من مسحوق الفاصوليا الحمراء الدقيقة لتنظيف المسام بعمق وإزالة الخلايا الميتة والزيوت الزائدة. يتميز بقوامه الكريمي الذي يتحول إلى قوام شمعي عند الجفاف، مما يسمح له بسحب الشوائب من أعماق المسام. يترك البشرة منعشة، ناعمة، وخالية من اللمعة الدهنية. مثالي للبشرة الدهنية والمختلطة والمعرضة لحب الشباب.",
+        "images": [
+          "https://f.nooncdn.com/p/pzsku/Z25850EF0FC8A86E28DB4Z/45/_/1729163206/1e980031-64d9-486f-9856-60ddbe364154.jpg?format=webp&width=800",
+          "https://f.nooncdn.com/p/pzsku/Z25850EF0FC8A86E28DB4Z/45/_/1728481571/2c07b908-eb39-428e-af18-c5d06e8a633d.jpg?format=webp&width=800",
+          "https://f.nooncdn.com/p/pzsku/Z25850EF0FC8A86E28DB4Z/45/_/1728481601/00b74ae8-f2c7-43fd-9117-298120174456.jpg?format=webp&width=800"
+        ],
+        "colors": ["أصلي"],
+        "sizes": ["50 مل"],
+        "الحجم": ["50 مل"],
+        "النوع": "قناع طيني للوجه"
+      },
+      {
+        "id": 62,
+        "name": "ANUA Heartleaf 70% Cleansing Pad - مناديل تونر Heartleaf من ANUA",
+        "price": "17 ر.س",
+        "image": "https://f.nooncdn.com/p/pzsku/Z1E37F7F5D05AF944DC56Z/45/_/1728481743/478eb165-19a9-48d2-a287-1775ba0918fb.jpg?format=webp&width=800",
+        "badges": ["جمال كوري"],
+        "category": "العناية بالبشرة",
+        "subcategory": "تونر ومناديل",
+        "brand": "ANUA",
+        "isKorean": true,
+        "description": "مناديل تونر يومية مثالية تحتوي على 70% من خلاصة ورق القلب (Heartleaf) لتهدئة فورية وتقليل المسام المتوسعة. هذه المناديل المتشبعة بالتونر تعمل على تقشير لطيف، موازنة درجة حموضة البشرة، وإعداد البشرة بشكل مثالي قبل المكياج لمنحها مظهر الجلد الزجاجي المتألق. مناسبة لجميع أنواع البشرة، وخاصة الحساسة والمتهيجة.",
+        "images": [
+          "https://f.nooncdn.com/p/pzsku/Z1E37F7F5D05AF944DC56Z/45/_/1728481743/478eb165-19a9-48d2-a287-1775ba0918fb.jpg?format=webp&width=800",
+          "https://f.nooncdn.com/p/pzsku/Z1E37F7F5D05AF944DC56Z/45/_/1728481744/bea0c7a7-4593-44a7-9fa5-909397d4aee4.jpg?format=webp&width=800"
+        ],
+        "colors": ["أصلي"],
+        "sizes": ["70 وسادة"],
+        "الحجم": ["70 وسادة"],
+        "النوع": "مناديل تونر مقشرة وملطفة"
+      },
+      {
+        "id": 63,
+        "name": "TIRTIR Mask Fit Make Up Fixer 80mL - مثبت مكياج من تيرتير",
+        "price": "20 ر.س",
+        "image": "https://f.nooncdn.com/p/pzsku/Z41BC56A6B17C16CFD863Z/45/_/1739402684/1a9d777d-37c0-4ced-a2c5-9dcfa780d6bb.jpg?format=webp&width=800",
+        "badges": ["جمال كوري"],
+        "category": "مكياج",
+        "subcategory": "مثبتات ومضادات للماء",
+        "brand": "TIRTIR",
+        "isKorean": true,
+        "description": "مثبت مكياج مبتكر على شكل سبراي من تيرتير، مصمم لإضفاء لمسة نهائية طويلة الأمد لمظهر المكياج. يتميز بتركيبته الخفيفة غير اللزجة التي تشكل حاجزاً واقياً يمنع تلطيخ المكياج أو ذوبانه، حتى في الظروف الرطبة. يحافظ على المكياج طازجاً ومثبتاً لمدة تصل إلى 12 ساعة. يناسب جميع أنواع البشرة، بما في ذلك الحساسة.",
+        "images": [
+          "https://f.nooncdn.com/p/pzsku/Z41BC56A6B17C16CFD863Z/45/_/1739402684/1a9d777d-37c0-4ced-a2c5-9dcfa780d6bb.jpg?format=webp&width=800",
+          "https://f.nooncdn.com/p/pzsku/Z41BC56A6B17C16CFD863Z/45/_/1739402686/97bca349-6a46-4b36-9ea1-4b438f51dd28.jpg?format=webp&width=800"
+        ],
+        "colors": ["شفاف"],
+        "sizes": ["80 مل"],
+        "الحجم": ["80 مل"],
+        "النوع": "سبراي مثبت للمكياج"
+      },
+      {
+        "id": 64,
+        "name": "SKIN1004 Madagascar Centella Light Cleansing Oil 200ml - زيت تنظيف خفيف",
+        "price": "23 ر.س",
+        "image": "https://f.nooncdn.com/p/pzsku/ZE357327CD0B5CB2F4F8AZ/45/_/1728995058/a733a7b5-bc13-4995-b304-e2362422e420.jpg?format=webp&width=800",
+        "badges": ["جمال كوري"],
+        "category": "العناية بالبشرة",
+        "subcategory": "منظفات",
+        "brand": "SKIN1004",
+        "isKorean": true,
+        "description": "زيت تنظيف خفيف القوام من SKIN1004، مصنوع من زيت Centella و6 زيوت نباتية أخرى. يذوب بلطف المكياج حتى المقاوم للماء، الأوساخ، الزيوت، وواقي الشمس دون أن يسبب لسعة في منطقة العين. قوامه المائي الخفيف يجعلها مناسباً حتى لأولئك الجدد على استخدام زيت التنظيف. غير كوميدوغينيك ولا يسد المسام.",
+        "images": [
+          "https://f.nooncdn.com/p/pzsku/ZE357327CD0B5CB2F4F8AZ/45/_/1728995058/a733a7b5-bc13-4995-b304-e2362422e420.jpg?format=webp&width=800",
+          "https://f.nooncdn.com/p/pzsku/ZE357327CD0B5CB2F4F8AZ/45/_/1728994931/c329b372-6a85-454d-b2c8-5ba2867a20b9.jpg?format=webp&width=800",
+          "https://f.nooncdn.com/p/pzsku/ZE357327CD0B5CB2F4F8AZ/45/_/1728994930/84fefa05-9139-42b8-96a5-ecab70f2bb17.jpg?format=webp&width=800"
+        ],
+        "colors": ["أصلي"],
+        "sizes": ["200 مل"],
+        "الحجم": ["200 مل"],
+        "النوع": "زيت تنظيف/مرحلة التنظيف الأولى"
+      },
+      {
+        "id": 65,
+        "name": "Beauty of Joseon Green Plum Refreshing Cleanser - منظف Green Plum المنعش",
+        "price": "30 ر.س",
+        "image": "https://f.nooncdn.com/p/pzsku/ZFC3B8D9CAE38F9C09B97Z/45/_/1729162079/1279c4b7-7545-4635-b396-37daf44dedf8.jpg?format=webp&width=800",
+        "badges": ["جمال كوري"],
+        "category": "العناية بالبشرة",
+        "subcategory": "منظفات",
+        "brand": "Beauty of Joseon",
+        "isKorean": true,
+        "description": "منظف وجه حمضي قليلاً (pH 6.5) من Beauty of Joseon، مصنوع من مستخلصات البرقوق الأخضر وبذور المونغ لتوفير توازن مثالي بين التنظيف العميق والحفاظ على صحة حاجز البشرة. يرغو برغوة كريمية كثيفة تزيل الشوائب بلطف دون تجريد البشرة من زيوتها الطبيعية. مثالي للاستخدام اليومي كمنظف ثانٍ بعد زيت التنظيف، أو كمنظف رئيسي في الصباح.",
+        "images": [
+          "https://f.nooncdn.com/p/pzsku/ZFC3B8D9CAE38F9C09B97Z/45/_/1729162079/1279c4b7-7545-4635-b396-37daf44dedf8.jpg?format=webp&width=800",
+          "https://f.nooncdn.com/p/pzsku/ZFC3B8D9CAE38F9C09B97Z/45/_/1728481846/ee0c37c9-d90e-4330-9e84-e341800fe5fd.jpg?format=webp&width=800"
+        ],
+        "colors": ["أزرق (لون العبوة)"],
+        "sizes": ["100 مل"],
+        "الحجم": ["100 مل"],
+        "النوع": "جل منظف للوجه"
+      },
+      {
+        "id": 66,
+        "name": "COSRX Acne Pimple Master Patch - لصقات علاج حب الشباب",
+        "price": "2 ر.س",
+        "image": "https://f.nooncdn.com/p/pzsku/ZC036F94E1B81E046FE3BZ/45/_/1728904597/d4be7707-b5a0-4be3-8a02-d07d8513b910.jpg?format=webp&width=800",
+        "badges": ["جمال كوري"],
+        "category": "العناية بالبشرة",
+        "subcategory": "علاج موضعي",
+        "brand": "COSRX",
+        "isKorean": true,
+        "description": "لصقات هيدروكولويد شفافة من COSRX مصممة خصيصًا لعلاج البثور وحب الشباب بشكل موضعي. تعمل على امتصاص القيح والزيوت الزائدة من البثور الناضجة أو المفتوحة، مع حماية المنطقة المصابة من البكتيريا والمزيد من التهيج. تعزز هذه الرقاع التئام أسرع وتقلل من خطر التندب. تتضمن العبوة 24 رقعة بمقاسات مختلفة تناسب جميع أنواع البثور.",
+        "images": [
+          "https://f.nooncdn.com/p/pzsku/ZC036F94E1B81E046FE3BZ/45/_/1728904597/d4be7707-b5a0-4be3-8a02-d07d8513b910.jpg?format=webp&width=800",
+          "https://f.nooncdn.com/p/pzsku/ZC036F94E1B81E046FE3BZ/45/_/1728483663/72940b8f-8504-44e7-b145-c0ce5cf4ca46.jpg?format=webp&width=800"
+        ],
+        "colors": ["شفاف"],
+        "sizes": ["24 رقعة (مقاسات مختلفة)"],
+        "الحجم": ["24 رقعة (مقاسات مختلفة)"],
+        "النوع": "لصقات علاج موضعي للبثور (هيدروكولويد)"
+      },
+      {
+        "id": 67,
+        "name": "COSRX Advanced Snail 96 Mucin Power Essence - إسنسوم snail mucin",
+        "price": "34 ر.س",
+        "image": "https://f.nooncdn.com/p/pzsku/ZF21A5896EF14D157CF36Z/45/_/1728895221/c5f5a44c-a1af-4872-a54a-06188aa270c5.jpg?format=webp&width=800",
+        "badges": ["جمال كوري"],
+        "category": "العناية بالبشرة",
+        "subcategory": "إسنسوم ومصل",
+        "brand": "COSRX",
+        "isKorean": true,
+        "description": "إسنسوم خارق من COSRX يحتوي على 96% من مركب Snail Mucin (مخاط الحلزون) لترطيب عميق وإصلاح مكثف للبشرة. يعمل على تهدئة البشرة المتهيجة، ملء الخطوط الدقيقة، وتحسين مرونة البشرة بشكل ملحوظ. قوامه الهلامي الخفيف يمتص بسرعة دون أن يترك ملمساً لزجاً. مثالي لجميع أنواع البشرة، وخاصة الجافة، الناضجة، أو التالفة.",
+        "images": [
+          "https://f.nooncdn.com/p/pzsku/ZF21A5896EF14D157CF36Z/45/_/1728895221/c5f5a44c-a1af-4872-a54a-06188aa270c5.jpg?format=webp&width=800",
+          "https://f.nooncdn.com/p/pzsku/ZF21A5896EF14D157CF36Z/45/_/1728481867/0203f5ec-c602-4653-8bde-ec66ffe44b40.jpg?format=webp&width=800"
+        ],
+        "colors": ["أصلي"],
+        "sizes": ["100 مل"],
+        "الحجم": ["100 مل"],
+        "النوع": "إسنسوم ترطيب وإصلاح"
+      },
+      {
+        "id": 68,
+        "name": "NEOGEN HYALURONIC ACID AIRY SUN STICK 22g - ستيك واقي شمسي",
+        "price": "9 ر.س",
+        "image": "https://f.nooncdn.com/p/pzsku/Z52A29F826BD59302AA7DZ/45/_/1728904461/7fb4cb01-d29c-4573-bda4-4fcb4e655ce2.jpg?format=webp&width=800",
+        "badges": ["جمال كوري"],
+        "category": "العناية بالبشرة",
+        "subcategory": "واقي الشمس",
+        "brand": "NEOGEN",
+        "isKorean": true,
+        "description": "ستيك واقي شمسي فائق الخفة من NEOGEN، مصمم لإعادة تطبيق الواقي الشمسي بسهولة وبدون فوضى طوال اليوم. يحتوي على 8 أنواع من حمض الهيالورونيك لترطيب البشرة وحمايتها من الأشعة فوق البنفسجية الضارة (SPF50+ PA++++). قوامه الهوائي (Airy) غير اللامع لا يترك طبقة بيضاء أو ملمساً دهنياً. مثالي للاستخدام فوق المكياج.",
+        "images": [
+          "https://f.nooncdn.com/p/pzsku/Z52A29F826BD59302AA7DZ/45/_/1728904461/7fb4cb01-d29c-4573-bda4-4fcb4e655ce2.jpg?format=webp&width=800"
+        ],
+        "colors": ["شفاف"],
+        "sizes": ["22 جم"],
+        "الحجم": ["22 جم"],
+        "النوع": "ستيك واقي من الشمس"
+      },
+      {
+        "id": 69,
+        "name": "Beauty of Joseon Hanbang Serum Discovery Kit - طقم تجربة السيرومات",
+        "price": "19 ر.س",
+        "image": "https://f.nooncdn.com/p/pzsku/Z738D34D8164149F29434Z/45/_/1742375833/22d47e3f-6cb0-41db-be40-96119cc789a4.jpg?format=webp&width=800",
+        "badges": ["جمال كوري"],
+        "category": "العناية بالبشرة",
+        "subcategory": "طقم عينات",
+        "brand": "Beauty of Joseon",
+        "isKorean": true,
+        "description": "طقم اكتشاف مثالي من Beauty of Joseon يتضمن 4 سيرومات مصغرة من خط Hanbang التقليدي. كل سيروم مصمم لاستهداف مشكلة محددة: سيروم تهدئة البشرة (الشاي الأخضر)، سيروم إشراق البشرة (النياسيناميد والبروبوليس)، سيروم إصلاح البشرة (الريتينول)، وسيروم تنعيم البشرة. مثالي للسفر أو لتجربة التركيبات قبل شراء الحجم الكامل.",
+        "images": [
+          "https://f.nooncdn.com/p/pzsku/Z738D34D8164149F29434Z/45/_/1742375833/22d47e3f-6cb0-41db-be40-96119cc789a4.jpg?format=webp&width=800",
+          "https://f.nooncdn.com/p/pzsku/Z738D34D8164149F29434Z/45/_/1728481121/9082c683-d00b-4194-b16d-c21ba3136093.jpg?format=webp&width=800"
+        ],
+        "colors": ["طقم عينات"],
+        "sizes": ["4 قطع مصغرة"],
+        "الحجم": ["4 قطع مصغرة"],
+        "النوع": "طقم سيرومات تجريبية"
+      },
+      {
+        "id": 70,
+        "name": "PURITO Wonder Releaf Centella Mini Kit Unscented - طقم Centella المصغر",
+        "price": "30 ر.س",
+        "image": "https://f.nooncdn.com/p/pzsku/Z628861129773EC7C2F07Z/45/_/1729165147/8489f2ab-0a15-4d32-9026-864e5dd20e62.jpg?format=webp&width=800",
+        "badges": ["جمال كوري"],
+        "category": "العناية بالبشرة",
+        "subcategory": "طقم عناية",
+        "brand": "PURITO",
+        "isKorean": true,
+        "description": "طقم مصغر من Purito خالي من العطور، مخصص للبشرة الحساسة والمتهيجة. يعتمد على Centella Asiatica بتركيز 49% كمكون رئيسي لتهدئة فورية وإصلاح مكثف لحاجز البشرة. يتضمن منظف لطيف، تونر مرطب، سيروم مركز، وكريم غني. مثالي لاستعادة توازن البشرة خلال فترات التوتر، بعد التقشير، أو عند التعرض للعوامل الخارجية المسببة للتهيج.",
+        "images": [
+          "https://f.nooncdn.com/p/pzsku/Z628861129773EC7C2F07Z/45/_/1729165147/8489f2ab-0a15-4d32-9026-864e5dd20e62.jpg?format=webp&width=800",
+          "https://f.nooncdn.com/p/pzsku/Z628861129773EC7C2F07Z/45/_/1728481480/9793a314-28dd-4282-91f0-f81ceb352a86.jpg?format=webp&width=800"
+        ],
+        "colors": ["طقم مصغر"],
+        "sizes": ["4 قطع مصغرة"],
+        "الحجم": ["4 قطع مصغرة"],
+        "النوع": "طقم عناية بالبشرة الحساسة"
+      },
+      {
+        "id": 71,
+        "name": "Numbuzin No.3 Pore Reset Ampoule - أمبول مسام Numbuzin رقم 3",
+        "price": "12 ر.س",
+        "image": "https://f.nooncdn.com/p/pzsku/Z841853FD1FCB981A5A93Z/45/_/1744275152/aac6d4ad-d94a-455d-8849-481f563d6b6a.jpg?format=webp&width=800",
+        "badges": ["جمال كوري"],
+        "category": "العناية بالبشرة",
+        "subcategory": "أمبول وسيروم",
+        "brand": "Numbuzin",
+        "isKorean": true,
+        "description": "أمبول مركز من Numbuzin رقم 3 مصمم لإعادة ضبط وتنقية المسام. يحتوي على مزيج من AHA, BHA, PHA لإزالة الخلايا الميتة والشوائب من أعماق المسام، بالإضافة إلى Niacinamide للتحكم في إفراز الزيوت وتحسين ملمس البشرة. قوامه المائي الخفيف يمتص بسرعة دون أن يترك ملمساً دهنياً. يستهدف المسام الواسعة، البشرة الدهنية، والعيوب.",
+        "images": [
+          "https://f.nooncdn.com/p/pzsku/Z841853FD1FCB981A5A93Z/45/_/1744275152/aac6d4ad-d94a-455d-8849-481f563d6b6a.jpg?format=webp&width=800"
+        ],
+        "colors": ["أصلي"],
+        "sizes": ["30 مل"],
+        "الحجم": ["30 مل"],
+        "النوع": "أمبول علاجي للمسام"
+      },
+      {
+        "id": 72,
+        "name": "The INKEY List Hyaluronic Acid Serum - سيروم حمض الهيالورونيك",
+        "price": "49 ر.س",
+        "image": "https://f.nooncdn.com/p/pzsku/ZF36EF2EB63407D77AEE3Z/45/_/1728904523/cb64420a-f47c-4109-9bef-253c829feb79.jpg?format=webp&width=800",
+        "badges": ["جمال كوري"],
+        "category": "العناية بالبشرة",
+        "subcategory": "سيروم",
+        "brand": "The INKEY List",
+        "isKorean": true,
+        "description": "سيروم ترطيب قوي من The INKEY List يحتوي على 3 أنواع من حمض الهيالورونيك بتركيز 2% لاستهداف طبقات البشرة المختلفة. يعمل على جذب الرطوبة بعمق، ملء الخطوط الدقيقة الناتجة عن الجفاف، وترك البشرة ممتلئة ونضرة. مدعم بفيتامين B5 (بانثينول) لتهدئة البشرة وتعزيز فعالية الترطيب. قوامه الهلامي الخفيف غير اللزج يمتص بسرعة ويناسب استخدامه تحت المكياج.",
+        "images": [
+          "https://f.nooncdn.com/p/pzsku/ZF36EF2EB63407D77AEE3Z/45/_/1728904523/cb64420a-f47c-4109-9bef-253c829feb79.jpg?format=webp&width=800",
+          "https://f.nooncdn.com/p/pzsku/ZF36EF2EB63407D77AEE3Z/45/_/1728481865/84a381fa-6fce-407c-9f8e-9df7f367e81c.jpg?format=webp&width=800"
+        ],
+        "colors": ["شفاف"],
+        "sizes": ["30 مل"],
+        "الحجم": ["30 مل"],
+        "النوع": "سيروم ترطيب"
+      },
+      {
+        "id": 73,
+        "name": "Milani 3D Highlighting Lip Gloss - ملمع شفاه ثلاثي الأبعاد من Milani",
+        "price": "170 ر.س",
+        "image": "https://f.nooncdn.com/p/pzsku/Z8322715F6CD3CBF5B43EZ/45/_/1744098806/34f18138-dcc4-4a83-8ca6-c7ae5a6962d7.jpg?format=webp&width=800",
+        "badges": ["جمال كوري"],
+        "category": "مكياج",
+        "subcategory": "ملمع شفاه",
+        "brand": "Milani",
+        "isKorean": true,
+        "description": "ملمع شفاه فاخر من Milani بتأثير ثلاثي الأبعاد يمنح شفاهك بريقاً لا يقاوم وحجماً مبهراً. يأتي مع Applicator سيليكون مبتكر لتطبيق دقيق وسهل. قوامه الجيل السميك غير اللزج يغلف الشفاه بطبقة لامعة وغنية دون أن يشعرك بالثقل. اللون 03 'مشهد أصفر' يمنح لوناً دافئاً براقاً يناسب جميع درجات البشرة.",
+        "images": [
+          "https://f.nooncdn.com/p/pzsku/Z8322715F6CD3CBF5B43EZ/45/_/1744098806/34f18138-dcc4-4a83-8ca6-c7ae5a6962d7.jpg?format=webp&width=800"
+        ],
+        "colors": ["03 مشهد أصفر"],
+        "sizes": ["5.5 مل"],
+        "الحجم": ["5.5 مل"],
+        "النوع": "ملمع شفاه عالي اللمعان"
+      },
+      {
+        "id": 74,
+        "name": "Cos De BAHA VC Serum 30ml - سيروم فيتامين سي",
+        "price": "32 ر.س",
+        "image": "https://f.nooncdn.com/p/pzsku/ZFE576163752506EC1692Z/45/_/1728481579/66af3b4f-ab7d-4980-b596-42a6a1cf4718.jpg?format=webp&width=800",
+        "badges": ["جمال كوري"],
+        "category": "العناية بالبشرة",
+        "subcategory": "سيروم",
+        "brand": "Cos De BAHA",
+        "isKorean": true,
+        "description": "سيروم فيتامين سي قوي وفعال من Cos De BAHA، مصنوع بـ L-Ascorbic Acid (أقوى أشكال فيتامين سي) لتحقيق أقصى فائدة في مكافحة علامات الشيخوخة وتوحيد لون البشرة. مدعم بـ Arbutin (للتفتيح)، فيتامين B5 (للترطيب والتهدئة)، وحمض الهيالورونيك. يعمل على تحفيز إنتاج الكولاجين، تقليل التجاعيد الدقيقة، ومحاربة البقع الداكنة والتصبغات.",
+        "images": [
+          "https://f.nooncdn.com/p/pzsku/ZFE576163752506EC1692Z/45/_/1728481579/66af3b4f-ab7d-4980-b596-42a6a1cf4718.jpg?format=webp&width=800",
+          "https://f.nooncdn.com/p/pzsku/ZFE576163752506EC1692Z/45/_/1728904483/47cc4bfd-be07-4bb9-bff5-396500a5447e.jpg?format=webp&width=800"
+        ],
+        "colors": ["أصفر فاتح (لون السيروم)"],
+        "sizes": ["30 مل"],
+        "الحجم": ["30 مل"],
+        "النوع": "سيروم فيتامين سي مضاد للأكسدة"
+      },
+      {
+        "id": 75,
+        "name": "ANUA Heartleaf 80% Soothing Ampoule 30ml - أمبول Heartleaf المهدئ من ANUA",
+        "price": "15 ر.س",
+        "image": "https://f.nooncdn.com/p/pzsku/ZA86DB07F3A89F463A46EZ/45/_/1728481516/2641eff3-129b-4c9d-88ee-6d999bf19cda.jpg?format=webp&width=800",
+        "badges": ["جمال كوري"],
+        "category": "العناية بالبشرة",
+        "subcategory": "أمبول",
+        "brand": "ANUA",
+        "isKorean": true,
+        "description": "أمبول مهدئ عالي التركيز من ANUA يحتوي على 80% من خلاصة ورق القلب (Heartleaf) لتهدئة فورية وإصلاح مكثف للبشرة المتهيجة أو المعرضة للاحمرار. يمتص بسهولة ويُعد البشرة بشكل مثالي قبل المكياج لمنحها مظهر الجلد الزجاجي المتألق. يعمل على تقليل الاحمرار، تهدئة الحكة والالتهاب، وتعزيز حاجز البشرة. خفيف وغير لزج، يناسب استخدامه يومياً.",
+        "images": [
+          "https://f.nooncdn.com/p/pzsku/ZA86DB07F3A89F463A46EZ/45/_/1728481516/2641eff3-129b-4c9d-88ee-6d999bf19cda.jpg?format=webp&width=800"
+        ],
+        "colors": ["أصلي"],
+        "sizes": ["30 مل"],
+        "الحجم": ["30 مل"],
+        "النوع": "أمبول مهدئ ومرطب"
+      }
+    ];
+
+    // دمج منتجات جمال كوري مع المصفوفة الأصلية
+    products.push(...koreanProducts);
+
+    // خلط جميع المنتجات عشوائياً بشكل كامل (Fisher-Yates Shuffle)
+    (function shuffleProducts(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+    })(products);
+
+    /* ============================================================
+       نظام السلة
+       ============================================================ */
+    let cart = [];
+
+    function loadCartFromLocalStorage() {
+        const savedCart = localStorage.getItem('jamalkCart');
+        if (savedCart) {
+            cart = JSON.parse(savedCart);
+            updateCartCount();
+        }
+    }
+
+    function saveCartToLocalStorage() {
+        localStorage.setItem('jamalkCart', JSON.stringify(cart));
+    }
+
+    function updateCartCount() {
+        const badge = document.getElementById('basketCounter');
+        const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+        if(badge) {
+            badge.textContent = totalItems;
+            badge.style.display = totalItems > 0 ? 'flex' : 'none';
+        }
+
+        const wrapper = document.getElementById('basketItemsWrapper');
+        if (!wrapper) return;
+
+        if (cart.length === 0) {
+            wrapper.innerHTML = '<div style="text-align:center; padding: 40px 0; color:#888; font-weight: 700;">السلة فارغة حالياً</div>';
+            document.getElementById('basketTotalPrice').textContent = '0';
+            return;
+        }
+
+        let html = '';
+        let totalPrice = 0;
+
+        cart.forEach((cartItem, index) => {
+            let priceNum = parseFloat(String(cartItem.price).replace(/[^\d.]/g, ''));
+            if(!isNaN(priceNum)) totalPrice += priceNum * cartItem.quantity;
+
+            html += `
+            <div class="basket-item">
+                <img src="${cartItem.image}">
+                <div class="basket-info">
+                <div class="basket-title">${cartItem.name}</div>
+                <div class="basket-price">${cartItem.price} (الكمية: ${cartItem.quantity})</div>
+                ${cartItem.selectedSize ? `<div style="font-size:11px; color:#666;">الحجم: ${cartItem.selectedSize}</div>` : ''}
+                </div>
+                <button class="basket-remove" onclick="removeFromCart(${index})">حذف</button>
+            </div>
+            `;
+        });
+
+        wrapper.innerHTML = html;
+        document.getElementById('basketTotalPrice').textContent = Math.round(totalPrice);
+    }
+
+    window.removeFromCart = function(index) {
+        cart.splice(index, 1);
+        saveCartToLocalStorage();
+        updateCartCount();
+    };
+
+    function addToCart(productId, size = null, price = null) {
+        let product = products.find(p => p.id == productId);
+        if (!product) return;
+        const finalPrice = price || product.price;
+
+        const existingItemIndex = cart.findIndex(item =>
+            item.id === product.id && (item.selectedSize || null) === (size || null)
+        );
+
+        if (existingItemIndex > -1) {
+            cart[existingItemIndex].quantity += 1;
+        } else {
+            cart.push({
+                id: product.id,
+                name: product.name,
+                price: finalPrice,
+                image: product.image,
+                quantity: 1,
+                selectedSize: size
+            });
+        }
+        saveCartToLocalStorage();
+        updateCartCount();
+        displayToast('تم إضافة المنتج للسلة بنجاح!');
+    }
+
+    /* ============================================================
+       أدوات مساعدة
+       ============================================================ */
+    function parsePrice(value) {
+        if (typeof value === 'number') return value;
+        const n = parseFloat(String(value).replace(/[^\d.]/g, ''));
+        return isNaN(n) ? 0 : n;
+    }
+
+    function formatPrice(n) {
+        return Math.round(n) + ' ر.س';
+    }
+
+    /* ============================================================
+       الفلترة والبحث
+       ============================================================ */
+    let activeType = null;
+    let searchQuery = '';
+
+    const typeTitles = {
+        'all': 'كل مكياج',
+        'وجه': 'وجه',
+        'شفاه': 'شفاه',
+        'عيون': 'عيون',
+        'جمال كوري': 'جمال كوري'
+    };
+
+    /* تحديد المجموعة التي ينتمي إليها المنتج */
+    function getProductGroup(p) {
+        if (p.isKorean) return 'جمال كوري';
+        const sub = (p.subcategory || '').trim();
+
+        if (sub === 'شفاه' || sub === 'الشفاه') return 'شفاه';
+        if (sub === 'عيون' || sub === 'العيون') return 'عيون';
+        if (sub === 'وجه' || sub === 'الوجه' || sub === 'عناية ما قبل المكياج') return 'وجه';
+
+        const nameL = (p.name || '').toLowerCase();
+        if (nameL.includes('شفاه') || nameL.includes('lip')) return 'شفاه';
+        if (nameL.includes('عيون') || nameL.includes('eye')) return 'عيون';
+        if (nameL.includes('وجه') || nameL.includes('face')) return 'وجه';
+
+        return '';
+    }
+
+    function getFilteredProducts() {
+        const q = searchQuery.trim().toLowerCase();
+        return products.filter(p => {
+            const group = getProductGroup(p);
+            const matchType = !activeType || group === activeType;
+            if (!matchType) return false;
+            if (!q) return true;
+            const haystack = (
+                (p.name || '') + ' ' +
+                (p.brand || '') + ' ' +
+                (p.description || '') + ' ' +
+                (p.category || '') + ' ' +
+                (p.subcategory || '')
+            ).toLowerCase();
+            return haystack.includes(q);
+        });
+    }
+
+    function applyFilters() {
+        renderProducts(getFilteredProducts(), 'featured-products');
+
+        const titleEl = document.getElementById('products-title');
+        if (searchQuery.trim()) {
+            titleEl.textContent = 'نتائج البحث: ' + searchQuery.trim();
+        } else {
+            titleEl.textContent = activeType ? (typeTitles[activeType] || 'كل مكياج') : 'كل مكياج';
+        }
+    }
+
+    function renderProducts(productsArray, containerId) {
+        const productsContainer = document.getElementById(containerId);
+        productsContainer.innerHTML = '';
+
+        if (!productsArray.length) {
+            productsContainer.innerHTML = '<div class="empty-results">لا توجد مكياج مطابقة لبحثك، جرّب كلمة أخرى.</div>';
+            return;
+        }
+
+        productsArray.forEach(product => {
+            const productCard = document.createElement('div');
+            productCard.className = 'item-card';
+            productCard.setAttribute('data-id', product.id);
+
+            let badgesHtml = '';
+            if (product.badges && product.badges.length > 0) {
+                let bg = '#2fb99e';
+                if (product.badges[0].includes('خصم')) bg = '#c0392b';
+                else if (product.isKorean) bg = '#5b1a8c';
+                badgesHtml = `<span class="item-badge" style="background:${bg};">${product.badges[0]}</span>`;
+            }
+
+            let priceHtml = `<div class="item-prices"><span class="price-current">${product.price}</span>`;
+            if (product.originalPrice) {
+                priceHtml += ` <span class="price-old">${product.originalPrice}</span>`;
+            }
+            priceHtml += `</div>`;
+
+            productCard.innerHTML = `
+                ${badgesHtml}
+                <div class="item-img btn-view-product" data-id="${product.id}">
+                    <img src="${product.image}" alt="${product.name}">
+                </div>
+                ${priceHtml}
+                <div class="item-brand">${product.brand || product.category || 'قولدن سنت'}</div>
+                <div class="item-name btn-view-product" data-id="${product.id}">${product.name}</div>
+                <button class="btn-add" data-id="${product.id}">أضف +</button>
+            `;
+            productsContainer.appendChild(productCard);
+        });
+    }
+
+    /* ============================================================
+       صفحة تفاصيل المنتج
+       ============================================================ */
+    function showProductPage(productId) {
+        const product = products.find(p => p.id == productId);
+        if (!product) return;
+
+        document.getElementById('products-section').style.display = 'none';
+        document.getElementById('article-page').style.display = 'none';
+        document.getElementById('product-page').style.display = 'block';
+
+        const sizes = Array.isArray(product["الحجم"]) ? product["الحجم"] : [];
+        const basePrice = parsePrice(product.price);
+        const imagesArray = (product.images && product.images.length) ? product.images : [product.image];
+
+        const thumbnailsHtml = imagesArray.map((img, i) =>
+            `<img src="${img}" class="product-thumbnail ${i === 0 ? 'active' : ''}" data-image="${img}" alt="${product.name}">`
+        ).join('');
+
+        let sizesHtml = '';
+        if (sizes.length) {
+            sizesHtml = `
+                <div class="product-options">
+                    <span class="option-title">اختر الحجم:</span>
+                    <div class="option-values" id="size-values">
+                        ${sizes.map((s, i) => `<span class="option-value ${i === 0 ? 'selected' : ''}" data-index="${i}">${s}</span>`).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        const oldPriceHtml = product.originalPrice
+            ? ` <span class="price-old" style="font-size:14px;font-weight:400;color:#888;">${product.originalPrice}</span>`
+            : '';
+
+        document.getElementById('product-details').innerHTML = `
+            <div class="product-gallery">
+                <img src="${imagesArray[0]}" class="main-product-image" id="main-product-image" alt="${product.name}">
+                <div class="product-thumbnails">${thumbnailsHtml}</div>
+            </div>
+            <div class="product-info-detail">
+                <h2 class="product-title-detail">${product.name}</h2>
+                <div style="color:#777;font-weight:700;margin-bottom:8px;">الماركة: ${product.brand || product.category || 'قولدن سنت'}</div>
+                ${product["النوع"] ? `<div style="color:#777;font-weight:700;margin-bottom:12px;">النوع: ${product["النوع"]}</div>` : ''}
+                <div class="product-price-detail" id="detail-price">${product.price}${oldPriceHtml}</div>
+                <p class="product-description">${product.description || 'منتج رائع يمنحك تجربة استثنائية للعناية بجمالك.'}</p>
+                ${sizesHtml}
+                <button id="add-to-cart-detail" class="btn-add" style="border:none;padding:14px;margin-top:10px;">إضافة إلى السلة</button>
+            </div>
+        `;
+
+        const priceEl = document.getElementById('detail-price');
+        let currentSize = sizes.length ? sizes[0] : null;
+        let currentPrice = product.price;
+
+        function updatePrice(index) {
+            const p = basePrice * Math.pow(1.15, index);
+            currentPrice = formatPrice(p);
+            currentSize = sizes[index];
+            priceEl.innerHTML = currentPrice + (index === 0 ? oldPriceHtml : '');
+        }
+
+        const sizeValues = document.querySelectorAll('#size-values .option-value');
+        sizeValues.forEach(el => {
+            el.addEventListener('click', function () {
+                sizeValues.forEach(o => o.classList.remove('selected'));
+                this.classList.add('selected');
+                updatePrice(parseInt(this.getAttribute('data-index'), 10));
+            });
+        });
+
+        document.querySelectorAll('.product-thumbnail').forEach(thumb => {
+            thumb.addEventListener('click', function () {
+                document.getElementById('main-product-image').src = this.getAttribute('data-image');
+                document.querySelectorAll('.product-thumbnail').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        document.getElementById('add-to-cart-detail').addEventListener('click', function (e) {
+            e.stopPropagation();
+            addToCart(product.id, currentSize, currentPrice);
+        });
+
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
+    /* ============================================================
+       التنقل بين الأقسام
+       ============================================================ */
+    function goHomeSection() {
+        document.getElementById('products-section').style.display = 'block';
+        document.getElementById('product-page').style.display = 'none';
+        document.getElementById('article-page').style.display = 'none';
+    }
+
+    function showHome(e) {
+        if (e && e.preventDefault) e.preventDefault();
+        goHomeSection();
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
+    function showArticle(key) {
+        const art = articles[key];
+        if (!art) return;
+        document.getElementById('products-section').style.display = 'none';
+        document.getElementById('product-page').style.display = 'none';
+        document.getElementById('article-page').style.display = 'block';
+        document.getElementById('article-body').innerHTML = art.body;
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
+    /* ============================================================
+       البحث
+       ============================================================ */
+    function toggleSearchPanel() {
+        const panel = document.getElementById('searchPanel');
+        const btn = document.getElementById('searchToggle');
+        const input = document.getElementById('searchInput');
+        const isOpen = panel.classList.toggle('open');
+        btn.classList.toggle('active', isOpen);
+
+        if (isOpen) {
+            goHomeSection();
+            applyFilters();
+            setTimeout(() => input.focus(), 60);
+        } else {
+            input.value = '';
+            searchQuery = '';
+            applyFilters();
+        }
+    }
+
+    /* ============================================================
+       النوافذ الجانبية والتنبيهات
+       ============================================================ */
+    function toggleDrawer(id) {
+        document.getElementById('backdrop').classList.add('active');
+        document.getElementById(id).classList.add('show');
+    }
+
+    function closeDrawers() {
+        document.getElementById('backdrop').classList.remove('active');
+        document.querySelectorAll('.drawer').forEach(el => el.classList.remove('show'));
+    }
+
+    let toastTimeout;
+    function displayToast(msg) {
+        const toast = document.getElementById('systemToast');
+        toast.textContent = msg;
+        toast.classList.add('visible');
+        clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => toast.classList.remove('visible'), 2500);
+    }
+
+    /* ============================================================
+       مقالات الفوتر (كاملة - مطابقة لملف العطور)
+       ============================================================ */
+    const articles = {
+
+      faq: {
+        title: 'الأسئلة الأكثر تكراراً',
+        body: `
+          <h1>الأسئلة الأكثر تكراراً (FAQ)</h1>
+          <p>جمعنا لك في هذه الصفحة أكثر الأسئلة التي تصلنا من عملائنا مع إجابات واضحة ومباشرة. وإذا لم تجد ما تبحث عنه، تواصل معنا عبر الواتساب أو البريد الإلكتروني وسنكون سعداء بخدمتك.</p>
+
+          <h2>كيف أطلب من متجر قولدن سنت؟</h2>
+          <p>اختر العطر الذي يناسبك، ثم حدّد الحجم المطلوب، ثم اضغط على زر «أضف +» أو «إضافة إلى السلة». بعد ذلك افتح سلة المشتريات من أعلى الصفحة، راجع منتجاتك، ثم أكمل بياناتك (الاسم، رقم الجوال، العنوان)، واختر طريقة الدفع المناسبة، وأكّد الطلب. ستصلك رسالة تأكيد على جوالك فور استلام الطلب.</p>
+
+          <h2>هل جميع العطور أصلية؟</h2>
+          <p>نعم، جميع منتجاتنا أصلية 100% ومستوردة من الوكلاء والموزعين المعتمدين، ونوفّر ضمان استرجاع كامل للمبلغ في حال إثبات عدم أصالة أي منتج.</p>
+
+          <h2>كم تستغرق مدة التوصيل؟</h2>
+          <p>التوصيل داخل المملكة العربية السعودية من 1 إلى 3 أيام عمل، ودول الخليج من 3 إلى 7 أيام عمل.</p>
+
+          <h2>ما هي طرق الدفع المتاحة؟</h2>
+          <p>نوفّر مدى، فيزا، ماستركارد، آبل باي، تابي، تمارا، والدفع عند الاستلام داخل المملكة.</p>
+
+          <h2>كيف أتتبع طلبي؟</h2>
+          <p>بعد شحن الطلب تصلك رسالة نصية تحتوي على رقم الشحنة ورابط التتبع، ويمكنك أيضًا متابعة حالة الطلب من صفحة «تتبع شحنتك ومشترياتك».</p>
+
+          <h2>هل يمكنني إرجاع أو استبدال المنتج؟</h2>
+          <p>نعم، يمكنك الإرجاع أو الاستبدال خلال 14 يومًا من تاريخ الاستلام، بشرط أن يكون المنتج مغلقًا بغلافه الأصلي وغير مستخدم.</p>
+
+          <h2>كيف يتحدد سعر الحجم الأكبر؟</h2>
+          <p>السعر الأساسي يظهر للحجم الأصغر، وكل زيادة في الحجم تضيف 15% على السعر، ويظهر السعر المحدّث مباشرة داخل صفحة المنتج عند اختيار الحجم.</p>
+
+          <h2>هل تتوفر عينات أو هدايا؟</h2>
+          <p>نعم، نضيف عينات مجانية مع معظم الطلبات، كما تتوفر أطقم هدايا فاخرة يمكنك اختيارها من قسم المجموعات.</p>
+
+          <h2>هل يمكنني تعديل أو إلغاء الطلب؟</h2>
+          <p>يمكنك تعديل أو إلغاء الطلب خلال ساعتين من تأكيده وقبل شحنه، وذلك بالتواصل معنا مباشرة عبر الواتساب.</p>
+        `
+      },
+
+      payment: {
+        title: 'طرق الدفع',
+        body: `
+          <h1>طرق الدفع</h1>
+          <p>نوفّر في قولدن سنت مجموعة متنوعة من طرق الدفع الآمنة والسريعة لتناسب جميع عملائنا داخل المملكة وخارجها.</p>
+
+          <h2>الدفع الإلكتروني</h2>
+          <ul>
+            <li>مدى (Mada) — البطاقات البنكية السعودية.</li>
+            <li>فيزا وماستركارد (Visa / MasterCard).</li>
+            <li>آبل باي (Apple Pay).</li>
+            <li>التحويل البنكي المباشر على حساب المتجر.</li>
+          </ul>
+
+          <h2>الدفع الآجل (تقسيط بدون فوائد)</h2>
+          <ul>
+            <li>تابي (Tabby): قسّم مشترياتك على 4 دفعات بدون فوائد أو رسوم.</li>
+            <li>تمارا (Tamara): قسّم طلبك على 3 أو 4 دفعات بدون فوائد.</li>
+          </ul>
+
+          <h2>الدفع عند الاستلام</h2>
+          <p>متاح داخل المملكة العربية السعودية برسوم إضافية بسيطة قدرها 15 ريال، ويمكنك الدفع نقدًا أو بالشبكة عند استلام الطلب.</p>
+
+          <h2>هل الدفع آمن؟</h2>
+          <p>نعم، جميع المعاملات تتم عبر بوابات دفع مشفّرة ببروتوكول SSL ومعتمدة رسميًا، ولا نحتفظ بأي بيانات بطاقات بنكية على الموقع.</p>
+
+          <h2>ماذا أفعل إذا فشلت عملية الدفع؟</h2>
+          <p>تأكد أولًا من صحة بيانات البطاقة وتاريخ الانتهاء والرصيد المتاح، ثم جرّب طريقة دفع أخرى. وإذا استمرت المشكلة تواصل معنا على care@goldenscent.com أو عبر الواتساب وسنساعدك فورًا.</p>
+
+          <h2>هل تصدر فاتورة ضريبية؟</h2>
+          <p>نعم، تصدر فاتورة ضريبية إلكترونية لكل طلب وتُرسل إلى بريدك الإلكتروني ورقم جوالك مباشرة بعد إتمام الطلب.</p>
+        `
+      },
+
+      shipping: {
+        title: 'الشحن والتوصيل',
+        body: `
+          <h1>الشحن والتوصيل</h1>
+          <p>نحرص في قولدن سنت على توصيل طلبك بأسرع وقت وبأعلى معايير الأمان والحفاظ على جودة العطر.</p>
+
+          <h2>مدة التوصيل داخل المملكة</h2>
+          <ul>
+            <li>الرياض، جدة، الدمام: 1 إلى 2 يوم عمل.</li>
+            <li>بقية مدن ومحافظات المملكة: 2 إلى 3 أيام عمل.</li>
+          </ul>
+
+          <h2>مدة التوصيل لدول الخليج</h2>
+          <p>الإمارات، الكويت، البحرين، قطر، وسلطنة عمان: من 3 إلى 7 أيام عمل حسب شركة الشحن.</p>
+
+          <h2>رسوم الشحن</h2>
+          <ul>
+            <li>شحن مجاني للطلبات التي تبلغ 199 ريال وأكثر داخل المملكة.</li>
+            <li>الطلبات الأقل من 199 ريال: 25 ريال.</li>
+            <li>الشحن الخليجي: 45 ريال.</li>
+            <li>الدفع عند الاستلام: رسوم إضافية 15 ريال.</li>
+          </ul>
+
+          <h2>شركات الشحن</h2>
+          <p>نتعاون مع أفضل شركات الشحن مثل أرامكس، سمسا، وريد بوكس لضمان وصول طلبك في الوقت المحدد.</p>
+
+          <h2>تغليف الطلبات</h2>
+          <p>يُغلّف كل عطر بعناية داخل صندوق محمي ومواد تمنع الكسر، مع إمكانية إضافة تغليف هدايا مجاني عند الطلب.</p>
+
+          <h2>تأخّر الشحنة</h2>
+          <p>في حال تأخرت شحنتك عن المدة المذكورة أعلاه، تواصل معنا وسنقوم بمتابعة الشحنة مع شركة التوصيل وإبلاغك بالتحديثات أولًا بأول.</p>
+        `
+      },
+
+      returns: {
+        title: 'سياسة الاستبدال والاسترجاع',
+        body: `
+          <h1>سياسة الاستبدال والاسترجاع</h1>
+          <p>رضاك هو أولويتنا، لذلك وفّرنا سياسة إرجاع مرنة وسهلة تمنحك راحة تامة عند الشراء.</p>
+
+          <h2>مدة الإرجاع</h2>
+          <p>يمكنك طلب الإرجاع أو الاستبدال خلال 14 يومًا من تاريخ استلام الطلب.</p>
+
+          <h2>شروط الإرجاع</h2>
+          <ul>
+            <li>أن يكون المنتج في حالته الأصلية وغير مستخدم.</li>
+            <li>أن يكون الغلاف الخارجي والعلبة سليمة ومغلقة.</li>
+            <li>إرفاق الفاتورة أو رقم الطلب.</li>
+          </ul>
+
+          <h2>المنتجات غير القابلة للإرجاع</h2>
+          <ul>
+            <li>العطور المفتوحة أو المستخدمة.</li>
+            <li>المنتجات المشتراة خلال العروض الترويجية النهائية (يُوضح ذلك في صفحة المنتج).</li>
+            <li>أطقم الهدايا بعد فتح غلافها الأصلي.</li>
+          </ul>
+
+          <h2>كيف أطلب إرجاعًا؟</h2>
+          <ol>
+            <li>تواصل معنا عبر الواتساب أو البريد الإلكتروني مع رقم الطلب.</li>
+            <li>سنرسل لك بوليصة الإرجاع وعنوان الاستلام.</li>
+            <li>سلّم الشحنة لشركة الشحن خلال 48 ساعة.</li>
+            <li>يُعاد المبلغ خلال 3 إلى 7 أيام عمل بعد استلام المنتج وفحصه.</li>
+          </ol>
+
+          <h2>هل الإرجاع مجاني؟</h2>
+          <p>نعم، الإرجاع مجاني داخل المملكة في حال كان المنتج تالفًا أو غير مطابق للوصف. أما في حالات تغيير الرأي فتطبق رسوم شحن الإرجاع 25 ريال.</p>
+
+          <h2>استبدال المنتج</h2>
+          <p>يمكنك استبدال المنتج بمنتج آخر من نفس القيمة أو بدفع الفرق، ويتم الاستبدال بعد استلام المنتج الأصلي وفحصه.</p>
+        `
+      },
+
+      tracking: {
+        title: 'تتبع شحنتك ومشترياتك',
+        body: `
+          <h1>تتبع شحنتك ومشترياتك</h1>
+          <p>يمكنك متابعة حالة طلبك خطوة بخطوة من لحظة التأكيد حتى الاستلام.</p>
+
+          <h2>خطوات التتبع</h2>
+          <ol>
+            <li>افتح رسالة التأكيد التي وصلتك على الجوال أو البريد الإلكتروني.</li>
+            <li>انسخ رقم الشحنة (يبدأ عادة بـ GS).</li>
+            <li>أدخل الرقم في صفحة تتبع الشحنات الخاصة بشركة الشحن المرسلة لك.</li>
+            <li>ستظهر لك حالة الشحنة: قيد التجهيز، تم الشحن، خرجت للتوصيل، تم التسليم.</li>
+          </ol>
+
+          <h2>لم يصلني رقم التتبع</h2>
+          <p>تصلك رسالة التتبع خلال 24 ساعة من شحن الطلب. وإذا لم تصلك، تواصل معنا على care@goldenscent.com مع رقم الطلب.</p>
+
+          <h2>حالات الطلب</h2>
+          <ul>
+            <li>قيد المراجعة: تم استلام الطلب وجارٍ التحقق منه.</li>
+            <li>قيد التجهيز: يتم تجهيز وتغليف منتجاتك.</li>
+            <li>تم الشحن: الطلب في الطريق إليك.</li>
+            <li>تم التسليم: استلمت الطلب بنجاح.</li>
+          </ul>
+
+          <h2>الشحنة متوقفة أو متأخرة</h2>
+          <p>قد تتأخر الشحنات لأسباب خارجة عن إرادتنا مثل الظروف الجوية أو الأعياد الرسمية. تواصل معنا وسنتابع شحنتك مع شركة الشحن ونوافيك بأي تحديث.</p>
+
+          <h2>هل يمكنني تغيير عنوان التوصيل؟</h2>
+          <p>نعم، إذا لم يتم شحن الطلب بعد يمكنك تعديل العنوان بالتواصل معنا مباشرة عبر الواتساب.</p>
+        `
+      },
+
+      about: {
+        title: 'من نحن',
+        body: `
+          <h1>من نحن</h1>
+          <p>قولدن سنت هو متجر سعودي متخصص في العطور الأصلية الفاخرة للرجال والنساء، انطلق برؤية واضحة: أن نمنح كل عميل تجربة عطرية راقية بأسعار عادلة وخدمة استثنائية.</p>
+
+          <h2>قصتنا</h2>
+          <p>بدأت الرحلة من شغف حقيقي بالعطر واهتمام بأدق تفاصيله، ومن إيمان بأن العطر ليس مجرد رائحة بل توقيع شخصي يبقى في الذاكرة. اليوم نخدم آلاف العملاء داخل المملكة ودول الخليج، ونوفّر تشكيلة مختارة بعناية من أشهر الدور العالمية والعطور العربية الأصيلة.</p>
+
+          <h2>رؤيتنا</h2>
+          <p>أن نكون الوجهة الأولى للعطور الأصلية في المملكة والخليج، وأكثر متجر يثق به العملاء في جودة المنتج ومصداقية التعامل.</p>
+
+          <h2>رسالتنا</h2>
+          <ul>
+            <li>توفير عطور أصلية 100% من الوكلاء المعتمدين.</li>
+            <li>تقديم أسعار تنافسية وعروض حقيقية.</li>
+            <li>خدمة عملاء سريعة ومتاحة يوميًا.</li>
+            <li>تجربة شراء سهلة وآمنة من الجوال.</li>
+          </ul>
+
+          <h2>لماذا يثق بنا العملاء؟</h2>
+          <ul>
+            <li>منتجات أصلية مضمونة مع سياسة إرجاع واضحة.</li>
+            <li>توصيل سريع خلال 1-3 أيام عمل داخل المملكة.</li>
+            <li>دعم فوري عبر الواتساب والهاتف الموحد.</li>
+            <li>موثقون لدى منصة الأعمال السعودية.</li>
+          </ul>
+
+          <h2>تواصل معنا</h2>
+          <p>يسعدنا خدمتك في أي وقت على care@goldenscent.com، وأوقات العمل يوميًا من 9 صباحًا حتى 11 مساءً.</p>
+        `
+      },
+
+      authenticity: {
+        title: 'ضمان الأصالة',
+        body: `
+          <h1>ضمان الأصالة</h1>
+          <p>نلتزم في قولدن سنت بتقديم منتجات أصلية 100%، لأن ثقتك هي رأس مالنا الحقيقي.</p>
+
+          <h2>كيف نضمن الأصالة؟</h2>
+          <ul>
+            <li>نشتري منتجاتنا من الوكلاء والموزعين المعتمدين فقط.</li>
+            <li>نتحقق من باركود كل منتج ورقم التشغيلة قبل عرضه.</li>
+            <li>نخزّن العطور في بيئة مناسبة تحفظ جودتها.</li>
+            <li>نفحص كل طلب قبل التغليف والشحن.</li>
+          </ul>
+
+          <h2>ماذا لو شككت في أصالة المنتج؟</h2>
+          <p>تواصل معنا خلال 14 يومًا من الاستلام مع صور المنتج والفاتورة، وسنقوم بمراجعة الحالة فورًا. وفي حال ثبوت عدم الأصالة نتحمل كامل المبلغ مع الشحن، ونمنحك تعويضًا إضافيًا تقديرًا لثقتك.</p>
+
+          <h2>هل العطور أصلية أم مقلّدة بجودة عالية؟</h2>
+          <p>جميع منتجاتنا أصلية من الشركات الأم، ولا نتعامل مع أي عطور مقلّدة أو معبّأة.</p>
+
+          <h2>هل الأسعار الأقل تعني منتجًا غير أصلي؟</h2>
+          <p>لا، فأسعارنا المنافسة ناتجة عن شراكاتنا المباشرة مع الموزعين وشراء كميات كبيرة، وليس عن أي تنازل عن الجودة.</p>
+        `
+      },
+
+      terms: {
+        title: 'الشروط والأحكام',
+        body: `
+          <h1>الشروط والأحكام</h1>
+          <p>باستخدامك موقع قولدن سنت فإنك توافق على الشروط والأحكام التالية.</p>
+
+          <h2>1. الطلبات</h2>
+          <p>يُعد الطلب مكتملًا بعد تأكيده من المتجر واستلام رسالة التأكيد. ويحق للمتجر إلغاء أي طلب في حال عدم توفر المنتج أو الاشتباه في صحة البيانات.</p>
+
+          <h2>2. الأسعار</h2>
+          <p>جميع الأسعار بالريال السعودي وتشمل ضريبة القيمة المضافة. ويحق للمتجر تعديل الأسعار في أي وقت دون إشعار مسبق، ولا يؤثر التعديل على الطلبات المؤكدة مسبقًا.</p>
+
+          <h2>3. الأحجام والأسعار</h2>
+          <p>السعر الأساسي المعروض يخص الحجم الأصغر، وكل زيادة في الحجم تضيف 15% على السعر، ويظهر السعر النهائي بوضوح في صفحة المنتج قبل الإضافة إلى السلة.</p>
+
+          <h2>4. الدفع</h2>
+          <p>يجب إتمام الدفع قبل شحن الطلب، ويُستثنى من ذلك طلبات الدفع عند الاستلام داخل المملكة.</p>
+
+          <h2>5. الشحن</h2>
+          <p>المدد المذكورة تقديرية وقد تتأخر لأسباب خارجة عن إرادتنا مثل الظروف الجوية أو الأعياد الرسمية.</p>
+
+          <h2>6. الإرجاع</h2>
+          <p>يخضع الإرجاع لسياسة الاستبدال والاسترجاع المنشورة في الموقع.</p>
+
+          <h2>7. الملكية الفكرية</h2>
+          <p>جميع الصور والنصوص والشعارات مملوكة لمتجر قولدن سنت ولا يجوز استخدامها دون إذن كتابي.</p>
+
+          <h2>8. القانون المطبق</h2>
+          <p>تخضع هذه الشروط لأنظمة المملكة العربية السعودية، وأي نزاع يُحل عبر الجهات المختصة داخل المملكة.</p>
+        `
+      },
+
+      privacy: {
+        title: 'سياسة الخصوصية',
+        body: `
+          <h1>سياسة الخصوصية</h1>
+          <p>نحترم خصوصيتك ونلتزم بحماية بياناتك الشخصية وفقًا لأنظمة المملكة العربية السعودية.</p>
+
+          <h2>البيانات التي نجمعها</h2>
+          <ul>
+            <li>الاسم ورقم الجوال والبريد الإلكتروني.</li>
+            <li>عنوان التوصيل والمدينة.</li>
+            <li>سجل الطلبات وتفاصيل المشتريات.</li>
+          </ul>
+
+          <h2>كيف نستخدم بياناتك؟</h2>
+          <ul>
+            <li>تنفيذ الطلبات وتوصيلها في الوقت المحدد.</li>
+            <li>إرسال تحديثات الطلب ورسائل التأكيد.</li>
+            <li>تحسين تجربتك على الموقع وتقديم عروض مناسبة.</li>
+            <li>الرد على استفساراتك وطلبات الدعم.</li>
+          </ul>
+
+          <h2>مشاركة البيانات</h2>
+          <p>لا نبيع بياناتك أو نشاركها مع أي طرف ثالث لأغراض تجارية، وتُشارك فقط مع شركات الشحن وبوابات الدفع لإتمام طلبك.</p>
+
+          <h2>حماية البيانات</h2>
+          <p>نستخدم تشفير SSL ووسائل حماية تقنية وإدارية للحفاظ على بياناتك، ولا نحتفظ ببيانات البطاقات البنكية على الموقع.</p>
+
+          <h2>ملفات تعريف الارتباط (Cookies)</h2>
+          <p>نستخدم ملفات تعريف الارتباط لتحسين تجربة التصفح وتذكّر سلة المشتريات. ويمكنك تعطيلها من إعدادات المتصفح مع العلم أن ذلك قد يؤثر على بعض الخصائص.</p>
+
+          <h2>حقوقك</h2>
+          <p>يحق لك طلب الاطلاع على بياناتك أو تصحيحها أو حذفها بالتواصل معنا على care@goldenscent.com.</p>
+        `
+      },
+
+      affiliate: {
+        title: 'برنامج التسويق بالعمولة',
+        body: `
+          <h1>برنامج التسويق بالعمولة (الأفلييت)</h1>
+          <p>انضم إلى برنامج شركاء قولدن سنت واربح عمولة على كل طلب يتم من خلال رابطك.</p>
+
+          <h2>من يمكنه الانضمام؟</h2>
+          <p>المؤثرون، وأصحاب المتاجر الإلكترونية، وصنّاع المحتوى، وكل من لديه جمهور مهتم بالعطور.</p>
+
+          <h2>كيف يعمل البرنامج؟</h2>
+          <ol>
+            <li>سجّل بياناتك عبر التواصل معنا.</li>
+            <li>ستصلك رابط الإحالة الخاص بك وكود خصم لمتابعيك.</li>
+            <li>شارك الرابط على منصاتك.</li>
+            <li>تُحسب عمولتك تلقائيًا على كل عملية شراء مكتملة.</li>
+          </ol>
+
+          <h2>نسبة العمولة</h2>
+          <p>تبدأ العمولة من 7% وتصل إلى 12% حسب حجم المبيعات الشهرية، وتُصرف شهريًا بعد انتهاء فترة الإرجاع (14 يومًا).</p>
+
+          <h2>مدة صلاحية الإحالة</h2>
+          <p>يبقى الرابط فعّالًا لمدة 30 يومًا من تاريخ آخر نقرة، ويُحسب الطلب لصالحك حتى لو تم الشراء لاحقًا خلال هذه المدة.</p>
+
+          <h2>كيف أتابع أرباحي؟</h2>
+          <p>نرسل لك تقريرًا شهريًا يوضح عدد الطلبات والعمولات المستحقة وطريقة التحويل.</p>
+
+          <h2>للتسجيل</h2>
+          <p>تواصل معنا على care@goldenscent.com أو عبر الواتساب واذكر كلمة «شراكة» وسنرد عليك خلال 48 ساعة.</p>
+        `
+      }
+
+    };
+
+    /* ============================================================
+       تهيئة الصفحة
+       ============================================================ */
+    document.addEventListener('DOMContentLoaded', function () {
+        loadCartFromLocalStorage();
+        renderProducts(products, 'featured-products');
+
+        const searchInput = document.getElementById('searchInput');
+        document.getElementById('searchToggle').addEventListener('click', toggleSearchPanel);
+
+        searchInput.addEventListener('input', function () {
+            searchQuery = this.value;
+            if (document.getElementById('article-page').style.display === 'block' ||
+                document.getElementById('product-page').style.display === 'block') {
+                goHomeSection();
+            }
+            applyFilters();
+        });
+
+        document.addEventListener('click', function (e) {
+
+            const articleLink = e.target.closest('[data-article]');
+            if (articleLink) {
+                e.preventDefault();
+                showArticle(articleLink.getAttribute('data-article'));
+                closeDrawers();
+                return;
+            }
+
+            const filterLink = e.target.closest('[data-filter]');
+            if (filterLink) {
+                e.preventDefault();
+                const val = filterLink.getAttribute('data-filter');
+                activeType = (val === 'all') ? null : val;
+                searchQuery = '';
+                searchInput.value = '';
+                closeDrawers();
+                goHomeSection();
+                applyFilters();
+                window.scrollTo({top: 0, behavior: 'smooth'});
+                return;
+            }
+
+            if (e.target.classList.contains('btn-add') && !e.target.id.includes('detail')) {
+                const productId = e.target.getAttribute('data-id');
+                addToCart(productId);
+                e.stopPropagation();
+                return;
+            }
+
+            const clickableElement = e.target.closest('.btn-view-product');
+            if (clickableElement) {
+                showProductPage(clickableElement.getAttribute('data-id'));
+            }
+        });
+
+        document.getElementById('back-to-products').addEventListener('click', function () {
+            goHomeSection();
+        });
+    });
+</script>
+</body>
+</html>

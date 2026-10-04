@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>سلة التسوق | GOLDEN SCENT</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --primary-color: #111;
+    --accent-red: #c0392b;
+    --bg-light: #fafafa;
+    --border-color: #eee;
+    --tabby-tamara-border: #e55322;
+    --green-btn: #78d672;
+    --green-track: #eaf6ea;
+  }
+  
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Tajawal', sans-serif;
+    color: var(--primary-color);
+    background: #fff;
+    overflow-x: hidden;
+  }
+  a { text-decoration: none; color: inherit; display: block; }
+  ul { list-style: none; }
+  img { display: block; width: 100%; height: auto; object-fit: cover; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+  /* --- شريط الإعلانات العلوي --- */
+  .promo-banner { background: #5b1a8c; color: #fff; text-align: center; font-size: 13px; font-weight: 700; padding: 10px; }
+  .promo-banner span { text-decoration: underline; cursor: pointer; margin-right: 5px; }
+
+  /* --- الترويسة الرئيسية --- */
+  .main-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 1px solid var(--border-color); max-width: 800px; margin: 0 auto; }
+  .header-right { display: flex; align-items: center; gap: 16px; flex: 1; }
+  .header-left { display: flex; align-items: center; gap: 16px; flex: 1; justify-content: flex-end; }
+  
+  .action-btn { position: relative; display: flex; align-items: center; justify-content: center; }
+  .action-btn svg { width: 24px; height: 24px; stroke: var(--primary-color); fill: none; }
+  .basket-badge { position: absolute; top: -6px; left: -8px; background: var(--accent-red); color: #fff; font-size: 10px; font-weight: 800; border-radius: 50%; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; }
+  
+  .brand-logo { flex: 1; display: flex; justify-content: center; align-items: center; }
+  .brand-logo img { max-height: 38px; width: auto; object-fit: contain; }
+
+  .menu-toggle { display: flex; }
+  .menu-toggle svg { width: 24px; height: 24px; stroke: var(--primary-color); }
+
+  /* --- الحاويات الرئيسية --- */
+  .app-container { max-width: 800px; margin: 0 auto; padding: 0 16px; }
+  .main-wrapper { display: block; }
+  .main-wrapper.hidden { display: none; }
+
+  /* ============================================================
+     صفحة سلة التسوق
+     ============================================================ */
+  .cart-page-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin: 20px 0 16px; flex-wrap: wrap; gap: 8px;
+  }
+  .cart-page-header h1 { font-size: 20px; font-weight: 800; }
+  .delivery-info { font-size: 13px; color: #3b82f6; font-weight: 700; display: flex; align-items: center; gap: 6px; }
+  .delivery-info svg { width: 18px; height: 18px; }
+
+  .cart-layout {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    margin-bottom: 30px;
+  }
+  .cart-items-column { flex: 1 1 60%; min-width: 0; }
+  .cart-summary-column {
+    flex: 1 1 35%;
+    background: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    position: sticky;
+    top: 16px;
+  }
+
+  /* شريط الشحن المجاني */
+  .shipping-progress {
+    background: #fff; border: 1px solid var(--border-color); border-radius: 12px;
+    padding: 18px; margin-bottom: 16px; text-align: center;
+  }
+  .progress-track { background: var(--green-track); height: 8px; border-radius: 4px; margin-bottom: 10px; overflow: hidden; }
+  .progress-fill { background: var(--green-btn); height: 100%; transition: width 0.4s ease; border-radius: 4px; }
+  .shipping-msg { font-size: 13px; color: #555; font-weight: 700; }
+
+  /* بطاقة المنتج في السلة */
+  .cart-items-list {
+    background: #fff; border: 1px solid var(--border-color); border-radius: 12px;
+    overflow: hidden;
+  }
+  .cart-item-card {
+    display: flex; align-items: center; gap: 14px;
+    padding: 16px; border-bottom: 1px solid var(--border-color);
+    position: relative;
+  }
+  .cart-item-card:last-child { border-bottom: none; }
+
+  .ci-image {
+    width: 80px; height: 80px; flex-shrink: 0;
+    background: var(--bg-light); border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .ci-image img { width: 90%; height: 90%; object-fit: contain; }
+
+  .ci-info { flex: 1; min-width: 0; }
+  .ci-brand { font-size: 12px; color: #666; font-weight: 700; margin-bottom: 4px; }
+  .ci-name { font-size: 13px; font-weight: 700; color: #222; line-height: 1.4; margin-bottom: 4px;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .ci-size { font-size: 11.5px; color: #888; font-weight: 500; }
+
+  .ci-qty {
+    display: flex; align-items: center;
+    border: 1px solid #ddd; border-radius: 6px;
+    padding: 4px 8px; gap: 10px;
+  }
+  .ci-qty button { font-size: 18px; font-weight: 800; color: #111; width: 22px; line-height: 1; }
+  .ci-qty span { font-size: 15px; font-weight: 800; min-width: 20px; text-align: center; }
+
+  .ci-price-col { text-align: left; min-width: 80px; }
+  .ci-price-col .curr { display: block; font-size: 15px; font-weight: 800; color: var(--accent-red); }
+
+  .ci-remove {
+    position: absolute; top: 10px; left: 10px;
+    color: #aaa; font-size: 16px; line-height: 1;
+  }
+  .ci-remove:hover { color: var(--accent-red); }
+
+  /* ملخص الطلب */
+  .summary-title { font-size: 17px; font-weight: 800; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border-color); }
+  .summary-row { display: flex; justify-content: space-between; font-size: 14px; font-weight: 700; margin-bottom: 14px; color: #444; }
+  .summary-row.total { font-size: 17px; color: #000; border-top: 1px solid var(--border-color); padding-top: 14px; margin-top: 6px; }
+  .summary-row.total .subtext { font-size: 11px; color: #888; font-weight: 500; display: block; }
+  .free-shipping-text { color: var(--green-btn); font-weight: 800; }
+
+  .btn-checkout {
+    background: #000; color: #fff; width: 100%;
+    padding: 14px; border-radius: 8px; font-size: 15px;
+    font-weight: 800; margin-top: 16px; transition: 0.3s;
+  }
+  .btn-checkout:hover { background: #333; }
+  .btn-checkout:disabled { background: #ccc; cursor: not-allowed; }
+
+  .add-more-btn {
+    display: block; text-align: center;
+    margin-top: 14px; font-size: 13.5px;
+    font-weight: 700; color: #555;
+  }
+  .add-more-btn:hover { color: #000; }
+
+  .empty-cart-msg {
+    text-align: center; padding: 50px 20px;
+    font-size: 16px; font-weight: 800; color: #777;
+    background: #fff; border: 1px solid var(--border-color); border-radius: 12px;
+  }
+  .empty-cart-msg .icon { font-size: 40px; margin-bottom: 12px; opacity: 0.4; }
+
+  @media (max-width: 640px) {
+    .cart-layout { flex-direction: column-reverse; }
+    .cart-summary-column { width: 100%; position: static; }
+    .cart-item-card { flex-wrap: wrap; padding-top: 26px; }
+    .ci-image { width: 70px; height: 70px; }
+    .ci-info { flex: 1 1 calc(100% - 84px); }
+    .ci-qty { margin-right: auto; }
+    .ci-price-col { min-width: auto; }
+  }
+
+  /* --- صفحة تفاصيل المنتج (نفسها) --- */
+  .product-page { display: none; padding: 20px 0; animation: fadeIn 0.3s; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .back-to-products { background: #f4f4f4; color: #333; padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 700; margin-bottom: 20px; display: inline-flex; align-items: center; gap: 6px; }
+
+  /* --- شريط تابي وتمارا --- */
+  .tabby-tamara-strip {
+    border: 2px solid var(--tabby-tamara-border);
+    border-radius: 16px; margin: 24px 0 16px; padding: 14px 16px;
+    display: flex; justify-content: space-between; align-items: center; background: #fff;
+  }
+  .tabby-tamara-strip .text-label { font-weight: 800; font-size: 15px; color: #000; }
+  .tabby-tamara-strip .logos { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 18px; letter-spacing: -0.5px; }
+  .tabby-logo { font-family: sans-serif; font-weight: 900; }
+  .tamara-logo { display: flex; align-items: center; gap: 4px; }
+  .tamara-logo span { font-size: 12px; background: #000; color: #fff; border-radius: 50%; width: 18px; height: 18px; display: inline-flex; align-items: center; justify-content: center; }
+
+  /* --- بوكسات المزايا --- */
+  .features-grid-bottom { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px; }
+  .feature-box {
+    background: #fcfcfc; border: 1px solid #eaeaea; border-radius: 14px; padding: 12px;
+    display: flex; align-items: center; justify-content: space-between; position: relative; min-height: 65px;
+  }
+  .feature-box .f-text { font-size: 12.5px; font-weight: 800; line-height: 1.3; color: #222; max-width: 70%; }
+  .feature-box .f-icon { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; }
+  .feature-box .f-icon svg { width: 26px; height: 26px; stroke: #000; stroke-width: 1.5; fill: none; }
+  .feature-badge { position: absolute; top: 6px; left: 6px; background: #e74c3c; color: #fff; font-size: 9px; font-weight: 800; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+
+  /* --- الفوتر --- */
+  .site-footer { border-top: 1px solid var(--border-color); margin-top: 30px; }
+  .faq-block { border-bottom: 1px solid var(--border-color); }
+  .faq-title { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; font-size: 14.5px; font-weight: 800; cursor: pointer; }
+  .faq-title .icon-arrow { transition: transform 0.3s; font-size: 12px; color: #555; }
+  .faq-block.active .icon-arrow { transform: rotate(180deg); }
+  .faq-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+  .faq-block.active .faq-content { max-height: 800px; padding-bottom: 16px; }
+  
+  .faq-content ul li { padding: 8px 0; font-size: 13.5px; color: #555; font-weight: 500; border-bottom: 1px dashed #f5f5f5; cursor: pointer; }
+  .faq-content ul li span:hover { color: var(--accent-red); }
+  
+  .business-auth-badge { text-align: center; padding: 20px 0 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+  .business-auth-badge img { width: 60px; height: auto; object-fit: contain; }
+  .business-auth-badge span { font-size: 12px; color: #777; font-weight: 700; }
+
+  .copyright-bar { background: var(--bg-light); padding: 20px; font-size: 12px; color: #777; text-align: center; border-top: 1px solid var(--border-color); margin-top: 20px; }
+
+  /* --- الصفحات الداخلية --- */
+  .internal-page { display: none; background: #fff; min-height: 100vh; max-width: 800px; margin: 0 auto; padding-bottom: 40px; }
+  .ip-header { display: flex; align-items: center; padding: 16px; border-bottom: 1px solid var(--border-color); position: sticky; top: 0; background: #fff; z-index: 10; gap: 16px; }
+  .ip-back-btn { width: 40px; height: 40px; border-radius: 50%; background: #f5f5f5; display: flex; align-items: center; justify-content: center; border: none; cursor: pointer; }
+  .ip-back-btn svg { width: 20px; height: 20px; stroke: #111; fill: none; }
+  .ip-title { font-size: 18px; font-weight: 800; margin: 0; }
+  .ip-content-area { padding: 16px; }
+  .ip-intro { font-size: 14px; color: #555; margin-bottom: 24px; line-height: 1.7; font-weight: 500; }
+  .ip-inner-p { padding: 12px 0; font-size: 14px; color: #555; line-height: 1.6; }
+
+  /* --- النوافذ الجانبية --- */
+  .backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 90; display: none; }
+  .backdrop.active { display: block; }
+  .drawer { position: fixed; top: 0; bottom: 0; right: -100%; width: min(320px, 85vw); background: #fff; z-index: 95; transition: right 0.3s ease; overflow-y: auto; }
+  .drawer.show { right: 0; }
+  .drawer.left-side { right: auto; left: -100%; transition: left 0.3s ease; }
+  .drawer.left-side.show { left: 0; }
+  .drawer-header { display: flex; justify-content: space-between; align-items: center; padding: 16px; border-bottom: 1px solid var(--border-color); font-weight: 800; font-size: 16px; position: sticky; top: 0; background: #fff; }
+
+  .alert-toast { position: fixed; bottom: 78px; left: 50%; transform: translateX(-50%); background: var(--primary-color); color: #fff; padding: 10px 24px; border-radius: 30px; font-size: 13px; font-weight: 700; z-index: 200; opacity: 0; pointer-events: none; transition: 0.3s; }
+  .alert-toast.visible { opacity: 1; bottom: 90px; }
+</style>
+</head>
+<body>
+
+<div id="main-wrapper" class="main-wrapper">
+  
+  <div class="promo-banner">اليوم فقط! خصم 15% | كود: AUTUMN15 &nbsp; <span>تطبق الشروط</span></div>
+
+  <header class="main-header">
+    <div class="header-right">
+      <button class="action-btn" aria-label="بحث">
+        <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+      </button>
+      <a class="action-btn" href="cart.html" aria-label="السلة">
+        <svg viewBox="0 0 24 24" stroke-width="2"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6L4 2H2"/><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/></svg>
+        <span class="basket-badge" id="basketCounter" style="display:none;">0</span>
+      </a>
+    </div>
+
+    <a class="brand-logo" href="index.html">
+      <img src="https://images.ctfassets.net/23i1rgq9xnnb/6vBhFu5r54V7ELwYVv0nPO/7093a34dd46557c301117d54a14b0de7/GS-LOGO__3_.png?fm=avif&q=62&w=256" alt="شعار المتجر">
+    </a>
+    
+    <div class="header-left">
+      <button class="menu-toggle" onclick="toggleDrawer('mobileMenu')" aria-label="القائمة">
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <div class="app-container">
+
+    <!-- ============ سلة التسوق ============ -->
+    <div class="cart-page-header">
+      <h1 id="pageTitleCount">سلة التسوق (0 منتجات)</h1>
+      <div class="delivery-info">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="14" height="14" rx="2"/><path d="M17 9h4l2 4v5h-6M1 18h2M7 18h6M19 18h2"/><circle cx="5" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>
+        توصيل في 2-3 أيام
+      </div>
+    </div>
+
+    <div class="cart-layout">
+      
+      <!-- عمود المنتجات -->
+      <div class="cart-items-column">
+        <div class="shipping-progress">
+          <div class="progress-track">
+            <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
+          </div>
+          <div class="shipping-msg" id="progressMsg">أضف منتجات لتحصل على شحن مجاني</div>
+        </div>
+
+        <div class="cart-items-list" id="cartItemsWrapper"></div>
+      </div>
+
+      <!-- عمود ملخص الطلب -->
+      <div class="cart-summary-column">
+        <div class="summary-title">ملخص الطلب</div>
+        <div class="summary-row">
+          <span>المجموع</span>
+          <span id="summarySubtotal">0 ر.س</span>
+        </div>
+        <div class="summary-row">
+          <span>رسوم الشحن</span>
+          <span id="summaryShipping" class="free-shipping-text">مجاناً</span>
+        </div>
+        <div class="summary-row total">
+          <div>
+            المجموع الكلي
+            <span class="subtext">شامل كل الضرائب والرسوم</span>
+          </div>
+          <span id="summaryTotal">0 ر.س</span>
+        </div>
+        
+        <button class="btn-checkout" id="checkoutBtn">إكمال الطلب</button>
+        <a href="index.html" class="add-more-btn">← أضف المزيد من المنتجات</a>
+      </div>
+    </div>
+
+    <div class="tabby-tamara-strip">
+      <div class="logos">
+        <span class="tabby-logo">tabby</span>
+        <span class="tamara-logo"><span>♥</span> tamara</span>
+      </div>
+      <div class="text-label">وادفع لاحقاً</div>
+    </div>
+
+    <div class="features-grid-bottom">
+      <div class="feature-box">
+        <div class="f-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+        <div class="f-text">توصيل سريع<br>خلال 1-3 أيام</div>
+      </div>
+      <div class="feature-box">
+        <span class="feature-badge">%5</span>
+        <div class="f-icon"><svg viewBox="0 0 24 24"><path d="M20 12V8H6a2 2 0 01-2-2c0-1.1.9-2 2-2h12v4"/><path d="M4 6v12a2 2 0 002 2h14v-4"/><circle cx="18" cy="16" r="2"/></svg></div>
+        <div class="f-text">برنامــــــج<br>الكاش باك</div>
+      </div>
+      <div class="feature-box">
+        <div class="f-icon"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
+        <div class="f-text">+20 ألف منتج<br>أصلي 100%</div>
+      </div>
+      <div class="feature-box">
+        <div class="f-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+        <div class="f-text">إرجاع مجاني<br>وسهــــــــــــــل</div>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <div class="faq-block active">
+        <div class="faq-title" onclick="this.parentElement.classList.toggle('active')">
+          <span>خدمة العملاء</span>
+          <span class="icon-arrow">▼</span>
+        </div>
+        <div class="faq-content">
+          <ul>
+            <li><span onclick="openPage('pageFAQ')">الأسئلة الأكثر تكراراً (FAQ)</span></li>
+            <li><span onclick="openPage('pagePayment')">طرق الدفع (مدى، فيزا، تابي، تمارا، الدفع عند الاستلام)</span></li>
+            <li><span onclick="openPage('pageShipping')">الشحن والتوصيل (التوصيل السريع للمملكة والخليج)</span></li>
+            <li><span onclick="openPage('pageReturns')">سياسة الاستبدال والاسترجاع (إرجاع مجاني خلال 14 يوم)</span></li>
+            <li><span onclick="openPage('pageTracking')">تتبع شحنتك ومشترياتك</span></li>
+          </ul>
+          
+          <div class="business-auth-badge">
+            <a href="https://ecregistry.sa" target="_blank">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZrYd4BVD38clPKW7eNHmvhdRlnfYD1K8_IV9AhAl16Q&s=10" alt="موثق لدى منصة الأعمال" onerror="this.src='https://assets.salla.cloud/themes/default/assets/images/sbc.png'">
+            </a>
+            <span>موثق لدى منصة الأعمال</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-block">
+        <div class="faq-title" onclick="this.parentElement.classList.toggle('active')">
+          <span>للشكاوى والمقترحات</span>
+          <span class="icon-arrow">▼</span>
+        </div>
+        <div class="faq-content">
+          <ul>
+            <li><strong>البريد الإلكتروني:</strong> <a href="mailto:care@goldenscent.com">care@goldenscent.com</a></li>
+            <li><strong>الواتساب المباشر:</strong> <a href="https://wa.me/966500000000" target="_blank">+966 50 000 0000</a></li>
+            <li><strong>الهاتف الموحد:</strong> <a href="tel:8001234567">800-123-4567</a></li>
+            <li><strong>أوقات العمل:</strong> يومياً من 9:00 صباحاً حتى 11:00 مساءً</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="faq-block">
+        <div class="faq-title" onclick="this.parentElement.classList.toggle('active')">
+          <span>عن قولدن سنت</span>
+          <span class="icon-arrow">▼</span>
+        </div>
+        <div class="faq-content">
+          <ul>
+            <li><span onclick="openPage('pageAbout')">من نحن (قصة قولدن سنت وأهدافنا)</span></li>
+            <li><span onclick="openPage('pageAuthenticity')">ضمان الأصالة (منتجات أصلية ومضمونة 100%)</span></li>
+            <li><span onclick="openPage('pageTerms')">الشروط والأحكام الخاصة بالموقع</span></li>
+            <li><span onclick="openPage('pagePrivacy')">سياسة الخصوصية وحماية البيانات</span></li>
+            <li><span onclick="openPage('pageAffiliate')">برنامج التسويق بالعمولة (الأفلييت)</span></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+  </div> 
+  <div class="copyright-bar">جميع الحقوق محفوظة © GOLDEN SCENT 2026 | المملكة العربية السعودية</div>
+</div>
+
+<!-- ================= الصفحات الداخلية ================= -->
+
+<div id="pageFAQ" class="internal-page">
+  <div class="ip-header">
+    <button class="ip-back-btn" onclick="closePage()"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <h2 class="ip-title">الأسئلة الأكثر تكراراً</h2>
+  </div>
+  <div class="ip-content-area">
+    <p class="ip-intro">نحن هنا للإجابة على جميع استفساراتك بشكل سريع وواضح لضمان تجربة تسوق ممتعة.</p>
+    <div class="faq-block active">
+      <div class="faq-title" onclick="this.parentElement.classList.toggle('active')"><span>هل المنتجات أصلية 100%؟</span><span class="icon-arrow">▼</span></div>
+      <div class="faq-content"><div class="ip-inner-p">نعم، جميع المنتجات المباعة في قولدن سنت أصلية ومضمونة 100% ويتم استيرادها من الموزعين المعتمدين للعلامات التجارية العالمية.</div></div>
+    </div>
+    <div class="faq-block">
+      <div class="faq-title" onclick="this.parentElement.classList.toggle('active')"><span>كيف يمكنني إلغاء طلبي؟</span><span class="icon-arrow">▼</span></div>
+      <div class="faq-content"><div class="ip-inner-p">يمكنك إلغاء طلبك من خلال التواصل مع خدمة العملاء قبل أن يتم شحن الطلب وتأكيده.</div></div>
+    </div>
+  </div>
+</div>
+
+<div id="pagePayment" class="internal-page">
+  <div class="ip-header">
+    <button class="ip-back-btn" onclick="closePage()"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <h2 class="ip-title">طرق الدفع</h2>
+  </div>
+  <div class="ip-content-area">
+    <p class="ip-intro">نوفر لك عدة طرق آمنة ومرنة لتسهيل عملية الدفع.</p>
+    <div class="faq-block active">
+      <div class="faq-title" onclick="this.parentElement.classList.toggle('active')"><span>ما هي وسائل الدفع المتاحة؟</span><span class="icon-arrow">▼</span></div>
+      <div class="faq-content"><div class="ip-inner-p">نوفر الدفع عبر البطاقات الائتمانية (فيزا وماستركارد)، مدى، الدفع عند الاستلام، بالإضافة إلى الدفع بالتقسيط الميسر عبر تابي وتمارا.</div></div>
+    </div>
+  </div>
+</div>
+
+<div id="pageShipping" class="internal-page">
+  <div class="ip-header">
+    <button class="ip-back-btn" onclick="closePage()"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <h2 class="ip-title">الشحن والتوصيل</h2>
+  </div>
+  <div class="ip-content-area">
+    <p class="ip-intro">نحرص على توصيل طلباتك بأسرع وقت ممكن لأي مكان في المملكة والخليج.</p>
+    <div class="faq-block active">
+      <div class="faq-title" onclick="this.parentElement.classList.toggle('active')"><span>كم تستغرق مدة التوصيل؟</span><span class="icon-arrow">▼</span></div>
+      <div class="faq-content"><div class="ip-inner-p">يستغرق التوصيل داخل المملكة العربية السعودية عادةً بين 1 إلى 3 أيام عمل حسب المدينة.</div></div>
+    </div>
+  </div>
+</div>
+
+<div id="pageReturns" class="internal-page">
+  <div class="ip-header">
+    <button class="ip-back-btn" onclick="closePage()"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <h2 class="ip-title">سياسة الاستبدال والاسترجاع</h2>
+  </div>
+  <div class="ip-content-area">
+    <p class="ip-intro">تستطيع إرجاع أو استبدال المنتجات بسهولة ومجاناً ضمن شروطنا المرنة.</p>
+    <div class="faq-block active">
+      <div class="faq-title" onclick="this.parentElement.classList.toggle('active')"><span>ما هي شروط الإرجاع؟</span><span class="icon-arrow">▼</span></div>
+      <div class="faq-content"><div class="ip-inner-p">يجب أن يكون المنتج في حالته الأصلية وبغلافه الأصلي غير مفتوح، وذلك خلال 14 يوماً من استلام الطلب.</div></div>
+    </div>
+  </div>
+</div>
+
+<div id="pageTracking" class="internal-page">
+  <div class="ip-header">
+    <button class="ip-back-btn" onclick="closePage()"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <h2 class="ip-title">تتبع الشحنة</h2>
+  </div>
+  <div class="ip-content-area">
+    <p class="ip-intro">يمكنك تتبع مسار شحنتك لحظة بلحظة حتى وصولها إليك.</p>
+    <div class="faq-block active">
+      <div class="faq-title" onclick="this.parentElement.classList.toggle('active')"><span>كيف أتتبع طلبي؟</span><span class="icon-arrow">▼</span></div>
+      <div class="faq-content"><div class="ip-inner-p">سيتم إرسال رابط التتبع عبر رسالة نصية SMS إلى رقم جوالك المسجل بمجرد تسليم الطلب لشركة الشحن.</div></div>
+    </div>
+  </div>
+</div>
+
+<div id="pageAbout" class="internal-page">
+  <div class="ip-header">
+    <button class="ip-back-btn" onclick="closePage()"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <h2 class="ip-title">من نحن</h2>
+  </div>
+  <div class="ip-content-area">
+    <p class="ip-intro">تعرف على قصة قولدن سنت ومهمتنا في تقديم أفضل المنتجات.</p>
+    <div class="faq-block active">
+      <div class="faq-title" onclick="this.parentElement.classList.toggle('active')"><span>من هي قولدن سنت؟</span><span class="icon-arrow">▼</span></div>
+      <div class="faq-content"><div class="ip-inner-p">نحن المنصة الأولى في المملكة العربية السعودية والشرق الأوسط الرائدة في تقديم أرقى وأفخم العطور ومنتجات التجميل العالمية بعروض لا تضاهى.</div></div>
+    </div>
+  </div>
+</div>
+
+<div id="pageAuthenticity" class="internal-page">
+  <div class="ip-header">
+    <button class="ip-back-btn" onclick="closePage()"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <h2 class="ip-title">ضمان الأصالة</h2>
+  </div>
+  <div class="ip-content-area">
+    <p class="ip-intro">نضمن لك الحصول على منتجات أصلية ومعتمدة.</p>
+    <div class="faq-block active">
+      <div class="faq-title" onclick="this.parentElement.classList.toggle('active')"><span>كيف تضمنون جودة المنتجات؟</span><span class="icon-arrow">▼</span></div>
+      <div class="faq-content"><div class="ip-inner-p">نتعامل بشكل مباشر مع الوكلاء والموزعين الرسميين للعلامات التجارية لنضمن أن يصلك المنتج بجودته الأصلية والمضمونة.</div></div>
+    </div>
+  </div>
+</div>
+
+<div id="pageTerms" class="internal-page">
+  <div class="ip-header">
+    <button class="ip-back-btn" onclick="closePage()"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <h2 class="ip-title">الشروط والأحكام</h2>
+  </div>
+  <div class="ip-content-area">
+    <p class="ip-intro">القواعد التي تنظم استخدامك لموقع وتطبيق قولدن سنت.</p>
+    <div class="faq-block active">
+      <div class="faq-title" onclick="this.parentElement.classList.toggle('active')"><span>استخدام الموقع</span><span class="icon-arrow">▼</span></div>
+      <div class="faq-content"><div class="ip-inner-p">باستخدامك لموقعنا، فإنك توافق على الالتزام بجميع القوانين واللوائح المعمول بها في المملكة العربية السعودية لتنظيم التجارة الإلكترونية.</div></div>
+    </div>
+  </div>
+</div>
+
+<div id="pagePrivacy" class="internal-page">
+  <div class="ip-header">
+    <button class="ip-back-btn" onclick="closePage()"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <h2 class="ip-title">سياسة الخصوصية</h2>
+  </div>
+  <div class="ip-content-area">
+    <p class="ip-intro">نحرص أشد الحرص على أمان وحماية بياناتك الشخصية.</p>
+    <div class="faq-block active">
+      <div class="faq-title" onclick="this.parentElement.classList.toggle('active')"><span>كيف يتم حفظ بياناتي؟</span><span class="icon-arrow">▼</span></div>
+      <div class="faq-content"><div class="ip-inner-p">يتم تشفير جميع بياناتك البنكية والشخصية عبر أحدث بروتوكولات الأمان الإلكتروني ولا يتم مشاركتها أبداً مع أطراف ثالثة دون موافقتك.</div></div>
+    </div>
+  </div>
+</div>
+
+<div id="pageAffiliate" class="internal-page">
+  <div class="ip-header">
+    <button class="ip-back-btn" onclick="closePage()"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <h2 class="ip-title">التسويق بالعمولة</h2>
+  </div>
+  <div class="ip-content-area">
+    <p class="ip-intro">شارك كود الخصم الخاص بك واحصل على عمولات مجزية.</p>
+    <div class="faq-block active">
+      <div class="faq-title" onclick="this.parentElement.classList.toggle('active')"><span>كيف يمكنني الانضمام؟</span><span class="icon-arrow">▼</span></div>
+      <div class="faq-content"><div class="ip-inner-p">يمكنك التسجيل في برنامج الأفلييت من خلال التواصل مع فريق الشراكات لدينا وسنقوم بتزويدك بروابط وأكواد الخصم الخاصة بك.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= العناصر المشتركة ================= -->
+
+<div class="backdrop" id="backdrop" onclick="closeDrawers()"></div>
+
+<div class="drawer left-side" id="mobileMenu">
+  <div class="drawer-header"><span>القائمة</span><button onclick="closeDrawers()">✕</button></div>
+  <div style="padding: 16px; display:flex; flex-direction:column; gap:16px; font-weight:700;">
+    <a href="index.html">الرئيسية</a>
+    <a href="عطور.html">عطور</a>
+    <a href="مكياج.html">مكياج</a>
+    <a href="هدايا.html">هدايا</a>
+    <a href="شعر.html">عناية بالشعر</a>
+    <a href="بشرة.html">عناية بالبشرة</a>
+  </div>
+</div>
+
+<div class="alert-toast" id="systemToast"></div>
+
+<script>
+  /* ============================================================
+     صفحات الفوتر الداخلية
+     ============================================================ */
+  function openPage(pageId) {
+    document.getElementById('main-wrapper').classList.add('hidden');
+    document.querySelectorAll('.internal-page').forEach(p => p.style.display = 'none');
+    document.getElementById(pageId).style.display = 'block';
+    window.scrollTo(0, 0);
+    history.pushState({page: pageId}, "", "#" + pageId);
+  }
+
+  function closePage() { history.back(); }
+
+  window.onpopstate = function(event) {
+    if (event.state && event.state.page) {
+      document.getElementById('main-wrapper').classList.add('hidden');
+      document.querySelectorAll('.internal-page').forEach(p => p.style.display = 'none');
+      document.getElementById(event.state.page).style.display = 'block';
+    } else {
+      document.getElementById('main-wrapper').classList.remove('hidden');
+      document.querySelectorAll('.internal-page').forEach(p => p.style.display = 'none');
+    }
+  };
+
+  /* ============================================================
+     النوافذ الجانبية
+     ============================================================ */
+  function toggleDrawer(did) {
+    document.getElementById('backdrop').classList.add('active');
+    const d = document.getElementById(did);
+    if (d) d.style.display = 'block';
+    requestAnimationFrame(() => d.classList.add('show'));
+  }
+
+  function closeDrawers() {
+    document.getElementById('backdrop').classList.remove('active');
+    document.getElementById('mobileMenu').classList.remove('show');
+  }
+
+  /* ============================================================
+     نظام سلة التسوق — يقرأ من نفس مصدر بيانات index.html
+     البنية المحفوظة في localStorage تحت المفتاح gsBasket:
+     [{ id, name, price, img, size }, ...]
+     ============================================================ */
+  const FREE_SHIPPING_THRESHOLD = 239;
+  const SHIPPING_FEE = 25;
+
+  function getBasket() {
+    try {
+      return JSON.parse(localStorage.getItem('gsBasket') || '[]');
+    } catch (e) { return []; }
+  }
+
+  function saveBasket(basket) {
+    localStorage.setItem('gsBasket', JSON.stringify(basket));
+  }
+
+  function getGroupedBasket() {
+    const basket = getBasket();
+    const map = new Map();
+    basket.forEach(item => {
+      const key = `${item.id}||${item.size || ''}`;
+      if (!map.has(key)) {
+        map.set(key, { ...item, qty: 0 });
+      }
+      map.get(key).qty += 1;
+    });
+    return Array.from(map.values());
+  }
+
+  function renderCartPage() {
+    const grouped = getGroupedBasket();
+    const wrapper = document.getElementById('cartItemsWrapper');
+
+    if (grouped.length === 0) {
+      wrapper.innerHTML = `
+        <div class="empty-cart-msg">
+          <div class="icon">🛒</div>
+          سلة التسوق الخاصة بك فارغة حالياً
+          <div style="margin-top:14px;">
+            <a href="index.html" style="display:inline-block;background:#111;color:#fff;padding:10px 22px;border-radius:8px;font-size:13.5px;font-weight:800;">تصفح المنتجات</a>
+          </div>
+        </div>
+      `;
+      updateSummary(0, 0);
+      return;
+    }
+
+    let html = '';
+    let total = 0;
+    let itemCount = 0;
+
+    grouped.forEach(item => {
+      const lineTotal = item.price * item.qty;
+      total += lineTotal;
+      itemCount += item.qty;
+
+      html += `
+        <div class="cart-item-card">
+          <button class="ci-remove" onclick="removeGroup('${item.id}', '${(item.size || '').replace(/'/g, "\\'")}')" title="حذف">✕</button>
+          <div class="ci-image">
+            <img src="${item.img}" alt="${item.name}" loading="lazy">
+          </div>
+          <div class="ci-info">
+            ${item.brand ? `<div class="ci-brand">${item.brand}</div>` : ''}
+            <div class="ci-name">${item.name}</div>
+            ${item.size ? `<div class="ci-size">الحجم: ${item.size}</div>` : ''}
+          </div>
+          <div class="ci-qty">
+            <button onclick="changeQty('${item.id}', '${(item.size || '').replace(/'/g, "\\'")}', 1)">+</button>
+            <span>${item.qty}</span>
+            <button onclick="changeQty('${item.id}', '${(item.size || '').replace(/'/g, "\\'")}', -1)">−</button>
+          </div>
+          <div class="ci-price-col">
+            <span class="curr">${lineTotal} ر.س</span>
+          </div>
+        </div>
+      `;
+    });
+
+    wrapper.innerHTML = html;
+    updateSummary(total, itemCount);
+  }
+
+  function updateSummary(total, count) {
+    document.getElementById('pageTitleCount').textContent = `سلة التسوق (${count} منتجات)`;
+    document.getElementById('summarySubtotal').textContent = `${total} ر.س`;
+
+    const badge = document.getElementById('basketCounter');
+    if (badge) {
+      badge.style.display = count > 0 ? 'flex' : 'none';
+      badge.innerText = count;
+    }
+
+    const progressFill = document.getElementById('progressFill');
+    const progressMsg = document.getElementById('progressMsg');
+    const summaryShipping = document.getElementById('summaryShipping');
+    const summaryTotal = document.getElementById('summaryTotal');
+    const checkoutBtn = document.getElementById('checkoutBtn');
+
+    if (total === 0) {
+      progressFill.style.width = '0%';
+      progressMsg.textContent = `أضف منتجات بقيمة ${FREE_SHIPPING_THRESHOLD} ر.س لتحصل على شحن مجاني`;
+      summaryShipping.textContent = '0 ر.س';
+      summaryShipping.className = '';
+      summaryTotal.textContent = '0 ر.س';
+      checkoutBtn.disabled = true;
+    } else if (total >= FREE_SHIPPING_THRESHOLD) {
+      progressFill.style.width = '100%';
+      progressMsg.innerHTML = '<span style="color: #78d672;">تهانينا! لقد حصلت على شحن مجاني</span>';
+      summaryShipping.textContent = 'مجاناً';
+      summaryShipping.className = 'free-shipping-text';
+      summaryTotal.textContent = `${total} ر.س`;
+      checkoutBtn.disabled = false;
+    } else {
+      const percentage = (total / FREE_SHIPPING_THRESHOLD) * 100;
+      progressFill.style.width = `${percentage}%`;
+      progressMsg.textContent = `أنت تحتاج فقط إلى ${FREE_SHIPPING_THRESHOLD - total} ر.س لتحصل على شحن مجاني`;
+      summaryShipping.textContent = `${SHIPPING_FEE} ر.س`;
+      summaryShipping.className = '';
+      summaryTotal.textContent = `${total + SHIPPING_FEE} ر.س`;
+      checkoutBtn.disabled = false;
+    }
+  }
+
+  /* تعديل الكمية */
+  function changeQty(id, size, delta) {
+    const targetId = String(id);
+    const targetSize = size || '';
+    let basket = getBasket();
+
+    if (delta > 0) {
+      // إضافة نسخة أخرى من نفس المنتج بنفس الحجم
+      const sample = basket.find(i => String(i.id) === targetId && (i.size || '') === targetSize);
+      if (sample) {
+        basket.push({ ...sample });
+      }
+    } else {
+      // إزالة أول عنصر مطابق
+      const idx = basket.findIndex(i => String(i.id) === targetId && (i.size || '') === targetSize);
+      if (idx !== -1) basket.splice(idx, 1);
+    }
+
+    saveBasket(basket);
+    renderCartPage();
+  }
+
+  /* حذف كامل للمجموعة */
+  function removeGroup(id, size) {
+    const targetId = String(id);
+    const targetSize = size || '';
+    let basket = getBasket().filter(i => !(String(i.id) === targetId && (i.size || '') === targetSize));
+    saveBasket(basket);
+    renderCartPage();
+  }
+
+  /* زر إكمال الطلب — التوجيه إلى صفحة الدفع */
+  function setupCheckout() {
+    const btn = document.getElementById('checkoutBtn');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      const basket = getBasket();
+      if (basket.length === 0) return;
+      window.location.href = 'pay.html';
+    });
+  }
+
+  /* ============================================================
+     تهيئة الصفحة
+     ============================================================ */
+  document.addEventListener('DOMContentLoaded', function () {
+    renderCartPage();
+    setupCheckout();
+  });
+</script>
+
+</body>
+</html>

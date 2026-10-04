@@ -1,0 +1,2139 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>قولدن سنت | العناية بالشعر</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+  :root {
+    --primary-color: #111;
+    --accent-red: #c0392b;
+    --bg-light: #fafafa;
+    --border-color: #eee;
+    --tabby-tamara-border: #e55322;
+    --border-radius: 12px;
+    --transition: all 0.3s ease;
+  }
+  
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Tajawal', sans-serif;
+    color: var(--primary-color);
+    background: #fff;
+    overflow-x: hidden;
+  }
+  a { text-decoration: none; color: inherit; display: block; }
+  ul { list-style: none; }
+  img { display: block; width: 100%; height: auto; object-fit: cover; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+  /* --- شريط الإعلانات العلوي --- */
+  .promo-banner { background: #5b1a8c; color: #fff; text-align: center; font-size: 13px; font-weight: 700; padding: 10px; }
+  .promo-banner span { text-decoration: underline; cursor: pointer; margin-right: 5px; }
+
+  /* --- الترويسة الرئيسية --- */
+  .main-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 1px solid var(--border-color); max-width: 800px; margin: 0 auto; position: sticky; top: 0; background: #fff; z-index: 100;}
+  .header-actions { display: flex; gap: 18px; align-items: center; }
+  .action-btn { position: relative; display: flex; align-items: center; justify-content: center; }
+  .action-btn svg { width: 24px; height: 24px; stroke: var(--primary-color); fill: none; }
+  .action-btn.active svg { stroke: var(--accent-red); }
+  .basket-badge { position: absolute; top: -6px; left: -8px; background: var(--accent-red); color: #fff; font-size: 10px; font-weight: 800; border-radius: 50%; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; }
+  
+/* تعديل لتنسيق اللوغو الجديد وتأثيرات الفوتر */
+  .brand-logo { flex: 1; display: flex; justify-content: center; align-items: center; }
+  .brand-logo img { max-height: 38px; width: auto; object-fit: contain; }
+  .faq-content ul li a:hover { color: var(--accent-red); }
+  .menu-toggle { display: flex; align-items: center; justify-content: flex-end; min-width: 66px; }
+  .menu-toggle svg { width: 24px; height: 24px; stroke: var(--primary-color); }
+
+  /* --- حقل البحث --- */
+  .search-panel { display: none; max-width: 800px; margin: 0 auto; padding: 12px 16px; border-bottom: 1px solid var(--border-color); background: #fff; }
+  .search-panel.open { display: block; animation: fadeIn 0.25s; }
+  .search-panel input {
+    width: 100%; padding: 12px 18px; border: 1px solid #e6e6e6; border-radius: 30px;
+    font-family: inherit; font-size: 14px; font-weight: 500; outline: none;
+    background: #fafafa; color: #222; transition: var(--transition);
+  }
+  .search-panel input::placeholder { color: #bfbfbf; font-weight: 500; }
+  .search-panel input:focus { border-color: #111; background: #fff; }
+
+  /* --- الحاويات الرئيسية للمحتوى --- */
+  .app-container { max-width: 800px; margin: 0 auto; padding: 0 16px; min-height: 70vh; }
+
+  /* --- شبكة المنتجات (تحاكي شكل تصميم index) --- */
+  .store-section { margin: 24px 0; }
+  .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+  .section-header h2 { font-size: 18px; font-weight: 800; }
+  .btn-outline { border: 1px solid #111; border-radius: 20px; padding: 4px 14px; font-size: 12px; font-weight: 700; }
+
+  .products-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+  }
+  @media (min-width: 600px) {
+      .products-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .empty-results { grid-column: 1 / -1; text-align: center; padding: 50px 10px; color: #999; font-weight: 700; font-size: 14px; }
+
+  .item-card {
+    position: relative; border: 1px solid #eee; border-radius: 12px; padding: 10px; text-align: center; background: #fff;
+    display: flex; flex-direction: column; width: 100%; height: 100%; transition: var(--transition);
+  }
+  .item-card:hover { transform: translateY(-3px); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+  .item-badge { position: absolute; top: 8px; left: 8px; background: #2fb99e; color: #fff; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px; z-index: 2; }
+  .item-img { width: 100%; aspect-ratio: 1/1; background: #fff; border-radius: 8px; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 8px; cursor: pointer;}
+  .item-img img { width: 90%; height: 90%; object-fit: contain; transition: var(--transition); }
+  .item-card:hover .item-img img { transform: scale(1.05); }
+  .item-prices { margin: 4px 0; font-weight: 800; font-size: 14px; }
+  .price-current { color: var(--accent-red); }
+  .price-old { color: #aaa; text-decoration: line-through; font-size: 12px; margin-inline-start: 6px; font-weight: 400; }
+  .item-brand { font-size: 11px; color: #555; font-weight: 700; margin-bottom: 4px; }
+  .item-name { font-size: 12px; font-weight: 500; color: #777; line-height: 1.4; height: 34px; overflow: hidden; margin-bottom: 12px; cursor: pointer;}
+  .btn-add { width: 100%; border: 1px solid #ddd; color: var(--primary-color); background: #fff; border-radius: 6px; padding: 8px; font-size: 13px; font-weight: 700; transition: 0.2s; margin-top: auto; }
+  .btn-add:hover { background: var(--primary-color); color: #fff; border-color: var(--primary-color); }
+
+  /* --- صفحة تفاصيل المنتج (تم تعديل ألوانها لتناسب Theme 1) --- */
+  .product-page { display: none; padding: 20px 0; animation: fadeIn 0.3s; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .back-to-products { background: #f4f4f4; color: #333; padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 700; margin-bottom: 20px; display: inline-flex; align-items: center; gap: 6px; }
+  .back-to-products:hover { background: #e0e0e0; }
+  .product-details { display: grid; grid-template-columns: 1fr; gap: 24px; }
+  @media (min-width: 600px) { .product-details { grid-template-columns: 1fr 1fr; } }
+  .product-gallery { position: relative; }
+  .main-product-image { width: 100%; border-radius: var(--border-radius); border: 1px solid var(--border-color); margin-bottom: 12px; aspect-ratio: 1/1; object-fit: contain; padding: 10px; }
+  .product-thumbnails { display: flex; gap: 8px; flex-wrap: wrap; }
+  .product-thumbnail { width: 60px; height: 60px; object-fit: contain; border-radius: 8px; cursor: pointer; border: 2px solid var(--border-color); padding: 4px;}
+  .product-thumbnail.active { border-color: var(--primary-color); }
+  .product-title-detail { font-size: 1.4rem; margin-bottom: 8px; font-weight: 800; }
+  .product-price-detail { font-size: 1.5rem; font-weight: 800; color: var(--accent-red); margin-bottom: 16px; }
+  .product-description { font-size: 14px; color: #555; line-height: 1.6; margin-bottom: 24px; }
+  .product-options { margin-bottom: 16px; }
+  .option-title { font-weight: 700; font-size: 13px; margin-bottom: 8px; display: block; }
+  .option-values { display: flex; gap: 8px; flex-wrap: wrap; }
+  .option-value { padding: 6px 14px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 13px; cursor: pointer; transition: 0.2s; font-weight: 500;}
+  .option-value.selected { background: var(--primary-color); color: #fff; border-color: var(--primary-color); }
+  .size-note { font-size: 11.5px; color: #999; margin-top: 10px; font-weight: 500; }
+  #add-to-cart-detail { background: var(--primary-color); color: #fff; padding: 14px; font-size: 15px; border-radius: 8px; margin-bottom: 24px; }
+  #add-to-cart-detail:hover { background: #333; }
+  .product-table { width: 100%; border-collapse: collapse; margin-top: 20px; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; }
+  .product-table th, .product-table td { padding: 12px; text-align: right; border-bottom: 1px solid var(--border-color); font-size: 13px; }
+  .product-table th { background-color: var(--bg-light); font-weight: 700; width: 35%; }
+
+  /* --- صفحة المقالات --- */
+  .article-page { display: none; padding: 20px 0 40px; animation: fadeIn 0.3s; }
+  .article-body h1 { font-size: 1.45rem; font-weight: 800; margin-bottom: 14px; line-height: 1.5; }
+  .article-body h2 { font-size: 1.05rem; font-weight: 800; margin: 22px 0 8px; color: #111; }
+  .article-body p { font-size: 14px; line-height: 1.9; color: #4a4a4a; margin-bottom: 10px; }
+  .article-body ul { list-style: disc; padding-inline-start: 22px; margin-bottom: 12px; }
+  .article-body ol { list-style: decimal; padding-inline-start: 22px; margin-bottom: 12px; }
+  .article-body li { font-size: 14px; line-height: 1.9; color: #4a4a4a; margin-bottom: 4px; }
+  .article-body hr { border: none; border-top: 1px solid var(--border-color); margin: 24px 0; }
+
+  /* --- شريط تابي وتمارا --- */
+  .tabby-tamara-strip { border: 2px solid var(--tabby-tamara-border); border-radius: 10px; margin: 24px 0 16px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; background: #fff; }
+  .tabby-tamara-strip .text-label { font-weight: 800; font-size: 15px; color: #000; }
+  .tabby-tamara-strip .logos { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 18px; letter-spacing: -0.5px; }
+  .tabby-logo { font-family: sans-serif; font-weight: 900; }
+  .tamara-logo { display: flex; align-items: center; gap: 4px; }
+  .tamara-logo span { font-size: 12px; background: #000; color: #fff; border-radius: 50%; width: 18px; height: 18px; display: inline-flex; align-items: center; justify-content: center; }
+
+  /* --- بوكسات المزايا الأربعة --- */
+  .features-grid-bottom { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px; }
+  .feature-box { background: #fcfcfc; border: 1px solid #eaeaea; border-radius: 10px; padding: 12px; display: flex; align-items: center; justify-content: space-between; position: relative; min-height: 65px; }
+  .feature-box .f-text { font-size: 12.5px; font-weight: 800; line-height: 1.3; color: #222; max-width: 70%; }
+  .feature-box .f-icon { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; }
+  .feature-box .f-icon svg { width: 26px; height: 26px; stroke: #000; stroke-width: 1.5; fill: none; }
+  .feature-badge { position: absolute; top: 6px; left: 6px; background: var(--accent-red); color: #fff; font-size: 9px; font-weight: 800; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+
+  /* --- الفوتر والأكورديون المطابق لتصميم الأول --- */
+  .site-footer { border-top: 1px solid var(--border-color); margin-top: 30px; }
+  .faq-block { border-bottom: 1px solid var(--border-color); }
+  .faq-title { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; font-size: 14.5px; font-weight: 800; cursor: pointer; }
+  .faq-title .icon-arrow { transition: transform 0.3s; font-size: 12px; color: #555; }
+  .faq-block.active .icon-arrow { transform: rotate(180deg); }
+  .faq-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+  .faq-block.active .faq-content { max-height: 900px; padding-bottom: 16px; }
+  .faq-content ul li { padding: 8px 0; font-size: 13.5px; color: #555; font-weight: 500; border-bottom: 1px dashed #f5f5f5; }
+  .business-auth-badge { text-align: center; padding: 20px 0 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+  .business-auth-badge img { width: 60px; height: auto; object-fit: contain; }
+  .business-auth-badge span { font-size: 12px; color: #777; font-weight: 700; }
+  .copyright-bar { background: var(--bg-light); padding: 20px; font-size: 12px; color: #777; text-align: center; border-top: 1px solid var(--border-color); margin-top: 20px; }
+
+  /* --- الأزرار العائمة والنوافذ الجانبية (Drawers) --- */
+  .fab-up { position: fixed; bottom: 20px; left: 16px; width: 42px; height: 42px; border-radius: 50%; background: #333; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 60; }
+  .fab-up svg { width: 20px; height: 20px; stroke: #fff; fill: none; }
+  
+  .backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 9990; display: none; }
+  .backdrop.active { display: block; }
+  .drawer { position: fixed; top: 0; bottom: 0; right: -100%; width: min(320px, 85vw); background: #fff; z-index: 9995; transition: right 0.3s ease; overflow-y: auto; display: flex; flex-direction: column; }
+  .drawer.show { right: 0; }
+  .drawer.left-side { right: auto; left: -100%; transition: left 0.3s ease; }
+  .drawer.left-side.show { left: 0; }
+  .drawer-header { display: flex; justify-content: space-between; align-items: center; padding: 16px; border-bottom: 1px solid var(--border-color); font-weight: 800; font-size: 16px; position: sticky; top: 0; background: #fff; z-index: 2; }
+  
+  .cart-container { padding: 16px; flex: 1; overflow-y: auto; }
+  .basket-item { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid #f2f2f2; align-items: center; }
+  .basket-item img { width: 55px; height: 55px; object-fit: contain; background: var(--bg-light); border-radius: 6px; border: 1px solid var(--border-color); }
+  .basket-info { flex: 1; }
+  .basket-title { font-size: 12.5px; font-weight: 700; line-height: 1.3; }
+  .basket-price { font-size: 13px; color: var(--accent-red); font-weight: 800; margin-top: 4px; }
+  .basket-remove { color: #999; font-size: 12px; text-decoration: underline; }
+  .basket-summary { padding: 16px; font-weight: 800; font-size: 15px; border-top: 2px solid var(--primary-color); position: sticky; bottom: 0; background: #fff; }
+
+  .alert-toast { position: fixed; bottom: 78px; left: 50%; transform: translateX(-50%); background: var(--primary-color); color: #fff; padding: 10px 24px; border-radius: 30px; font-size: 13px; font-weight: 700; z-index: 9999; opacity: 0; pointer-events: none; transition: 0.3s; }
+  .alert-toast.visible { opacity: 1; bottom: 90px; }
+</style>
+</head>
+<body>
+
+<div class="promo-banner">اليوم فقط! خصم 15% | كود: JUL15 &nbsp; <span>تطبق الشروط</span></div>
+
+<header class="main-header">
+
+  <!-- السلة والبحث على اليمين -->
+  <div class="header-actions">
+    <button class="action-btn" id="searchToggle" aria-label="بحث">
+      <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+    </button>
+
+    <button class="action-btn" onclick="toggleDrawer('cartDrawer')" aria-label="السلة">
+      <svg viewBox="0 0 24 24" stroke-width="2"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6L4 2H2"/><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/></svg>
+      <span class="basket-badge" id="basketCounter" style="display:none;">0</span>
+    </button>
+  </div>
+
+  <a class="brand-logo" href="#" onclick="showHome(event)">
+    <img src="https://images.ctfassets.net/23i1rgq9xnnb/6vBhFu5r54V7ELwYVv0nPO/7093a34dd46557c301117d54a14b0de7/GS-LOGO__3_.png?fm=avif&q=62&w=256" alt="شعار المتجر">
+  </a>
+
+  <!-- الهامبرقر على اليسار -->
+  <button class="menu-toggle" onclick="toggleDrawer('mobileMenu')" aria-label="القائمة">
+    <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+  </button>
+</header>
+
+<!-- حقل البحث -->
+<div class="search-panel" id="searchPanel">
+  <input type="text" id="searchInput" placeholder="ابحث في منتجات العناية بالشعر..." autocomplete="off">
+</div>
+
+<div class="app-container">
+
+  <section class="store-section" id="products-section">
+    <div class="section-header">
+      <h2 id="products-title">كل منتجات العناية بالشعر</h2>
+    </div>
+    <div class="products-grid" id="featured-products">
+    </div>
+  </section>
+
+  <section class="product-page" id="product-page">
+    <button class="back-to-products" id="back-to-products">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      العودة للمنتجات
+    </button>
+    <div class="product-details" id="product-details">
+    </div>
+  </section>
+
+  <section class="article-page" id="article-page">
+    <button class="back-to-products" onclick="showHome(event)">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      العودة للرئيسية
+    </button>
+    <article class="article-body" id="article-body"></article>
+  </section>
+
+  <div class="tabby-tamara-strip">
+    <div class="logos">
+      <span class="tabby-logo">tabby</span>
+      <span class="tamara-logo"><span>♥</span> tamara</span>
+    </div>
+    <div class="text-label">وادفع لاحقاً</div>
+  </div>
+
+  <div class="features-grid-bottom">
+    <div class="feature-box">
+      <div class="f-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+      <div class="f-text">توصيل سريع<br>خلال 1-3 أيام</div>
+    </div>
+    <div class="feature-box">
+      <span class="feature-badge">%5</span>
+      <div class="f-icon"><svg viewBox="0 0 24 24"><path d="M20 12V8H6a2 2 0 01-2-2c0-1.1.9-2 2-2h12v4"/><path d="M4 6v12a2 2 0 002 2h14v-4"/><circle cx="18" cy="16" r="2"/></svg></div>
+      <div class="f-text">برنامــــــج<br>الكاش باك</div>
+    </div>
+    <div class="feature-box">
+      <div class="f-icon"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
+      <div class="f-text">منتجاتنا<br>أصلية 100%</div>
+    </div>
+    <div class="feature-box">
+      <div class="f-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+      <div class="f-text">إرجاع مجاني<br>وسهــــــــــــــل</div>
+    </div>
+  </div>
+
+<footer class="site-footer">
+    
+    <div class="faq-block active">
+      <div class="faq-title" onclick="this.parentElement.classList.toggle('active')">
+        <span>خدمة العملاء</span>
+        <span class="icon-arrow">▼</span>
+      </div>
+      <div class="faq-content">
+        <ul>
+          <li><a href="#" data-article="faq">الأسئلة الأكثر تكراراً (FAQ)</a></li>
+          <li><a href="#" data-article="payment">طرق الدفع (مدى، فيزا، تابي، تمارا، الدفع عند الاستلام)</a></li>
+          <li><a href="#" data-article="shipping">الشحن والتوصيل (التوصيل السريع للمملكة والخليج)</a></li>
+          <li><a href="#" data-article="returns">سياسة الاستبدال والاسترجاع (إرجاع مجاني خلال 14 يوم)</a></li>
+          <li><a href="#" data-article="tracking">تتبع شحنتك ومشترياتك</a></li>
+        </ul>
+        
+        <div class="business-auth-badge">
+          <img src="https://imagedelivery.net/nU9Yamkp250UHNYBIVAE6w/5bd6720d-f098-4559-5eea-457564de8100/public" alt="شعار منصة الأعمال" onerror="this.src='https://assets.salla.cloud/themes/default/assets/images/sbc.png'">
+          <a href="https://imagedelivery.net/nU9Yamkp250UHNYBIVAE6w/5bd6720d-f098-4559-5eea-457564de8100/public" target="_blank">
+            <img src="" alt="موثق لدى منصة الأعمال" onerror="this.src='https://assets.salla.cloud/themes/default/assets/images/sbc.png'">
+          </a>
+          <span>موثق لدى منصة الأعمال</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-block">
+      <div class="faq-title" onclick="this.parentElement.classList.toggle('active')">
+        <span>للشكاوى والمقترحات</span>
+        <span class="icon-arrow">▼</span>
+      </div>
+      <div class="faq-content">
+        <ul>
+          <li><strong>البريد الإلكتروني:</strong> <a href="mailto:care@goldenscent.com">care@goldenscent.com</a></li>
+          <li><strong>الواتساب المباشر:</strong> <a href="https://wa.me/966500000000" target="_blank">+966 50 000 0000</a></li>
+          <li><strong>الهاتف الموحد:</strong> <a href="tel:8001234567">800-123-4567</a></li>
+          <li><strong>أوقات العمل:</strong> يومياً من 9:00 صباحاً حتى 11:00 مساءً</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="faq-block">
+      <div class="faq-title" onclick="this.parentElement.classList.toggle('active')">
+        <span>عن قولدن سنت</span>
+        <span class="icon-arrow">▼</span>
+      </div>
+      <div class="faq-content">
+        <ul>
+          <li><a href="#" data-article="about">من نحن (قصة قولدن سنت وأهدافنا)</a></li>
+          <li><a href="#" data-article="authenticity">ضمان الأصالة (منتجات أصلية ومضمونة 100%)</a></li>
+          <li><a href="#" data-article="terms">الشروط والأحكام الخاصة بالموقع</a></li>
+          <li><a href="#" data-article="privacy">سياسة الخصوصية وحماية البيانات</a></li>
+          <li><a href="#" data-article="affiliate">برنامج التسويق بالعمولة (الأفلييت)</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+</div> 
+
+<div class="copyright-bar">جميع الحقوق محفوظة © GOLDEN SCENT 2026 | المملكة العربية السعودية</div>
+
+<button class="fab-up" onclick="window.scrollTo({top:0})"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg></button>
+
+<div class="backdrop" id="backdrop" onclick="closeDrawers()"></div>
+
+<div class="drawer left-side" id="mobileMenu">
+  <div class="drawer-header"><span>القائمة</span><button onclick="closeDrawers()">✕</button></div>
+  <div style="padding: 16px; display:flex; flex-direction:column; gap:16px; font-weight:700;">
+    <a href="#" data-filter="all">الرئيسية</a>
+    <a href="#" data-filter="all">كل منتجات العناية</a>
+    <a href="#" data-filter="شامبو">شامبو</a>
+    <a href="#" data-filter="زيوت">زيوت ومصول</a>
+    <a href="#" data-filter="ماسكات">ماسكات وعلاجات</a>
+    <a href="#" data-filter="تصفيف">منتجات تصفيف</a>
+  </div>
+</div>
+
+<div class="drawer" id="cartDrawer">
+  <div class="drawer-header"><span>سلتي</span><button onclick="closeDrawers()">✕</button></div>
+  <div class="cart-container" id="basketItemsWrapper"></div>
+  <div class="basket-summary">الإجمالي: <span id="basketTotalPrice">0</span> ر.س</div>
+</div>
+
+<div class="alert-toast" id="systemToast"></div>
+
+<script>
+    // بيانات المنتجات
+    const products = [{
+"id": 1,
+"name": "مجموعة K Nutritive Fondant Holidays 24 - هدية العناية الفاخرة للشعر الجاف",
+"price": "90 ر.س",
+"originalPrice": "120 ر.س",
+"discount": "25%",
+"image": "https://f.nooncdn.com/p/pzsku/Z03821DED7D3839065E52Z/45/_/1742453672/51dccc4f-08bb-4b31-a180-e9b3285bfefd.jpg?format=webp&width=800",
+"badges": ["fast-delivery", "خصم", "هدية", "ممتاز"],
+"category": "عناية بالشعر",
+"subcategory": "علاجات وماسكات شعر",
+"description": "مجموعة هدايا فاخرة من كيراستاس للعناية بالشعر الجاف! تحتوي على مجموعة من أفضل منتجات Nutritive التي توفر تغذية عميقة وإصلاحاً مكثفاً للشعر التالف. تركيبة غنية بالزيوت الطبيعية والعناصر المغذية التي تعيد الحيوية واللمعان للشعر الباهت. مثالية للاستخدام اليومي أو كهدية فاخرة لمحبي العناية بالشعر.",
+"images": [
+"https://f.nooncdn.com/p/pzsku/Z03821DED7D3839065E52Z/45/_/1742453672/51dccc4f-08bb-4b31-a180-e9b3285bfefd.jpg?format=webp&width=800",
+                    "https://f.nooncdn.com/p/pzsku/Z03821DED7D3839065E52Z/45/_/1741180879/c63e75f8-936a-4d53-a3dd-f0aa67c93e0b.jpg?format=webp&width=800"
+                ],
+"colors": ["شفاف"],
+"sizes": ["مجموعة كاملة", "حجم متوسط", "حجم كبير"],
+"details": {
+"النوع": "مجموعة هدايا للعناية بالشعر",
+"العلامة التجارية": "كيراستاس",
+"الموديل": "Nutritive Fondant Holidays 24",
+"الحجم": "مجموعة متكاملة (شامبو + بلسم + ماسك + سيروم)",
+"الاستخدام": "للشعر الجاف والتالف",
+"نوع الشعر": "يناسب جميع أنواع الشعر - من متوسط إلى كثيف",
+"المكونات الرئيسية": "زيت الأرجان، زيت الجوجوبا، بروتين الحرير، فيتامين E",
+"الفعالية": "ترطيب عميق - تغذية - إصلاح التلف - لمعة فائقة",
+"طريقة الاستخدام": "استخدم الشامبو ثم البلسم ثم الماسك مرتين أسبوعياً",
+"الرائحة": "عطرية ناعمة برائحة الزهور والفل",
+"نسبة طبيعية": "85% مكونات طبيعية",
+"خالي من": "خالي من السلفات - خالي من البارابين - غير معد على الحيوانات",
+"بلد المنشأ": "فرنسا",
+"مدة الصلاحية": "36 شهراً من تاريخ الإنتاج",
+"الوزن الصافي": "450 مل"
+},
+"features": [
+"ترطيب عميق للشعر الجاف",
+"إصلاح الشعر التالف والمتقصف",
+"تغذية مكثفة لبصيلات الشعر",
+"حماية من الحرارة والتلف",
+"لمعة طبيعية فائقة",
+"تقوية الشعر من الجذور",
+"سهولة التمشيط والتسريح"
+],
+"howToUse": "1. اغسلي الشعر بالشامبو\n2. طبق البلسم واتركيه 3 دقائق\n3. استخدمي الماسك مرة أسبوعياً\n4. جففي الشعر بلطف",
+"benefits": "شعر أكثر نعومة، لمعاناً، وقوة في 3 استخدامات فقط"
+},
+
+{
+"id": 2,
+"name": "زيت وماسك أبسولوت ريبير من لوريال - علاج مكثف لإصلاح الشعر التالف",
+"price": "40 ر.س",
+"originalPrice": "55 ر.س",
+"discount": "27%",
+"image": "https://f.nooncdn.com/p/pzsku/Z6025866E4ED5EA5DDB44Z/45/_/1742371646/e8b527da-f2d5-46de-b97e-4eeffe82bfa2.jpg?format=webp&width=800",
+"badges": ["fast-delivery", "عرض", "الأكثر مبيعاً"],
+"category": "عناية بالشعر",
+"subcategory": "علاجات وماسكات شعر",
+"description": "زيت وماسك أبسولوت ريبير من لوريال بروفيسيونال هو علاج متكامل لإصلاح الشعر التالف والمتقصف. تركيبته الثورية تحتوي على بروتين الكيراتين وزيت الأرجان الذي يخترق عمق الشعر ليعيد بناءه من الداخل. يحمي الشعر من العوامل الخارجية ويوفر حرارة تصل إلى 230 درجة مئوية.",
+"images": [
+"https://f.nooncdn.com/p/pzsku/Z6025866E4ED5EA5DDB44Z/45/_/1742371646/e8b527da-f2d5-46de-b97e-4eeffe82bfa2.jpg?format=webp&width=800",
+                    "https://f.nooncdn.com/p/pzsku/Z6025866E4ED5EA5DDB44Z/45/_/1742371753/7789f074-5c06-4b62-8bea-32f888de5504.jpg?format=webp&width=800",
+                    "https://f.nooncdn.com/p/pzsku/Z6025866E4ED5EA5DDB44Z/45/_/1742371755/b45ff766-bf78-4183-8a1d-0f5c6b123556.jpg?format=webp&width=800"
+                ],
+"colors": ["فاتح"],
+"sizes": ["150 مل", "250 مل", "500 مل"],
+"details": {
+"النوع": "زيت وماسك علاجي",
+"العلامة التجارية": "لوريال بروفيسيونال",
+"الموديل": "أبسولوت ريبير",
+"الحجم": "150 مل",
+"الاستخدام": "إصلاح الشعر التالف والمتقصف",
+"نوع الشعر": "يناسب جميع أنواع الشعر التالف",
+"المكونات الرئيسية": "بروتين الكيراتين، زيت الأرجان، زيت الجوجوبا، فيتامين B5",
+"الفعالية": "إصلاح عميق - حماية من الحرارة - لمعة فائقة - تقوية",
+"طريقة الاستخدام": "يطبق على الشعر الجاف أو الرطب قبل التصفيف",
+"الرائحة": "عبير زهري ناعم",
+"نسبة طبيعية": "90% مكونات طبيعية",
+"خالي من": "خالي من البارابين - خالي من السيليكون - غير لزج",
+"بلد المنشأ": "فرنسا",
+"مدة الصلاحية": "24 شهراً",
+"الوزن الصافي": "150 مل",
+"مقاومة الحرارة": "حتى 230 درجة مئوية"
+},
+"features": [
+"إصلاح فوري للشعر التالف",
+"حماية من حرارة الأدوات",
+"لمعة طبيعية فائقة",
+"عدم ترك تأثير دهني",
+"سهولة التسريح والتمشيط",
+"حماية من التقصف"
+],
+"howToUse": "1. ضعي كمية صغيرة على راحة اليد\n2. دلكي الشعر من المنتصف إلى الأطراف\n3. يمكن استخدامه على الشعر الجاف أو الرطب\n4. استخدمي قبل التصفيف بالحرارة",
+"benefits": "شعر مصفف بشكل احترافي وخالٍ من التلف في دقائق"
+},
+
+{
+"id": 3,
+"name": "شامبو جينيسيس بين هيدرا فورتيفيانت من كيراستاس - 250 مل للشعر الضعيف",
+"price": "33 ر.س",
+"originalPrice": "45 ر.س",
+"discount": "27%",
+"image": "https://f.nooncdn.com/p/pzsku/Z05CB087713A995EB7743Z/45/_/1745570940/3b3c4f39-4e0e-464b-ba93-f44764f53f7f.jpg?format=webp&width=800",
+"badges": ["fast-delivery", "جديد", "مقاوم للتساقط"],
+"category": "عناية بالشعر",
+"subcategory": "شامبو",
+"description": "شامبو جينيسيس بين هيدرا فورتيفيانت من كيراستاس هو حل متكامل للشعر الضعيف والمعرض للتساقط. تركيبته الغنية بالأمينوكسيل والجلوكوز تساعد على تقوية الشعر من الجذور وتحفيز نموه. ينظف بلطف دون إزالة الزيوت الطبيعية ويمنح الشعر كثافة وحيوية ملحوظة.",
+"images": [
+"https://f.nooncdn.com/p/pzsku/Z05CB087713A995EB7743Z/45/_/1745570940/3b3c4f39-4e0e-464b-ba93-f44764f53f7f.jpg?format=webp&width=800",
+                    "https://f.nooncdn.com/p/pzsku/Z05CB087713A995EB7743Z/45/_/1726036268/9af2de27-2c99-4703-be95-76cd30a9fa55.jpg?format=webp&width=800"
+                ],
+"colors": ["شفاف"],
+"sizes": ["250 مل", "500 مل", "1 لتر"],
+"details": {
+"النوع": "شامبو تقوية",
+"العلامة التجارية": "كيراستاس",
+"الموديل": "جينيسيس بين هيدرا فورتيفيانت",
+"الحجم": "250 مل",
+"الاستخدام": "تقوية الشعر ومنع التساقط",
+"نوع الشعر": "الشعر الضعيف والمعرض للتساقط",
+"المكونات الرئيسية": "أمينوكسيل، جلوكوز، نياسيناميد، بيوتين",
+"الفعالية": "تقوية الجذور - منع التساقط - تحفيز النمو - زيادة الكثافة",
+"طريقة الاستخدام": "تدليك فروة الرأس لمدة 3 دقائق ثم شطف",
+"الرائحة": "نعناع منعش",
+"نسبة طبيعية": "80% مكونات طبيعية",
+"خالي من": "خالي من السلفات - خالي من البارابين - خالي من الملح",
+"بلد المنشأ": "فرنسا",
+"مدة الصلاحية": "36 شهراً",
+"الوزن الصافي": "250 مل",
+"النتيجة": "خلال 4 أسابيع من الاستخدام المنتظم"
+},
+"features": [
+"تقليل تساقط الشعر بنسبة 77%",
+"زيادة كثافة الشعر",
+"تحفيز نمو الشعر الجديد",
+"تنظيف لطيف لفروة الرأس",
+"تحسين الدورة الدموية",
+"تغذية بصيلات الشعر"
+],
+"howToUse": "1. ضعي كمية مناسبة على الشعر المبلل\n2. دلكي فروة الرأس لمدة 3 دقائق\n3. اتركيه لمدة دقيقتين\n4. اشطفيه جيداً",
+"benefits": "شعر أقوى وأكثر كثافة في 4 أسابيع فقط"
+},
+
+{
+"id": 4,
+"name": "زيت الفيف اكسترا اورديناري من لوريال باريس - 100 مل لجميع أنواع الشعر",
+"price": "21 ر.س",
+"originalPrice": "30 ر.س",
+"discount": "30%",
+"image": "https://f.nooncdn.com/p/pzsku/Z3A14A8BC71242C40EA70Z/45/_/1744349262/8e33fafb-33bd-4792-b6e2-d02a959b773b.jpg?format=webp&width=800",
+"badges": ["fast-delivery", "عرض خاص", "الأفضل مبيعاً"],
+"category": "عناية بالشعر",
+"subcategory": "زيوت شعر",
+"description": "زيت اكسترا اورديناري من لوريال باريس هو زيت متعدد الاستخدامات مصمم خصيصاً لترطيب الشعر وإضفاء لمعان طبيعي فائق. يحتوي على مزيج فريد من 6 خلاصات زهور نادرة تغذي الشعر دون أن تثقل عليه. مثالي للاستخدام اليومي للحصول على شعر حريري ناعم كصفات التجميل.",
+"images": [
+"https://f.nooncdn.com/p/pzsku/Z3A14A8BC71242C40EA70Z/45/_/1744349262/8e33fafb-33bd-4792-b6e2-d02a959b773b.jpg?format=webp&width=800",
+                    "https://f.nooncdn.com/p/pzsku/Z3A14A8BC71242C40EA70Z/45/_/1743569503/7504ea84-62f5-4710-8f20-8b863d6651bd.jpg?format=webp&width=800"
+                ],
+"colors": ["شفاف", "ذهبي", "زهري"],
+"sizes": ["100 مل", "200 مل", "500 مل"],
+"details": {
+"النوع": "زيت شعر متعدد الاستخدامات",
+"العلامة التجارية": "لوريال باريس",
+"الموديل": "الفيف اكسترا اورديناري",
+"الحجم": "100 مل",
+"الاستخدام": "ترطيب وإضفاء لمعان للشعر",
+"نوع الشعر": "يناسب جميع أنواع الشعر",
+"المكونات الرئيسية": "خلاصة 6 زهور، زيت الأرجان، زيت الجوجوبا، فيتامين E",
+"الفعالية": "ترطيب - لمعة - حماية من الحرارة - عدم دهنية",
+"طريقة الاستخدام": "بضع قطرات على الشعر الجاف أو الرطب",
+"الرائحة": "عبير زهري ناعم",
+"نسبة طبيعية": "95% مكونات طبيعية",
+"خالي من": "خالي من السيليكون - غير دهني - غير لزج",
+"بلد المنشأ": "فرنسا",
+"مدة الصلاحية": "24 شهراً",
+"الوزن الصافي": "100 مل",
+"عدد الاستخدامات": "أكثر من 100 استخدام"
+},
+"features": [
+"ترطيب عميق دون تأثير دهني",
+"لمعة طبيعية فائقة",
+"حماية من حرارة الأدوات",
+"سهولة التسريح والتمشيط",
+"منع التقصف والتكسر",
+"تنعيم الشعر المجعد"
+],
+"howToUse": "1. ضعي 2-3 قطرات على راحة اليد\n2. مرري على الشعر من المنتصف إلى الأطراف\n3. يمكن استخدامه على الشعر الجاف أو الرطب\n4. لا حاجة للشطف",
+"benefits": "شعر حريري ناعم بلمسة احترافية في ثوانٍ"
+},
+
+{
+"id": 5,
+"name": "ماسك هير فود الترا دو 3 في 1 بزبدة الكاكاو من غارنييه - علاج متكامل",
+"price": "90 ر.س",
+"originalPrice": "120 ر.س",
+"discount": "25%",
+"image": "https://f.nooncdn.com/p/pzsku/Z209CA0E3EDB7413EDDE4Z/45/_/1729519431/46e3c56d-4d3f-4e3c-bc90-f6ec24fcc024.jpg?format=webp&width=800",
+"badges": ["fast-delivery", "3 في 1", "نباتي"],
+"category": "عناية بالشعر",
+"subcategory": "ماسكات شعر",
+"description": "ماسك هير فود الترا دو 3 في 1 من غارنييه هو ابتكار ثوري في عالم العناية بالشعر! تركيبته النباتية الغنية بزبدة الكاكاو تحتوي على 97% مكونات طبيعية وتوفر 3 طرق استخدام مختلفة: حمام زيت ساخن، ماسك ترطيب، أو كريم يترك على الشعر. مثالي للشعر المجعد الجاف الذي يحتاج إلى ترطيب مكثف وتغذية عميقة.",
+"images": [
+"https://f.nooncdn.com/p/pzsku/Z209CA0E3EDB7413EDDE4Z/45/_/1729519431/46e3c56d-4d3f-4e3c-bc90-f6ec24fcc024.jpg?format=webp&width=800",
+                    "https://f.nooncdn.com/p/pzsku/Z209CA0E3EDB7413EDDE4Z/45/1746748138/60f6f390-5a25-41fc-a12d-ff58fdc82ac1.jpg?format=webp&width=800"
+                ],
+"colors": ["بنى", "ذهبي", "أخضر"],
+"sizes": ["300 مل", "500 مل", "700 مل"],
+"details": {
+"النوع": "ماسك 3 في 1 متعدد الاستخدامات",
+"العلامة التجارية": "غارنييه",
+"الموديل": "هير فود الترا دو",
+"الحجم": "300 مل",
+"الاستخدام": "ترطيب وتغذية الشعر المجعد",
+"نوع الشعر": "الشعر المجعد، الجاف، والتالف",
+"المكونات الرئيسية": "زبدة الكاكاو، زيت جوز الهند، عسل، بروتين القمح",
+"الفعالية": "ترطيب مكثف - تغذية - تنعيم - حماية",
+"طريقة الاستخدام": "3 طرق: حمام زيت، ماسك، أو كريم",
+"الرائحة": "شوكولاتة وكاكاو",
+"نسبة طبيعية": "97% مكونات طبيعية",
+"خالي من": "خالي من السلفات - خالي من البارابين - نباتي",
+"بلد المنشأ": "فرنسا",
+"مدة الصلاحية": "36 شهراً",
+"الوزن الصافي": "300 مل",
+"عدد الاستخدامات": "أكثر من 20 استخدام"
+},
+"features": [
+"3 طرق استخدام مختلفة",
+"ترطيب لمدة 72 ساعة",
+"تنعيم الشعر المجعد",
+"منع التشابك والتقصف",
+"لمعة طبيعية فائقة",
+"تركيبة نباتية آمنة"
+],
+"howToUse": "1. كحمام زيت: دافئي وطبقي قبل الغسيل\n2. كماسك: بعد الشامبو لمدة 5 دقائق\n3. ككريم: كمية صغيرة على الشعر الجاف",
+"benefits": "شعر مرطب، منعم، ولامع بثلاث طرق مختلفة"
+},
+
+{
+"id": 6,
+"name": "سيروم سيريوكسيل ادفانسد من لوريال بروفيسيونال - 90 مل لتكثيف الشعر",
+"price": "25 ر.س",
+"originalPrice": "35 ر.س",
+"discount": "29%",
+"image": "https://f.nooncdn.com/p/pzsku/Z9D74030C1A4F94575F89Z/45/_/1731019539/a16f16be-bc55-4798-872b-27237edc8edc.jpg?format=webp&width=800",
+"badges": ["fast-delivery", "مكثف للشعر", "تقوية"],
+"category": "عناية بالشعر",
+"subcategory": "مصل شعر",
+"description": "سيروم سيريوكسيل ادفانسد من لوريال بروفيسيونال هو مصل متقدم بتركيز 5% ستيموكسيدين وريسفيراترول لتحفيز نمو الشعر وزيادة كثافته. يعمل على تحسين أداء الخلايا الجذعية لبصيلات الشعر وتجديدها، مما يؤدي إلى شعر أكثر كثافة وقوة من الجذور. نتائج مرئية خلال 3 أشهر من الاستخدام المنتظم.",
+"images": [
+"https://f.nooncdn.com/p/pzsku/Z9D74030C1A4F94575F89Z/45/_/1731019539/a16f16be-bc55-4798-872b-27237edc8edc.jpg?format=webp&width=800",
+                    "https://f.nooncdn.com/p/pzsku/Z9D74030C1A4F94575F89Z/45/1747128428/08fe1761-b2fc-4470-b27f-8408de51a22f.jpg?format=webp&width=800"
+                ],
+"colors": ["شفاف", "أزرق", "فضي"],
+"sizes": ["90 مل", "180 مل", "270 مل"],
+"details": {
+"النوع": "مصل تكثيف الشعر",
+"العلامة التجارية": "لوريال بروفيسيونال",
+"الموديل": "سيريوكسيل ادفانسد",
+"الحجم": "90 مل",
+"الاستخدام": "تكثيف الشعر وتحفيز النمو",
+"نوع الشعر": "الشعر الخفيف، الرقيق، والمعرض للتساقط",
+"المكونات الرئيسية": "ستيموكسيدين 5%، ريسفيراترول، أمينوكسيل، بيوتين",
+"الفعالية": "تحفيز النمو - زيادة الكثافة - تقوية الجذور - منع التساقط",
+"طريقة الاستخدام": "يطبق على فروة الرأس يومياً",
+"الرائحة": "عديم الرائحة",
+"نسبة طبيعية": "70% مكونات طبيعية",
+"خالي من": "خالي من البارابين - خالي من الكحول - غير دهني",
+"بلد المنشأ": "فرنسا",
+"مدة الصلاحية": "24 شهراً",
+"الوزن الصافي": "90 مل",
+"مدة النتائج": "3 أشهر من الاستخدام المنتظم"
+},
+"features": [
+"زيادة كثافة الشعر بنسبة 86%",
+"تقليل التساقط بنسبة 78%",
+"تحفيز نمو شعر جديد",
+"تركيبة خفيفة غير دهنية",
+"امتصاص سريع بدون بقايا",
+"مناسب للاستخدام اليومي"
+],
+"howToUse": "1. نظفي فروة الرأس جيداً\n2. ضعي 1 مل على المناطق المرغوبة\n3. دلكي برفق لمدة دقيقة\n4. لا داعي للشطف",
+"benefits": "شعر أكثر كثافة وقوة في 90 يوماً"
+},
+
+{
+"id": 7,
+"name": "شامبو الفيف هيدرا هيالورونيك اسيد من لوريال - 200 مل للترطيب العميق",
+"price": "90 ر.س",
+"originalPrice": "110 ر.س",
+"discount": "18%",
+"image": "https://f.nooncdn.com/p/pzsku/Z06DBC3F28AE992B5AEF6Z/45/_/1698974028/568aef17-0592-490f-94bd-fb15830d16f5.jpg?format=webp&width=800",
+"badges": ["fast-delivery", "ترطيب", "حمض الهيالورونيك"],
+"category": "عناية بالشعر",
+"subcategory": "شامبو",
+"description": "شامبو الفيف هيدرا مع حمض الهيالورونيك من لوريال باريس هو ابتكار ثوري في ترطيب الشعر! مستوحى من العناية بالبشرة، هذا الشامبو الغني بحمض الهيالورونيك يغلف الشعر بخفة ويحافظ على رطوبته لمدة تصل إلى 72 ساعة. مثالي للشعر الجاف والتالف الذي يحتاج إلى ترطيب مكثف وإصلاح فوري.",
+"images": [
+"https://f.nooncdn.com/p/pzsku/Z06DBC3F28AE992B5AEF6Z/45/_/1698974028/568aef17-0592-490f-94bd-fb15830d16f5.jpg?format=webp&width=800",
+                    "https://f.nooncdn.com/p/pzsku/Z06DBC3F28AE992B5AEF6Z/45/_/1698974030/4910e2c3-47ea-4ffa-a72c-1feca283dc63.jpg?format=webp&width=800"
+                ],
+"colors": ["شفاف", "زهرى", "أزرق"],
+"sizes": ["200 مل", "400 مل", "600 مل"],
+"details": {
+"النوع": "شامبو ترطيب عميق",
+"العلامة التجارية": "لوريال باريس",
+"الموديل": "الفيف هيدرا هيالورونيك",
+"الحجم": "200 مل",
+"الاستخدام": "ترطيب الشعر الجاف والتالف",
+"نوع الشعر": "الشعر الجاف، التالف، والباهت",
+"المكونات الرئيسية": "حمض الهيالورونيك، بروتين الحرير، جلسيرين، فيتامين B5",
+"الفعالية": "ترطيب عميق - إصلاح التلف - لمعة - حماية",
+"طريقة الاستخدام": "تدليك الشعر المبلل ثم شطفه",
+"الرائحة": "عبير نقي منعش",
+"نسبة طبيعية": "85% مكونات طبيعية",
+"خالي من": "خالي من السلفات - خالي من البارابين - خالي من الملح",
+"بلد المنشأ": "فرنسا",
+"مدة الصلاحية": "36 شهراً",
+"الوزن الصافي": "200 مل",
+"مدة الترطيب": "حتى 72 ساعة"
+},
+"features": [
+"ترطيب عميق لمدة 72 ساعة",
+"إصلاح الشعر التالف فوراً",
+"لمعة طبيعية فائقة",
+"تنعيم الخصل المتطايرة",
+"حماية من العوامل الخارجية",
+"تنظيف لطيف بدون تجفيف"
+],
+"howToUse": "1. بللي الشعر جيداً\n2. ضعي كمية مناسبة\n3. دلكي لمدة دقيقتين\n4. اشطفيه thoroughly",
+"benefits": "شعر ممتلئ، حيوي، ولامع من أول استخدام"
+},
+
+{
+"id": 8,
+"name": "كيراستاس غلوس أبسولو بخاخ غلايز ميلك - لمعة فائقة للشعر",
+"price": "40 ر.س",
+"originalPrice": "55 ر.س",
+"discount": "27%",
+"image": "https://f.nooncdn.com/p/pzsku/Z5098B14013677F0273F8Z/45/1748763509/fac0b2c1-1205-4feb-991e-93a50612c89a.jpg?format=webp&width=800",
+"badges": ["fast-delivery", "لمعة", "سريع"],
+"category": "عناية بالشعر",
+"subcategory": "منتجات تصفيف",
+"description": "بخاخ غلوس أبسولو غلايز ميلك من كيراستاس هو منتج ثوري يمنح شعرك لمعة فائقة فورية! تركيبته الحليبية الفريدة تغلف كل خصلة بطبقة رقيقة من اللمعة الطبيعية دون أن تثقل الشعر أو تتركه دهنياً. مثالي للاستخدام اليومي للحصول على شعر لامع كالحرير في ثوانٍ.",
+"images": [
+"https://f.nooncdn.com/p/pzsku/Z5098B14013677F0273F8Z/45/1748763509/fac0b2c1-1205-4feb-991e-93a50612c89a.jpg?format=webp&width=800",
+                    "https://f.nooncdn.com/p/pzsku/Z5098B14013677F0273F8Z/45/1748763510/92ee2fea-0c1a-4eca-b22f-f50eea31fea7.jpg?format=webp&width=800"
+                ],
+"colors": ["أبيض", "فضي", "شفاف"],
+"sizes": ["150 مل", "250 مل", "400 مل"],
+"details": {
+"النوع": "بخاخ لمعة فورية",
+"العلامة التجارية": "كيراستاس",
+"الموديل": "غلوس أبسولو غلايز ميلك",
+"الحجم": "150 مل",
+"الاستخدام": "إضفاء لمعة فورية للشعر",
+"نوع الشعر": "يناسب جميع أنواع الشعر",
+"المكونات الرئيسية": "بروتين الحليب، سيليكون خفيف، فيتامين E، زيت الأرجان",
+"الفعالية": "لمعة فورية - حماية - تنعيم - عدم دهنية",
+"طريقة الاستخدام": "يرش على الشعر الجاف من مسافة 20 سم",
+"الرائحة": "فانيليا وحليب ناعمة",
+"نسبة طبيعية": "80% مكونات طبيعية",
+"خالي من": "خالي من الكحول - خالي من البارابين - غير لزج",
+"بلد المنشأ": "فرنسا",
+"مدة الصلاحية": "24 شهراً",
+"الوزن الصافي": "150 مل",
+"مقاومة الماء": "مقاوم للرطوبة"
+},
+"features": [
+"لمعة فورية في ثوانٍ",
+"حماية من الأشعة فوق البنفسجية",
+"تنعيم الخصل المتطايرة",
+"عدم ترك تأثير دهني",
+"سهولة التسريح",
+"رائحة منعشة"
+],
+"howToUse": "1. رجي العلبة جيداً\n2. ارفعيها 20 سم عن الشعر\n3. رشي بشكل متساو\n4. لا داعي للتمشيط",
+"benefits": "شعر لامع كالحرير بلمسة واحدة"
+},
+
+{
+"id": 9,
+"name": "كيراستاس غلوس أبسولو هيدرا-غلايز شامبو - ترطيب ولمعة للشعر الطويل",
+"price": "90 ر.س",
+"originalPrice": "120 ر.س",
+"discount": "25%",
+"image": "https://f.nooncdn.com/p/pzsku/ZF95AC8C31189BB4A9078Z/45/1748763506/89e09e2e-2c34-4273-9713-5cb55645812e.jpg?format=webp&width=800",
+"badges": ["fast-delivery", "ترطيب", "لمعة"],
+"category": "عناية بالشعر",
+"subcategory": "شامبو",
+"description": "شامبو غلوس أبسولو هيدرا-غلايز من كيراستاس هو شامبو مرطب فاخر مصمم خصيصاً للشعر الطويل المعرض للتجعد. تركيبته الغنية بحمض الهيالورونيك وبروتين الحرير توفر ترطيباً عميقاً ولمعة فائقة مع الحفاظ على تجعيدات الشعر الطبيعية. ينظف بلطف ويترك الشعر ناعماً كالحرير.",
+"images": [
+"https://f.nooncdn.com/p/pzsku/ZF95AC8C31189BB4A9078Z/45/1748763506/89e09e2e-2c34-4273-9713-5cb55645812e.jpg?format=webp&width=800",
+                    "https://f.nooncdn.com/p/pzsku/ZF95AC8C31189BB4A9078Z/45/1748763506/e7bd0550-7e0f-4c40-982a-154720fdf0f0.jpg?format=webp&width=800"
+                ],
+"colors": ["شفاف", "ذهبي", "أزرق"],
+"sizes": ["250 مل", "500 مل", "1 لتر"],
+"details": {
+"النوع": "شامبو ترطيب ولمعة",
+"العلامة التجارية": "كيراستاس",
+"الموديل": "غلوس أبسولو هيدرا-غلايز",
+"الحجم": "250 مل",
+"الاستخدام": "ترطيب وإضفاء لمعة للشعر الطويل",
+"نوع الشعر": "الشعر الطويل، المجعد، والجاف",
+"المكونات الرئيسية": "حمض الهيالورونيك، بروتين الحرير، زيت الأرجان، جلسيرين",
+"الفعالية": "ترطيب عميق - لمعة فائقة - تنعيم - حماية",
+"طريقة الاستخدام": "تدليك الشعر المبلل ثم شطفه",
+"الرائحة": "عبير زهري ناعم",
+"نسبة طبيعية": "90% مكونات طبيعية",
+"خالي من": "خالي من السلفات - خالي من البارابين - خالي من الملح",
+"بلد المنشأ": "فرنسا",
+"mدة الصلاحية": "36 شهراً",
+"الوزن الصافي": "250 مل",
+"النتيجة": "من أول استخدام"
+},
+"features": [
+"ترطيب عميق للشعر الطويل",
+"لمعة طبيعية فائقة",
+"الحفاظ على التجعيدات الطبيعية",
+"منع التشابك والتقصف",
+"تنظيف لطيف بدون تجفيف",
+"رائحة عطرة تدوم طويلاً"
+],
+"howToUse": "1. بللي الشعر جيداً\n2. ضعي كمية مناسبة\n3. دلكي لمدة دقيقتين\n4. اشطفيه thoroughly",
+"benefits": "شعر طويل ناعم، لامع، وخالٍ من التجعدات"
+},
+
+{
+"id": 10,
+"name": "زيت الباتانا من بوتانيك هيرث - 100 مل مغذي ومنعش للشعر والبشرة",
+"price": "30 ر.س",
+"originalPrice": "45 ر.س",
+"discount": "33%",
+"image": "https://f.nooncdn.com/p/pzsku/ZC6E06FD36EF205F6D523Z/45/1746212250/a5700283-eec5-4628-8c3a-a128d08e8897.jpg?format=webp&width=800",
+"badges": ["fast-delivery", "طبيعي", "متعدد الاستخدامات"],
+"category": "عناية بالشعر",
+"subcategory": "زيوت طبيعية",
+"description": "زيت الباتانا الأصلي من بوتانيك هيرث هو زيت طبيعي 100% مستخلص من أفضل البذور والمكسرات. غني بالفيتامينات والأحماض الدهنية الأساسية التي تغذي الشعر والبشرة بعمق. مثالي للتدليك، الترطيب، والتغذية اليومية. منتج متعدد الاستخدامات برائحة خشبية自然ية تبعث على الاسترخاء.",
+"images": [
+"https://f.nooncdn.com/p/pzsku/ZC6E06FD36EF205F6D523Z/45/1746212250/a5700283-eec5-4628-8c3a-a128d08e8897.jpg?format=webp&width=800",
+                    "https://f.nooncdn.com/p/pzsku/ZC6E06FD36EF205F6D523Z/45/1746212251/367ecb66-45f5-4059-bd5e-5289c80dc701.jpg?format=webp&width=800"
+                ],
+"colors": ["ذهبي", "عسلي", "شفاف"],
+"sizes": ["100 مل", "200 مل", "500 مل"],
+"details": {
+"النوع": "زيت طبيعي متعدد الاستخدامات",
+"العلامة التجارية": "بوتانيك هيرث",
+"الموديل": "زيت الباتانا الأصلي",
+"الحجم": "100 مل",
+"الاستخدام": "تغذية الشعر والبشرة",
+"نوع الشعر": "يناسب جميع أنواع الشعر والبشرة",
+"المكونات الرئيسية": "زيت اللوز، زيت الجوجوبا، زيت الأرجان، فيتامين E",
+"الفعالية": "تغذية عميقة - ترطيب - حماية - إصلاح",
+"طريقة الاستخدام": "للشعر: قبل الغسيل، للبشرة: يومياً",
+"الرائحة": "خشبي طبيعي منعش",
+"نسبة طبيعية": "100% مكونات طبيعية",
+"خالي من": "خالي من الكيماويات - خالي من العطور الصناعية - غير معد على الحيوانات",
+"بلد المنشأ": "الهند",
+"مدة الصلاحية": "24 شهراً",
+"الوزن الصافي": "100 مل",
+"طريقة الاستخراج": "عصر على البارد"
+},
+"features": [
+"100% طبيعي وعضوي",
+"متعدد الاستخدامات",
+"تغذية عميقة للشعر والبشرة",
+"منع التقصف والتكسر",
+"ملائم للبشرة الحساسة",
+"رائحة استرخاء طبيعية"
+],
+"howToUse": "1. للشعر: دلكي فروة الرأس قبل الغسيل\n2. للبشرة: ضعي بعد الاستحمام\n3. للتدليك: دلكي الجسم كله\n4. يمكن استخدامه يومياً",
+"benefits": "تغذية شاملة للشعر والبشرة بزيت طبيعي 100%"
+},
+
+{
+"id": 11,
+"name": "زيت شعر باتانا بالكافيين من بوتانيك هيرث مع اللوز - تحفيز النمو",
+"price": "40 ر.س",
+"originalPrice": "60 ر.س",
+"discount": "33%",
+"image": "https://f.nooncdn.com/p/pzsku/Z93F64A6C52FEC8ED3E9EZ/45/1746195542/f7a041d7-b06a-472d-952f-359b1797afb4.jpg?format=webp&width=800",
+"badges": ["fast-delivery", "تحفيز النمو", "كافيين"],
+"category": "عناية بالشعر",
+"subcategory": "زيوت شعر",
+"description": "زيت باتانا بالكافيين من بوتانيك هيرث هو تركيبة فريدة مصممة خصيصاً لتحفيز نمو الشعر ومنع التساقط. غني بالكافيين الطبيعي، زيت اللوز، والأعشاب Ayurvedic التي تنشط الدورة الدموية في فروة الرأس وتقوي البصيلات. مثالي للرجال والنساء الذين يعانون من تساقط الشعر أو ضعف النمو.",
+"images": [
+"https://f.nooncdn.com/p/pzsku/Z93F64A6C52FEC8ED3E9EZ/45/1746195542/f7a041d7-b06a-472d-952f-359b1797afb4.jpg?format=webp&width=800",
+                    "https://f.nooncdn.com/p/pzsku/Z93F64A6C52FEC8ED3E9EZ/45/1746195542/042ccbdf-b9a0-4cfd-b336-74e89c812e80.jpg?format=webp&width=800"
+                ],
+"colors": ["بنى", "ذهبي", "غامق"],
+"sizes": ["100 مل", "200 مل", "500 مل"],
+"details": {
+"النوع": "زيت تحفيز نمو الشعر",
+"العلامة التجارية": "بوتانيك هيرث",
+"الموديل": "باتانا بالكافيين",
+"الحجم": "100 مل",
+"الاستخدام": "تحفيز نمو الشعر ومنع التساقط",
+"نوع الشعر": "الشعر الخفيف، الضعيف، والمعرض للتساقط",
+"المكونات الرئيسية": "كافيين، زيت اللوز، أملا، براهمي، نيم",
+"الفعالية": "تحفيز النمو - تقوية الجذور - منع التساقط - تنشيط الدورة الدموية",
+"طريقة الاستخدام": "تدليك فروة الرأس يومياً",
+"الرائحة": "أعشاب Ayurvedic طبيعية",
+"نسبة طبيعية": "100% مكونات طبيعية",
+"خالي من": "خالي من الكيماويات - خالي من العطور الصناعية - غير معد على الحيوانات",
+"بلد المنشأ": "الهند",
+"مدة الصلاحية": "24 شهراً",
+"الوزن الصافي": "100 مل",
+"مدة النتائج": "3 أشهر من الاستخدام المنتظم"
+},
+"features": [
+"تحفيز نمو الشعر الجديد",
+"تقليل تساقط الشعر بنسبة 80%",
+"تنشيط الدورة الدموية",
+"تقوية بصيلات الشعر",
+"تركيبة Ayurvedic طبيعية",
+"مناسب للاستخدام اليومي"
+],
+"howToUse": "1. نظفي فروة الرأس\n2. ضعي الزيت ودلكي لمدة 10 دقائق\n3. اتركيه 30 دقيقة أو overnight\n4. اغسليه بشامبو لطيف",
+"benefits": "شعر أكثر كثافة وقوة في 90 يوماً"
+},
+
+{
+"id": 12,
+"name": "سيرم الفيف اكسترا اورديناري من لوريال - لجميع انواع الشعر",
+"price": "90 ر.س",
+"originalPrice": "120 ر.س",
+"discount": "25%",
+"image": "https://f.nooncdn.com/p/pzsku/Z77030C62276C7CF70983Z/45/_/1694566874/647da3ae-122e-4f2c-b699-013b006a7ee2.jpg?format=webp&width=800",
+"badges": ["fast-delivery", "متعدد الاستخدامات", "لمعة"],
+"category": "عناية بالشعر",
+"subcategory": "مصل شعر",
+"description": "سيرم الفيف اكسترا اورديناري من لوريال باريس هو منتج متعدد الاستخدامات يمنح شعرك لمعاناً فورياً وحماية شاملة. تركيبته الخفيفة الغنية بـ 6 خلاصات زهور تغلف كل خصلة بطبقة رقيقة من الحماية دون أن تثقل الشعر. مثالي للاستخدام اليومي قبل التصفيف أو كلمسة نهائية لإطلالة لامعة.",
+"images": [
+"https://f.nooncdn.com/p/pzsku/Z77030C62276C7CF70983Z/45/_/1694566874/647da3ae-122e-4f2c-b699-013b006a7ee2.jpg?format=webp&width=800"
+],
+"colors": ["شفاف", "ذهبي", "زهرى"],
+"sizes": ["100 مل", "200 مل", "500 مل"],
+"details": {
+"النوع": "سيرم متعدد الاستخدامات",
+"العلامة التجارية": "لوريال باريس",
+"الموديل": "الفيف اكسترا اورديناري",
+"الحجم": "100 مل",
+"الاستخدام": "حماية وإضفاء لمعة للشعر",
+"نوع الشعر": "يناسب جميع أنواع الشعر",
+"المكونات الرئيسية": "6 خلاصات زهور، زيت الأرجان، فيتامين E، بروتين الحرير",
+"الفعالية": "لمعة فورية - حماية من الحرارة - تنعيم - عدم دهنية",
+"طريقة الاستخدام": "بضع قطرات على الشعر الجاف أو الرطب",
+"الرائحة": "عبير زهري ناعم",
+"نسبة طبيعية": "95% مكونات طبيعية",
+"خالي من": "خالي من السيليكون - غير دهني - غير لزج",
+"بلد المنشأ": "فرنسا",
+"مدة الصلاحية": "24 شهراً",
+"الوزن الصافي": "100 مل",
+"مقاومة الحرارة": "حتى 230 درجة مئوية"
+},
+"features": [
+"لمعة فورية في ثوانٍ",
+"حماية من حرارة الأدوات",
+"تنعيم الخصل المتطايرة",
+"عدم ترك تأثير دهني",
+"سهولة التسريح والتمشيط",
+"رائحة عطرة تدوم طويلاً"
+
+],
+
+"howToUse": "1. ضعي 2-3 قطرات على راحة اليد\n2. مرري على الشعر من المنتصف إلى الأطراف\n3. يمكن استخدامه قبل أو بعد التصفيف\n4. لا داعي للشطف",
+"benefits": "شعر لامع، ناعم، ومحمي طوال اليوم"
+},
+
+{
+"id": 13,
+"name": "ماسك الشعر ريزيستانس ثيرابيست من كيراستاس - 200 مل إصلاح متقدم",
+"price": "30 ر.س",
+"originalPrice": "45 ر.س",
+"discount": "33%",
+"image": "https://f.nooncdn.com/p/pzsku/Z700B6EB18C4D8D791A2CZ/45/_/1731009302/63fc305e-0a3f-4fda-a56f-9c8c37101b79.jpg?format=webp&width=800",
+"badges": ["fast-delivery", "إصلاح", "علاجي"],
+"category": "عناية بالشعر",
+"subcategory": "ماسكات شعر",
+"description": "ماسك ريزيستانس ثيرابيست من كيراستاس هو علاج متقدم للشعر التالف جداً والمعرض للكسر. تركيبته الغنية بالسيراميد والبروتينات تخترق عمق الشعر لتعيد بناءه من الداخل وتصلح التلف الشديد. نتائج فورية ملحوظة من أول استخدام - شعر أقوى، أكثر نعومة، ومقاوم للتلف.",
+"images": [
+"https://f.nooncdn.com/p/pzsku/Z700B6EB18C4D8D791A2CZ/45/_/1731009302/63fc305e-0a3f-4fda-a56f-9c8c37101b79.jpg?format=webp&width=800",
+                    "https://f.nooncdn.com/p/pzsku/Z700B6EB18C4D8D791A2CZ/45/_/1731009312/59864068-31a5-47be-b5a5-3233d2f470d8.jpg?format=webp&width=800"
+                ],
+"colors": ["أبيض", "فضي", "شفاف"],
+"sizes": ["200 مل", "500 مل", "1 لتر"],
+"details": {
+"النوع": "ماسك إصلاح متقدم",
+"العلامة التجارية": "كيراستاس",
+"الموديل": "ريزيستانس ثيرابيست",
+"الحجم": "200 مل",
+"الاستخدام": "إصلاح الشعر التالف جداً",
+"نوع الشعر": "الشعر التالف، المتقصف، والمعرض للكسر",
+"المكونات الرئيسية": "سيراميد، بروتين الكيراتين، أرجان، فيتامين B5",
+"الفعالية": "إصلاح عميق - تقوية - حماية - منع الكسر",
+"طريقة الاستخدام": "بعد الشامبو لمدة 5-10 دقائق",
+"الرائحة": "عبير نقي منعش",
+"نسبة طبيعية": "85% مكونات طبيعية",
+"خالي من": "خالي من البارابين - خالي من السلفات - خالي من الملح",
+"بلد المنشأ": "فرنسا",
+"مدة الصلاحية": "36 شهراً",
+"الوزن الصافي": "200 مل",
+"النتيجة": "فورية من أول استخدام"
+},
+"features": [
+"إصلاح التلف الشديد فوراً",
+"تقوية الشعر الضعيف",
+"منع التقصف والكسر",
+"لمعة طبيعية فائقة",
+"تنعيم الخصل المتطايرة",
+"حماية دائمة من التلف"
+],
+"howToUse": "1. بعد الشامبو، ضعي الماسك\n2. اتركيه 5-10 دقائق\n3. دلكي برفق\n4. اشطفيه thoroughly",
+"benefits": "شعر معاد بناؤه ومقاوم للتلف من أول استخدام"
+},
+
+{
+"id": 14,
+"name": "بي كيرلي كواش متقدم من ديڤاكيرل - 350 مل للشعر المجعد",
+"price": "40 ر.س",
+"originalPrice": "60 ر.س",
+"discount": "33%",
+"image": "https://f.nooncdn.com/p/pzsku/ZD8CB869E1EE4D4526B5CZ/45/1746747114/e1899347-af83-4ed4-97b3-8a186fcf09dd.jpg?format=webp&width=800",
+"badges": ["fast-delivery", "للشعر المجعد", "تحديد"],
+"category": "عناية بالشعر",
+"subcategory": "منتجات تصفيف",
+"description": "بي كيرلي كواش المتقدم من ديڤاكيرل هو منتج مصمم خصيصاً لتحديد وتثبيت تجعيدات الشعر الطبيعية. تركيبته الخفيفة الغنية ببروتين الحرير والزيوت الطبيعية تحافظ على التجعيدات مدة أطول دون أن تثقل الشعر أو تتركه مقسماً. مثالي للشعر المجعد الذي يحتاج إلى تعريف وتثبيت طوال اليوم.",
+"images": [
+"https://f.nooncdn.com/p/pzsku/ZD8CB869E1EE4D4526B5CZ/45/1746747114/e1899347-af83-4ed4-97b3-8a186fcf09dd.jpg?format=webp&width=800",
+                    "https://f.nooncdn.com/p/pzsku/ZD8CB869E1EE4D4526B5CZ/45/1746747114/ba4994fd-8fbe-459a-95c4-c032140428d6.jpg?format=webp&width=800"
+],
+"colors": ["أزرق", "شفاف", "أخضر"],
+"sizes": ["350 مل", "500 مل", "1 لتر"],
+"details": {
+"النوع": "منتج تحديد تجعيدات",
+"العلامة التجارية": "ديڤاكيرل",
+"الموديل": "بي كيرلي كواش متقدم",
+"الحجم": "350 مل",
+"الاستخدام": "تحديد وتثبيت تجعيدات الشعر",
+"نوع الشعر": "الشعر المجعد، المموج، والكثيف",
+"المكونات الرئيسية": "بروتين الحرير، زيت الجوجوبا، الصبار، جلسيرين",
+"الفعالية": "تحديد التجعيدات - تثبيت - ترطيب - عدم تقسي",
+"طريقة الاستخدام": "على الشعر الرطب قبل التجفيف",
+"الرائحة": "منعش ونقي",
+"نسبة طبيعية": "90% مكونات طبيعية",
+"خالي من": "خالي من الكحول - خالي من البارابين - غير لزج",
+"بلد المنشأ": "الولايات المتحدة",
+"مدة الصلاحية": "24 شهراً",
+"الوزن الصافي": "350 مل",
+"مدة التثبيت": "حتى 72 ساعة"
+},
+"features": [
+"تحديد واضح للتجعيدات",
+"تثبيت طويل الأمد",
+"ترطيب عميق دون ثقل",
+"منع التقسي والتشابك",
+"حماية من الرطوبة",
+"سهولة إعادة التسريح"
+],
+"howToUse": "1. على الشعر الرطب بعد الغسيل\n2. وزعي بشكل متساو\n3. شكلي التجعيدات بالأصابع\n4. اتركيه يجف naturally أو جففي",
+"benefits": "تجعيدات محددة وثابتة طوال اليوم"
+},
+
+{
+"id": 15,
+"name": "ماسك الشعر انتنس ريبير جاباتي وبراهمي - علاج Ayurvedic تقليدي",
+"price": "30 ر.س",
+"originalPrice": "45 ر.س",
+"discount": "33%",
+"image": "https://f.nooncdn.com/p/pzsku/Z5A1029B443DA4DDCD9D2Z/45/1746747314/656b4e14-134b-4f78-aaa5-102e1d9009c3.jpg?format=webp&width=800",
+"badges": ["fast-delivery", "Ayurvedic", "طبيعي"],
+"category": "عناية بالشعر",
+"subcategory": "ماسكات شعر",
+"description": "ماسك انتنس ريبير جاباتي وبراهمي هو علاج Ayurvedic تقليدي يعود إلى centuries من الحكمة الهندية. غني بأعشاب الجاباتي والبراهمي المعروفة بقدرتها الفائقة على تغذية فروة الرأس وتقوية الجذور. مثالي للشعر الضعيف والمعرض للتساقط الذي يحتاج إلى عناية طبيعية 100%.",
+"images": [
+"https://f.nooncdn.com/p/pzsku/Z5A1029B443DA4DDCD9D2Z/45/1746747314/656b4e14-134b-4f78-aaa5-102e1d9009c3.jpg?format=webp&width=800"
+],
+"colors": ["أخضر", "بنى", "طبيعي"],
+"sizes": ["200 مل", "500 مل", "1 لتر"],
+"details": {
+"النوع": "ماسك Ayurvedic طبيعي",
+"العلامة التجارية": "انتنس ريبير",
+"الموديل": "جاباتي وبراهمي",
+"الحجم": "200 مل",
+"الاستخدام": "تغذية وتقوية الشعر",
+"نوع الشعر": "الشعر الضعيف، الخفيف، والمعرض للتساقط",
+"المكونات الرئيسية": "جاباتي، براهمي، نيم، أملا، زيت جوز الهند",
+"الفعالية": "تقوية الجذور - منع التساقط - تحفيز النمو - تغذية",
+"طريقة الاستخدام": "تدليك فروة الرأس والشعر",
+"الرائحة": "أعشاب Ayurvedic طبيعية",
+"نسبة طبيعية": "100% مكونات طبيعية",
+"خالي من": "خالي من الكيماويات - خالي من العطور الصناعية - غير معد على الحيوانات",
+"بلد المنشأ": "الهند",
+"مدة الصلاحية": "24 شهراً",
+"الوزن الصافي": "200 مل",
+"طريقة التحضير": "وصفة Ayurvedic تقليدية"
+},
+"features": [
+"100% مكونات Ayurvedic طبيعية",
+"تقوية جذور الشعر",
+"منع التساقط effectively",
+"تحفيز نمو شعر جديد",
+"تغذية عميقة لفروة الرأس",
+"تنظيف مسام فروة الرأس"
+],
+"howToUse": "1. ضعي على فروة الرأس والشعر\n2. دلكي لمدة 10-15 دقيقة\n3. اتركيه 30-60 دقيقة\n4. اغسليه بشامبو لطيف",
+"benefits": "شعر أقوى وأكثر صحة بعلاج Ayurvedic طبيعي"
+},
+
+{
+"id": 16,
+"name": "ماسك ومعالج للشعر من كيراستاس - علاج احترافي متكامل",
+"price": "120 ر.س",
+"originalPrice": "160 ر.س",
+"discount": "25%",
+"image": "https://f.nooncdn.com/p/pzsku/Z0A433025DBC24127BDD4Z/45/_/1722491739/f10ef47d-e7b6-406b-ac45-7f75b701c86f.jpg?format=webp&width=800",
+"badges": ["fast-delivery", "احترافي", "متكامل"],
+"category": "عناية بالشعر",
+"subcategory": "علاجات شعر",
+"description": "ماسك ومعالج الشعر الاحترافي من كيراستاس هو نظام متكامل للعناية بالشعر التالف جداً. يجمع بين فوائد الماسك العميق والمعالج اليومي في منتج واحد. تركيبته الغنية بالبروتينات والسيراميد تخترق عمق الشعر لتعيد بناءه وتحميه من التلف المستقبلي. نتائج صالون احترافية من المنزل.",
+"images": [
+"https://f.nooncdn.com/p/pzsku/Z0A433025DBC24127BDD4Z/45/_/1722491739/f10ef47d-e7b6-406b-ac45-7f75b701c86f.jpg?format=webp&width=800",
+                    "https://f.nooncdn.com/p/pzsku/Z0A433025DBC24127BDD4Z/45/_/1722491745/45a15956-2de5-4936-93f6-54eb1bc10e33.jpg?format=webp&width=800"
+],
+"colors": ["أبيض", "فضي", "ذهبي"],
+"sizes": ["250 مل", "500 مل", "750 مل"],
+"details": {
+"النوع": "نظام علاجي متكامل",
+"العلامة التجارية": "كيراستاس",
+"الموديل": "ماسك ومعالج احترافي",
+"الحجم": "250 مل",
+"الاستخدام": "إصلاح وحماية الشعر التالف",
+"نوع الشعر": "الشعر التالف جداً، المصبوغ، والمعالج",
+"المكونات الرئيسية": "سيراميد، بروتين الكيراتين، أرجان، فيتامين E، كولاجين",
+"الفعالية": "إصلاح عميق - حماية دائمة - تقوية - لمعة",
+"طريقة الاستخدام": "ماسك: مرة أسبوعياً، معالج: بعد كل غسلة",
+"الرائحة": "عبير نقي فاخر",
+"نسبة طبيعية": "80% مكونات طبيعية",
+"خالي من": "خالي من البارابين - خالي من السلفات - خالي من الملح",
+"بلد المنشأ": "فرنسا",
+"مدة الصلاحية": "36 شهراً",
+"الوزن الصافي": "250 مل",
+"النتيجة": "فورية ودائمة"
+},
+"features": [
+"إصلاح التلف الشديد فوراً",
+"حماية دائمة من التلف المستقبلي",
+"تقوية الشعر من الجذور",
+"لمعة صالون احترافية",
+"تنعيم الخصل المتطايرة",
+"سهولة التسريح والتمشيط"
+],
+"howToUse": "1. الماسك: مرة أسبوعياً لمدة 10 دقائق\n2. المعالج: بعد الشامبو لمدة 2-3 دقائق\n3. اشطفيه thoroughly\n4. جففي كالمعتاد",
+"benefits": "شعر معاد بناؤه ومحمي كصالون التجميل"
+}, {
+"id": 17,
+"name": "قناع الترطيب المكثف من Texture Solutions 235 مل",
+"price": "20 ر.س",
+"image": "https://f.nooncdn.com/p/pzsku/ZA60ED65E474E6EB2E885Z/45/_/1741674483/1e102e87-08a0-4dcb-a5f9-ff1f470ccd27.jpg?format=webp&width=800",
+"badges": ["fast-delivery"],
+"category": "عناية بالشعر",
+"subcategory": "ماسكات شعر",
+"description": "قناع علاجي مكثف من Texture Solutions مصمم لإحياء الشعر الجاف والتالف. يرطب بعمق حتى أقصى طبقات الشعرة، يصلح التقصف ويهديء فروة الرأس، ويترك الشعر ناعمًا حريريًا ولماعًا وكأنه جديد. غني بمزيج من الزيوت الطبيعية والبروتينات، وهو الحل الأمثل للاستخدام الأسبوعي لاستعادة صحة وقوة ولمعان الشعر.",
+"images": [
+"https://f.nooncdn.com/p/pzsku/ZA60ED65E474E6EB2E885Z/45/_/1741674483/1e102e87-08a0-4dcb-a5f9-ff1f470ccd27.jpg?format=webp&width=800",
+                    "https://f.nooncdn.com/p/pzsku/ZA60ED65E474E6EB2E885Z/45/_/1741674487/1a3a968c-ccbb-49d9-a60f-03f0e33ab27b.jpg?format=webp&width=800"
+                ],
+"colors": ["شفاف"],
+"details": {
+"النوع": "قناع / ماسك للشعر",
+"العلامة التجارية": "Texture Solutions",
+"الحجم": "235 مل",
+"الاستخدام": "ترطيب وتغذية عميقة للشعر الجاف والتالف",
+"نوع الشعر": "جميع أنواع الشعر، خاصة الجاف والمجعد والسميك",
+"المكونات الرئيسية": "زيت الأرجان، زيت الجوجوبا، البروتينات، الزبدة",
+"الفائدة": "ترطيب مكثف، إصلاح التقصف، توفير اللمعان، تسهيل التمشيط",
+"طريقة الاستخدام": "يوضع على الشعر النظيف بعد الغسيل، يترك لمدة 5-10 دقائق ثم يشطف جيدًا.",
+"خالي من": "السلفات، البارابين، الألوان الاصطناعية"
+}
+},
+{
+"id": 18,
+"name": "معالج اسينشيال داميدغ كي|| بروتين LPP|| لمعالجة الشعر التألف",
+"price": "90 ر.س",
+"image": "https://f.nooncdn.com/p/pzsku/ZDF27EDFDA2517F0C9DE0Z/45/1754554630/366abd6e-791e-4029-9872-f469e86057fc.jpg?format=webp&width=800",
+"badges": ["fast-delivery"],
+"category": "عناية بالشعر",
+"subcategory": "علاجات شعر",
+"description": "معالج علاجي احترافي يعتمد على تقنية بروتين LPP المتقدمة لاستعادة الشعر المتألف والهش إلى حالته الصحية. يملأ الفراغات في بنية الشعرة، يعيد بناء الروابط الداخلية، ويوفر حماية دائمة ضد العوامل الخارجية والتلف الحراري. علاج ضروري لتصفيف الشعر الكيميائي والمعالج.",
+"images": [
+"https://f.nooncdn.com/p/pzsku/ZDF27EDFDA2517F0C9DE0Z/45/1754554658/1653ea0d-0c51-4fb4-8a08-4c4c255790a5.jpg?format=webp&width=800",
+                    "https://f.nooncdn.com/p/pzsku/ZDF27EDFDA2517F0C9DE0Z/45/1754554674/9b9f8aca-1e45-4591-89e8-7c9bf7a2aefc.jpg?format=webp&width=800"
+                ],
+"colors": ["شفاف"],
+"details": {
+"النوع": "معالج / مصل علاجي للشعر",
+"العلامة التجارية": "كيراستاس",
+"الحجم": "غير محدد (يرجى مراجعة العبوة)",
+"الاستخدام": "إصلاح وبناء الشعر المتألف كيميائيًا والمتضرر",
+"نوع الشعر": "الشعر المتألف، المعالج كيميائيًا، التالف بشدة",
+"المكونات الرئيسية": "بروتين LPP، Damidgh Quat, Keratin",
+"الفائدة": "إعادة بناء بنية الشعر، سد الفراغات، حماية من التلف، منع التقصف",
+"طريقة الاستخدام": "يستخدم بعد الشامبو حسب الحاجة، يوضع على طول الشعر ويترك دون شطف أو يشطف حسب التعليمات.",
+"مكمل ل": "علاجات الكيراتين والبروتين"
+}
+},
+{
+"id": 19,
+"name": "برايمر بي كيرلي لتحديد تجعيد الشعر المتقدم - 200 مل",
+"price": "40 ر.س",
+"image": "https://f.nooncdn.com/p/pzsku/Z335CF3BE70CDCB4AB947Z/45/1746221162/ea3d4fac-8032-413c-b228-c02e0e730146.jpg?format=webp&width=800",
+"badges": ["fast-delivery"],
+"category": "عناية بالشعر",
+"subcategory": "منتجات تصفيف",
+"description": "برايمر متخصص لتحديد وتكثيف تجعيدات الشعر الكيرلي والملتف. يعمل كأساس مثالي قبل استخدام منتجات التثبيت، يحدد التجعيدات بوضوح، يقلل من الهيشان، ويمنح الشعر تناسقًا رائعًا ولمسة نهائية ناعمة غير لزجة. مثالي للشعر المجعد الذي يحتاج إلى تعريف طويل الأمد.",
+"images": [
+"https://f.nooncdn.com/p/pzsku/Z335CF3BE70CDCB4AB947Z/45/1746221162/ea3d4fac-8032-413c-b228-c02e0e730146.jpg?format=webp&width=800",
+                    "https://f.nooncdn.com/p/pzsku/Z335CF3BE70CDCB4AB947Z/45/1746221169/9f0190d8-5be3-495f-ad4e-0fabfff69ebf.jpg?format=webp&width=800"
+                ],
+"colors": ["شفاف"],
+"details": {
+"النوع": "برايمر / مصل تحضيري للشعر",
+"العلامة التجارية": "كيراستاس",
+"الحجم": "200 مل",
+"الاستخدام": "تحضير وتحديد تجعيدات الشعر الكيرلي",
+"نوع الشعر": "الشعر المجعد، الملتف، المموج",
+"المكونات الرئيسية": "مطريات خفيفة، بوليمرات تعريف",
+"الفائدة": "تعريف التجاعيد، تقليل الهيشان، تحسين ملمس الشعر، قاعدة لمنتجات التثبيت",
+"طريقة الاستخدام": "يطبق على الشعر الرطب أو الجاف حسب الرغبة قبل استخدام الكريم أو الجل.",
+"النتيجة": "تجعيدات محددة، خالية من التكتل، مع لمعان طبيعي"
+}
+},
+{
+"id": 20,
+"name": "ماسك الاشراق بي1 فضي - 200 مل",
+"price": "90 ر.س",
+"image": "https://f.nooncdn.com/p/pzsku/ZCB6C7B0434B10B1D0358Z/45/1746747817/cad4c09a-7429-4bdb-94c6-b26249a00398.jpg?format=webp&width=800",
+"badges": ["fast-delivery"],
+"category": "عناية بالشعر",
+"subcategory": "ماسكات شعر",
+"description": "ماسك فضي متخصص مصمم خصيصًا للشعر الأشقر والفضي والشيب. يعادل اللون الأصفر والمسحات غير المرغوب فيها، يمنح الشعر لونًا فضيًا نقيًا باردًا وبراقًا. يرطب ويغذي الشعر مع الحفاظ على لون الصبغة وحيويتها، مما يمنحه إشراقة فورية ومظهرًا مصففًا محترفًا.",
+"images": [
+"https://f.nooncdn.com/p/pzsku/ZCB6C7B0434B10B1D0358Z/45/1746747817/cad4c09a-7429-4bdb-94c6-b26249a00398.jpg?format=webp&width=800"
+],
+"colors": ["شفاف"],
+"details": {
+"النوع": "ماسك مصحح للون",
+"العلامة التجارية": "كيراستاس",
+"الحجم": "200 مل",
+"الاستخدام": "تصحيح اللون الأصفر وإضفاء الإشراق على الشعر الأشقر والفضي",
+"نوع الشعر": "الشعر الأشقر، الشعر الأشيب، الشعر المصفف باللون الفضي",
+"المكونات الرئيسية": "أصباغ بنفسجية وفضية معادلة، مرطبات",
+"الفائدة": "معادلة اللون الأصفر، توفير لون فضي بارد، ترطيب، إضافة لمعان فوري",
+"طريقة الاستخدام": "يوضع على الشعر النظيف لمدة 3-5 دقائق ثم يشطف جيدًا.",
+"التكرار": "مرة إلى مرتين أسبوعيًا أو حسب الحاجة للحفاظ على اللون"
+}
+},
+{
+"id": 21,
+"name": "Color Protection Deep Conditioner Packet 50g",
+"price": "30 ر.س",
+"image": "https://f.nooncdn.com/p/pzsku/Z362182A2BD0CEDE214B0Z/45/_/1741674524/0b8b2754-9e9c-43b3-bf5d-fb9a084cb10b.jpg?format=webp&width=800",
+"badges": ["fast-delivery"],
+"category": "عناية بالشعر",
+"subcategory": "ماسكات شعر",
+"description": "علاج مرطب عميق وحماية لون في عبوة واحدة سهلة الاستخدام. مصمم خصيصًا للحفاظ على لون الصبغة الزاهي ومنع بهتانه المبكر. يغلف الشعر بطبقة واقية، يغذي العمق، ويترك الشعر حريريًا وناعمًا مع الحفاظ على نضارة اللون وإشراقته لفترة أطول. مثالي للسفر أو للاستخدام المنزلي.",
+"images": [
+"https://f.nooncdn.com/p/pzsku/Z362182A2BD0CEDE214B0Z/45/_/1741674524/0b8b2754-9e9c-43b3-bf5d-fb9a084cb10b.jpg?format=webp&width=800",
+                    "https://f.nooncdn.com/p/pzsku/Z362182A2BD0CEDE214B0Z/45/_/1741674525/7021f0ce-969d-44a6-b764-0202ae570c89.jpg?format=webp&width=800"
+],
+"colors": ["شفاف"],
+"details": {
+"النوع": "ماسك عميق للشعر (عبوة وحيدة)",
+"العلامة التجارية": "كيراستاس",
+"الحجم": "50 جرام",
+"الاستخدام": "ترطيب عميق وحماية لون الشعر المصبوغ",
+"نوع الشعر": "الشعر المصبوغ، المعرض للبهتان",
+"المكونات الرئيسية": "مرطبات مكثفة، عوامل حاجزة للون، فيتامينات",
+"الفائدة": "منع بهتان اللون، ترطيب عميق، حماية من العوامل الخارجية، تسهيل التمشيط",
+"طريقة الاستخدام": "يوزع المحتوى على الشعر النظيف بعد الغسيل، يترك لمدة 3-5 دقائق ثم يشطف.",
+"مثالي ل": "الاستخدام الفردي، السفر، التجربة قبل شراء العبوة الكبيرة"
+}
+},
+{
+"id": 22,
+"name": "ماسك بوتانيكال ريبير لتقوية الشعر - ريتش 25 مل",
+"price": "90 ر.س",
+"image": "https://f.nooncdn.com/p/pzsku/Z5CC46B5BF8BDC1188A51Z/45/_/1698992461/362f858f-2cc9-4646-854b-def381a3326d.jpg?format=webp&width=800",
+"badges": ["fast-delivery"],
+"category": "عناية بالشعر",
+"subcategory": "ماسكات شعر",
+"description": "ماسك نباتي مركز غني بالعناصر المغذية مصمم لتقوية الشعر من الجذور إلى الأطراف. يعمل على إصلاح الضرر اليومي، يملأ الشعر الضعيف ويمنحه كثافة وقوة ملحوظة. بمكونات نباتية طبيعية، هو علاج每周必不可少 للشعر الذي يحتاج إلى تدعيم وإحياء.",
+"images": [
+"https://f.nooncdn.com/p/pzsku/Z5CC46B5BF8BDC1188A51Z/45/_/1698992461/362f858f-2cc9-4646-854b-def381a3326d.jpg?format=webp&width=800",
+                    "https://f.nooncdn.com/p/pzsku/Z5CC46B5BF8BDC1188A51Z/45/_/1698992462/1dd3ae66-a41f-456b-ab99-da18d9b4a4f7.jpg?format=webp&width=800"
+                ],
+"colors": ["شفاف"],
+"details": {
+"النوع": "ماسك تقوية وتكثيف",
+"العلامة التجارية": "كيراستاس",
+"الحجم": "25 مل (عبوة تجريبية / سفر)",
+"الاستخدام": "تقوية الشعر الضعيف والخالي من الحيوية وإضفاء الكثافة",
+"نوع الشعر": "الشعر الضعيف، الرفيع، المتساقط، الذي فقد كثافته",
+"المكونات الرئيسية": "مستخلصات نباتية مقوية (مثل الأرقطيون، Ginseng)، بروتينات",
+"الفائدة": "تقوية جذور الشعر، منع التساقط، إضفاء ملمس أكثر كثافة، تحسين مرونة الشعر",
+"طريقة الاستخدام": "يوضع على الشعر النظيف من الجذور إلى الأطراف، يترك لمدة 5-10 دقائق ثم يشطف.",
+"التركيبة": "خالية من السيليكون، غنية بالمكونات النباتية"
+}
+},
+{
+"id": 23,
+"name": "مجموعة هدايا مستحضرات العناية المرطّبة للشعر الخفيف الجاف للغاية",
+"price": "70 ر.س",
+"image": "https://f.nooncdn.com/p/pzsku/Z9A2ECCA9CF6F6F7E97E7Z/45/_/1730887940/b4326436-d236-4509-997e-5fb9099613cc.jpg?format=webp&width=800",
+"badges": ["fast-delivery"],
+"category": "عناية بالشعر",
+"subcategory": "علاجات شعر",
+"description": "مجموعة هدايا متكاملة تحتوي على أفضل المستحضرات المرطبة المصممة خصيصًا للشعر الجاف جدًا والخشن. توفر هذه المجموعة رحلة عناية كاملة من التنظيف العميق إلى الترطيب المكثف، لتحويل الشعر الجاف إلى شعر ناعم، خاضع للتحكم، ومشبع بالصحة. هدية مثالية لكل من تبحث عن حل لمشكلة الجفاف.",
+"images": [
+"https://f.nooncdn.com/p/pzsku/Z9A2ECCA9CF6F6F7E97E7Z/45/_/1730887940/b4326436-d236-4509-997e-5fb9099613cc.jpg?format=webp&width=800",
+                    "https://f.nooncdn.com/p/pzsku/Z9A2ECCA9CF6F6F7E97E7Z/45/_/1727097751/2cc05870-45be-4a85-a1a7-71f3522e68d4.jpg?format=webp&width=800"
+                ],
+"colors": ["شفاف"],
+"details": {
+"النوع": "مجموعة هدايا (عدة منتجات)",
+"العلامة التجارية": "غير محدد (مجموعة متنوعة)",
+"محتوى المجموعة": "شامبو، بلسم، ماسك، زيت أو سيروم (قد يختلف)",
+"الاستخدام": "رoutine عناية كامل للشعر الجاف جدًا والخشن",
+"نوع الشعر": "الشعر الجاف جدًا، التالف، صعب التسريح",
+"الفائدة الأساسية": "ترطيب مكثف، إصلاح، توفير اللمعان، تسهيل التسريح",
+"مثالية ل": "الهدايا، التجربة، السفر، البدء في روتين جديد",
+"ميزة": "جميع المنتجات في مجموعة متوافقة لتحقيق أفضل نتيجة"
+}
+},
+{
+"id": 24,
+"name": "مجموعة لوريال بروفيسيونالميتال ديتوكس جلاسيال يوتوبيا ديو، شامبو 300 مل وماسك 250 مل",
+"price": "90 ر.س",
+"image": "https://f.nooncdn.com/p/pzsku/ZA3C6B3B88847A2C4314EZ/45/_/1737522624/19cac9c3-02ac-4914-aa5a-4122541cca4a.jpg?format=webp&width=800",
+"badges": ["fast-delivery"],
+"category": "عناية بالشعر",
+"subcategory": "علاجات شعر",
+"description": "مجموعة تطهير وتنقية احترافية من لوريال بروفيشونال. الشامبو والماسك يعملان معًا لإزالة ترسبات المعادن والكلور والشوائب الأخرى التي تثقل الشعر وتغير لونه. يمنحان الشعر feelingانتعاشًا جليديًا، نظافة عميقة، ولمعانًا فائقًا. الحل الأمثل لسكان المدن أو من يستخدمون المياه العسرة.",
+"images": [
+"https://f.nooncdn.com/p/pzsku/ZA3C6B3B88847A2C4314EZ/45/_/1737522624/19cac9c3-02ac-4914-aa5a-4122541cca4a.jpg?format=webp&width=800",
+                    "https://f.nooncdn.com/p/pzsku/ZA3C6B3B88847A2C4314EZ/45/_/1737522631/82085e75-b0e7-45c7-a3e7-8847fc64c03e.jpg?format=webp&width=800"
+],
+"colors": ["شفاف"],
+"details": {
+"النوع": "مجموعة تطهير (شامبو + ماسك)",
+"العلامة التجارية": "لوريال بروفيشونال",
+"محتوى المجموعة": "شامبو 300 مل + ماسك 250 مل",
+"الاستخدام": "تطهير عميق للشعر من المعادن والترسبات والشوائب",
+"نوع الشعر": "جميع أنواع الشعر، خاصة المعرض للملوثات والمياه العسرة",
+"المكونات النشطة": "عوامل خلابة (chelating)، منقي",
+"الفائدة": "إزالة الترسبات المعدنية، تنقية العمق، استعادة النعومة واللمعان الأصلي",
+"التكرار": "استخدام مرة واحدة إلى مرتين في الأسبوع",
+"تحذير": "قد يزيل لون الصبغة مع الاستخدام المتكرر جدًا"
+}
+},
+{
+"id": 25,
+"name": "روتين الشعر الدهني",
+"price": "90 ر.س",
+"image": "https://f.nooncdn.com/p/pzsku/ZBA152849F424AE2C6598Z/45/1746747539/58c97667-06dc-441f-9c4e-f008f3bae2da.jpg?format=webp&width=800",
+"badges": ["fast-delivery"],
+"category": "عناية بالشعر",
+"subcategory": "علاجات شعر",
+"description": "روتين متكامل مصمم خصيصًا للتحكم في إفراز الزيوت الزائدة في فروة الرأس والشعر. ينظف بعمق دون تجفيف الفروة، يوازن الإفرازات، ويمنح الشعر feelingانتعاشًا ونظافة طويلة الأمد. يقلل من الحاجة إلى الغسيل المتكرر ويحافظ على مظهر الشعر volumized وخالي من الدهون طوال اليوم.",
+"images": [
+"https://f.nooncdn.com/p/pzsku/ZBA152849F424AE2C6598Z/45/1746747539/58c97667-06dc-441f-9c4e-f008f3bae2da.jpg?format=webp&width=800",
+                    "https://f.nooncdn.com/p/pzsku/ZBA152849F424AE2C6598Z/45/1746747540/cb6e5e21-13f9-43f2-854e-b82181ed7692.jpg?format=webp&width=800"
+],
+"colors": ["شفاف"],
+"details": {
+"النوع": "مجموعة عناية (روتين كامل)",
+"العلامة التجارية": "غير محدد",
+"محتوى المجموعة": "منتجات مصممة للشعر الدهني (شامبو، بلسم، علاج...)",
+"الاستخدام": "تنظيم إفراز الزهم، تنظيف عميق لفروة الرأس، الحفاظ على نظافة الشعر",
+"نوع الشعر": "الشعر الدهني، ذو فروة الرأس الدهنية",
+"الفائدة": "التنظيف العميق، تنظيم إفراز الدهون، إضافة volume، منع ظهور الشعر دهنيًا سريعًا",
+"طريقة الاستخدام": "استخدام المنتجات معًا وفقًا للتعليمات للحصول على أفضل نتيجة.",
+"التركيبة": "خالية من الزيوت الثقيلة، غير كوميدوجينية لفروة الرأس"
+}
+},
+{
+"id": 26,
+"name": "لوريال باريس الفيف دريم لونغ شامبو 400 مل + بلسم 200 مل للشعر الطويل والمجعد",
+"price": "90 ر.س",
+"image": "https://f.nooncdn.com/p/pzsku/Z3330AE711A40A55FFF70Z/45/_/1742549304/c079f681-419f-4538-b265-5600853d0713.jpg?format=webp&width=800",
+"badges": ["fast-delivery"],
+"category": "عناية بالشعر",
+"subcategory": "شامبو",
+"description": "شامبو وبلسم من لوريال باريس مصممان خصيصًا لتلبية احتياجات الشعر الطويل والمجعد. يعملان على تنظيف الشعر بلطف مع الحفاظ على رطوبته الطبيعية، يسهلان تمشيطه دون تكسير، ويحاربان التقصف لتعزيز النمو والحفاظ على الطول. يحافظان على حيوية التجعد ويمنحان الشعر管理ًا سهلاً.",
+"images": [
+"https://f.nooncdn.com/p/pzsku/Z3330AE711A40A55FFF70Z/45/_/1742549304/c079f681-419f-4538-b265-5600853d0713.jpg?format=webp&width=800"
+],
+"colors": ["شفاف"],
+"details": {
+"النوع": "شامبو وبلسم (مجموعة)",
+"العلامة التجارية": "لوريال باريس",
+"محتوى المجموعة": "شامبو 400 مل + بلسم 200 مل",
+"الاستخدام": "تنظيف وترطيب الشعر الطويل والمجعد ومنع التقصف",
+"نوع الشعر": "الشعر الطويل، المجعد، المتموج، المعرض للتكسير",
+"المكونات الرئيسية": "زيت الزيتون، بروتين، عوامل مطرية",
+"الفائدة": "منع تقصف الأطراف، تسهيل التمشيط، الحفاظ على رطوبة الشعر الطويل، تعريف التجعد",
+"طريقة الاستخدام": "استخدام الشامبو ثم البلسم في كل غسلة.",
+"الرائحة": "عبير زهري ناعم"
+}
+}       ];
+
+
+    /* ============================================================
+       مقالات صفحات الفوتر (تفتح داخل نفس الصفحة مع الهيدر والفوتر)
+       ============================================================ */
+    const articles = {
+
+      faq: {
+        title: 'الأسئلة الأكثر تكراراً',
+        body: `
+          <h1>الأسئلة الأكثر تكراراً (FAQ)</h1>
+          <p>جمعنا لك في هذه الصفحة أكثر الأسئلة التي تصلنا من عملائنا مع إجابات واضحة ومباشرة. وإذا لم تجد ما تبحث عنه، تواصل معنا عبر الواتساب أو البريد الإلكتروني وسنكون سعداء بخدمتك.</p>
+
+          <h2>كيف أطلب من متجر قولدن سنت؟</h2>
+          <p>اختر المنتج الذي يناسبك، ثم حدّد الحجم المطلوب، ثم اضغط على زر «أضف +» أو «إضافة إلى السلة». بعد ذلك افتح سلة المشتريات من أعلى الصفحة، راجع منتجاتك، ثم أكمل بياناتك (الاسم، رقم الجوال، العنوان)، واختر طريقة الدفع المناسبة، وأكّد الطلب. ستصلك رسالة تأكيد على جوالك فور استلام الطلب.</p>
+
+          <h2>هل جميع منتجات العناية بالشعر أصلية؟</h2>
+          <p>نعم، جميع منتجاتنا أصلية 100% ومستوردة من الوكلاء والموزعين المعتمدين، ونوفّر ضمان استرجاع كامل للمبلغ في حال إثبات عدم أصالة أي منتج.</p>
+
+          <h2>كم تستغرق مدة التوصيل؟</h2>
+          <p>التوصيل داخل المملكة العربية السعودية من 1 إلى 3 أيام عمل، ودول الخليج من 3 إلى 7 أيام عمل.</p>
+
+          <h2>ما هي طرق الدفع المتاحة؟</h2>
+          <p>نوفّر مدى، فيزا، ماستركارد، آبل باي، تابي، تمارا، والدفع عند الاستلام داخل المملكة.</p>
+
+          <h2>كيف أتتبع طلبي؟</h2>
+          <p>بعد شحن الطلب تصلك رسالة نصية تحتوي على رقم الشحنة ورابط التتبع، ويمكنك أيضًا متابعة حالة الطلب من صفحة «تتبع شحنتك ومشترياتك».</p>
+
+          <h2>هل يمكنني إرجاع أو استبدال المنتج؟</h2>
+          <p>نعم، يمكنك الإرجاع أو الاستبدال خلال 14 يومًا من تاريخ الاستلام، بشرط أن يكون المنتج مغلقًا بغلافه الأصلي وغير مستخدم.</p>
+
+          <h2>كيف يتحدد سعر الحجم الأكبر؟</h2>
+          <p>السعر الأساسي يظهر للحجم الأصغر، وكل زيادة في الحجم تضيف 15% على السعر، ويظهر السعر المحدّث مباشرة داخل صفحة المنتج عند اختيار الحجم.</p>
+
+          <h2>هل تتوفر عينات أو هدايا؟</h2>
+          <p>نعم، نضيف عينات مجانية مع معظم الطلبات، كما تتوفر أطقم هدايا فاخرة يمكنك اختيارها من قسم المجموعات.</p>
+
+          <h2>هل يمكنني تعديل أو إلغاء الطلب؟</h2>
+          <p>يمكنك تعديل أو إلغاء الطلب خلال ساعتين من تأكيده وقبل شحنه، وذلك بالتواصل معنا مباشرة عبر الواتساب.</p>
+        `
+      },
+
+      payment: {
+        title: 'طرق الدفع',
+        body: `
+          <h1>طرق الدفع</h1>
+          <p>نوفّر في قولدن سنت مجموعة متنوعة من طرق الدفع الآمنة والسريعة لتناسب جميع عملائنا داخل المملكة وخارجها.</p>
+
+          <h2>الدفع الإلكتروني</h2>
+          <ul>
+            <li>مدى (Mada) — البطاقات البنكية السعودية.</li>
+            <li>فيزا وماستركارد (Visa / MasterCard).</li>
+            <li>آبل باي (Apple Pay).</li>
+            <li>التحويل البنكي المباشر على حساب المتجر.</li>
+          </ul>
+
+          <h2>الدفع الآجل (تقسيط بدون فوائد)</h2>
+          <ul>
+            <li>تابي (Tabby): قسّم مشترياتك على 4 دفعات بدون فوائد أو رسوم.</li>
+            <li>تمارا (Tamara): قسّم طلبك على 3 أو 4 دفعات بدون فوائد.</li>
+          </ul>
+
+          <h2>الدفع عند الاستلام</h2>
+          <p>متاح داخل المملكة العربية السعودية برسوم إضافية بسيطة قدرها 15 ريال، ويمكنك الدفع نقدًا أو بالشبكة عند استلام الطلب.</p>
+
+          <h2>هل الدفع آمن؟</h2>
+          <p>نعم، جميع المعاملات تتم عبر بوابات دفع مشفّرة ببروتوكول SSL ومعتمدة رسميًا، ولا نحتفظ بأي بيانات بطاقات بنكية على الموقع.</p>
+
+          <h2>ماذا أفعل إذا فشلت عملية الدفع؟</h2>
+          <p>تأكد أولًا من صحة بيانات البطاقة وتاريخ الانتهاء والرصيد المتاح، ثم جرّب طريقة دفع أخرى. وإذا استمرت المشكلة تواصل معنا على care@goldenscent.com أو عبر الواتساب وسنساعدك فورًا.</p>
+
+          <h2>هل تصدر فاتورة ضريبية؟</h2>
+          <p>نعم، تصدر فاتورة ضريبية إلكترونية لكل طلب وتُرسل إلى بريدك الإلكتروني ورقم جوالك مباشرة بعد إتمام الطلب.</p>
+        `
+      },
+
+      shipping: {
+        title: 'الشحن والتوصيل',
+        body: `
+          <h1>الشحن والتوصيل</h1>
+          <p>نحرص في قولدن سنت على توصيل طلبك بأسرع وقت وبأعلى معايير الأمان والحفاظ على جودة المنتج.</p>
+
+          <h2>مدة التوصيل داخل المملكة</h2>
+          <ul>
+            <li>الرياض، جدة، الدمام: 1 إلى 2 يوم عمل.</li>
+            <li>بقية مدن ومحافظات المملكة: 2 إلى 3 أيام عمل.</li>
+          </ul>
+
+          <h2>مدة التوصيل لدول الخليج</h2>
+          <p>الإمارات، الكويت، البحرين، قطر، وسلطنة عمان: من 3 إلى 7 أيام عمل حسب شركة الشحن.</p>
+
+          <h2>رسوم الشحن</h2>
+          <ul>
+            <li>شحن مجاني للطلبات التي تبلغ 199 ريال وأكثر داخل المملكة.</li>
+            <li>الطلبات الأقل من 199 ريال: 25 ريال.</li>
+            <li>الشحن الخليجي: 45 ريال.</li>
+            <li>الدفع عند الاستلام: رسوم إضافية 15 ريال.</li>
+          </ul>
+
+          <h2>شركات الشحن</h2>
+          <p>نتعاون مع أفضل شركات الشحن مثل أرامكس، سمسا، وريد بوكس لضمان وصول طلبك في الوقت المحدد.</p>
+
+          <h2>تغليف الطلبات</h2>
+          <p>يُغلّف كل منتج بعناية داخل صندوق محمي ومواد تمنع الكسر، مع إمكانية إضافة تغليف هدايا مجاني عند الطلب.</p>
+
+          <h2>تأخّر الشحنة</h2>
+          <p>في حال تأخرت شحنتك عن المدة المذكورة أعلاه، تواصل معنا وسنقوم بمتابعة الشحنة مع شركة التوصيل وإبلاغك بالتحديثات أولًا بأول.</p>
+        `
+      },
+
+      returns: {
+        title: 'سياسة الاستبدال والاسترجاع',
+        body: `
+          <h1>سياسة الاستبدال والاسترجاع</h1>
+          <p>رضاك هو أولويتنا، لذلك وفّرنا سياسة إرجاع مرنة وسهلة تمنحك راحة تامة عند الشراء.</p>
+
+          <h2>مدة الإرجاع</h2>
+          <p>يمكنك طلب الإرجاع أو الاستبدال خلال 14 يومًا من تاريخ استلام الطلب.</p>
+
+          <h2>شروط الإرجاع</h2>
+          <ul>
+            <li>أن يكون المنتج في حالته الأصلية وغير مستخدم.</li>
+            <li>أن يكون الغلاف الخارجي والعلبة سليمة ومغلقة.</li>
+            <li>إرفاق الفاتورة أو رقم الطلب.</li>
+          </ul>
+
+          <h2>المنتجات غير القابلة للإرجاع</h2>
+          <ul>
+            <li>منتجات العناية بالشعر المفتوحة أو المستخدمة.</li>
+            <li>المنتجات المشتراة خلال العروض الترويجية النهائية (يُوضح ذلك في صفحة المنتج).</li>
+            <li>أطقم الهدايا بعد فتح غلافها الأصلي.</li>
+          </ul>
+
+          <h2>كيف أطلب إرجاعًا؟</h2>
+          <ol>
+            <li>تواصل معنا عبر الواتساب أو البريد الإلكتروني مع رقم الطلب.</li>
+            <li>سنرسل لك بوليصة الإرجاع وعنوان الاستلام.</li>
+            <li>سلّم الشحنة لشركة الشحن خلال 48 ساعة.</li>
+            <li>يُعاد المبلغ خلال 3 إلى 7 أيام عمل بعد استلام المنتج وفحصه.</li>
+          </ol>
+
+          <h2>هل الإرجاع مجاني؟</h2>
+          <p>نعم، الإرجاع مجاني داخل المملكة في حال كان المنتج تالفًا أو غير مطابق للوصف. أما في حالات تغيير الرأي فتطبق رسوم شحن الإرجاع 25 ريال.</p>
+
+          <h2>استبدال المنتج</h2>
+          <p>يمكنك استبدال المنتج بمنتج آخر من نفس القيمة أو بدفع الفرق، ويتم الاستبدال بعد استلام المنتج الأصلي وفحصه.</p>
+        `
+      },
+
+      tracking: {
+        title: 'تتبع شحنتك ومشترياتك',
+        body: `
+          <h1>تتبع شحنتك ومشترياتك</h1>
+          <p>يمكنك متابعة حالة طلبك خطوة بخطوة من لحظة التأكيد حتى الاستلام.</p>
+
+          <h2>خطوات التتبع</h2>
+          <ol>
+            <li>افتح رسالة التأكيد التي وصلتك على الجوال أو البريد الإلكتروني.</li>
+            <li>انسخ رقم الشحنة (يبدأ عادة بـ GS).</li>
+            <li>أدخل الرقم في صفحة تتبع الشحنات الخاصة بشركة الشحن المرسلة لك.</li>
+            <li>ستظهر لك حالة الشحنة: قيد التجهيز، تم الشحن، خرجت للتوصيل، تم التسليم.</li>
+          </ol>
+
+          <h2>لم يصلني رقم التتبع</h2>
+          <p>تصلك رسالة التتبع خلال 24 ساعة من شحن الطلب. وإذا لم تصلك، تواصل معنا على care@goldenscent.com مع رقم الطلب.</p>
+
+          <h2>حالات الطلب</h2>
+          <ul>
+            <li>قيد المراجعة: تم استلام الطلب وجارٍ التحقق منه.</li>
+            <li>قيد التجهيز: يتم تجهيز وتغليف منتجاتك.</li>
+            <li>تم الشحن: الطلب في الطريق إليك.</li>
+            <li>تم التسليم: استلمت الطلب بنجاح.</li>
+          </ul>
+
+          <h2>الشحنة متوقفة أو متأخرة</h2>
+          <p>قد تتأخر الشحنات لأسباب خارجة عن إرادتنا مثل الظروف الجوية أو الأعياد الرسمية. تواصل معنا وسنتابع شحنتك مع شركة الشحن ونوافيك بأي تحديث.</p>
+
+          <h2>هل يمكنني تغيير عنوان التوصيل؟</h2>
+          <p>نعم، إذا لم يتم شحن الطلب بعد يمكنك تعديل العنوان بالتواصل معنا مباشرة عبر الواتساب.</p>
+        `
+      },
+
+      about: {
+        title: 'من نحن',
+        body: `
+          <h1>من نحن</h1>
+          <p>قولدن سنت هو متجر سعودي متخصص في منتجات العناية بالشعر الأصلية الفاخرة للرجال والنساء، انطلق برؤية واضحة: أن نمنح كل عميل تجربة عناية راقية بأسعار عادلة وخدمة استثنائية.</p>
+
+          <h2>قصتنا</h2>
+          <p>بدأت الرحلة من شغف حقيقي بالعناية بالشعر واهتمام بأدق تفاصيله، ومن إيمان بأن العناية ليست مجرد روتين بل توقيع شخصي يبقى في الذاكرة. اليوم نخدم آلاف العملاء داخل المملكة ودول الخليج، ونوفّر تشكيلة مختارة بعناية من أشهر العلامات العالمية لمنتجات العناية بالشعر.</p>
+
+          <h2>رؤيتنا</h2>
+          <p>أن نكون الوجهة الأولى لمنتجات العناية بالشعر الأصلية في المملكة والخليج، وأكثر متجر يثق به العملاء في جودة المنتج ومصداقية التعامل.</p>
+
+          <h2>رسالتنا</h2>
+          <ul>
+            <li>توفير منتجات عناية بالشعر أصلية 100% من الوكلاء المعتمدين.</li>
+            <li>تقديم أسعار تنافسية وعروض حقيقية.</li>
+            <li>خدمة عملاء سريعة ومتاحة يوميًا.</li>
+            <li>تجربة شراء سهلة وآمنة من الجوال.</li>
+          </ul>
+
+          <h2>لماذا يثق بنا العملاء؟</h2>
+          <ul>
+            <li>منتجات أصلية مضمونة مع سياسة إرجاع واضحة.</li>
+            <li>توصيل سريع خلال 1-3 أيام عمل داخل المملكة.</li>
+            <li>دعم فوري عبر الواتساب والهاتف الموحد.</li>
+            <li>موثقون لدى منصة الأعمال السعودية.</li>
+          </ul>
+
+          <h2>تواصل معنا</h2>
+          <p>يسعدنا خدمتك في أي وقت على care@goldenscent.com، وأوقات العمل يوميًا من 9 صباحًا حتى 11 مساءً.</p>
+        `
+      },
+
+      authenticity: {
+        title: 'ضمان الأصالة',
+        body: `
+          <h1>ضمان الأصالة</h1>
+          <p>نلتزم في قولدن سنت بتقديم منتجات أصلية 100%، لأن ثقتك هي رأس مالنا الحقيقي.</p>
+
+          <h2>كيف نضمن الأصالة؟</h2>
+          <ul>
+            <li>نشتري منتجاتنا من الوكلاء والموزعين المعتمدين فقط.</li>
+            <li>نتحقق من باركود كل منتج ورقم التشغيلة قبل عرضه.</li>
+            <li>نخزّن المنتجات في بيئة مناسبة تحفظ جودتها.</li>
+            <li>نفحص كل طلب قبل التغليف والشحن.</li>
+          </ul>
+
+          <h2>ماذا لو شككت في أصالة المنتج؟</h2>
+          <p>تواصل معنا خلال 14 يومًا من الاستلام مع صور المنتج والفاتورة، وسنقوم بمراجعة الحالة فورًا. وفي حال ثبوت عدم الأصالة نتحمل كامل المبلغ مع الشحن، ونمنحك تعويضًا إضافيًا تقديرًا لثقتك.</p>
+
+          <h2>هل المنتجات أصلية أم مقلّدة بجودة عالية؟</h2>
+          <p>جميع منتجاتنا أصلية من الشركات الأم، ولا نتعامل مع أي منتجات مقلّدة أو معبّأة.</p>
+
+          <h2>هل الأسعار الأقل تعني منتجًا غير أصلي؟</h2>
+          <p>لا، فأسعارنا المنافسة ناتجة عن شراكاتنا المباشرة مع الموزعين وشراء كميات كبيرة، وليس عن أي تنازل عن الجودة.</p>
+        `
+      },
+
+      terms: {
+        title: 'الشروط والأحكام',
+        body: `
+          <h1>الشروط والأحكام</h1>
+          <p>باستخدامك موقع قولدن سنت فإنك توافق على الشروط والأحكام التالية.</p>
+
+          <h2>1. الطلبات</h2>
+          <p>يُعد الطلب مكتملًا بعد تأكيده من المتجر واستلام رسالة التأكيد. ويحق للمتجر إلغاء أي طلب في حال عدم توفر المنتج أو الاشتباه في صحة البيانات.</p>
+
+          <h2>2. الأسعار</h2>
+          <p>جميع الأسعار بالريال السعودي وتشمل ضريبة القيمة المضافة. ويحق للمتجر تعديل الأسعار في أي وقت دون إشعار مسبق، ولا يؤثر التعديل على الطلبات المؤكدة مسبقًا.</p>
+
+          <h2>3. الأحجام والأسعار</h2>
+          <p>السعر الأساسي المعروض يخص الحجم الأصغر، وكل زيادة في الحجم تضيف 15% على السعر، ويظهر السعر النهائي بوضوح في صفحة المنتج قبل الإضافة إلى السلة.</p>
+
+          <h2>4. الدفع</h2>
+          <p>يجب إتمام الدفع قبل شحن الطلب، ويُستثنى من ذلك طلبات الدفع عند الاستلام داخل المملكة.</p>
+
+          <h2>5. الشحن</h2>
+          <p>المدد المذكورة تقديرية وقد تتأخر لأسباب خارجة عن إرادتنا مثل الظروف الجوية أو الأعياد الرسمية.</p>
+
+          <h2>6. الإرجاع</h2>
+          <p>يخضع الإرجاع لسياسة الاستبدال والاسترجاع المنشورة في الموقع.</p>
+
+          <h2>7. الملكية الفكرية</h2>
+          <p>جميع الصور والنصوص والشعارات مملوكة لمتجر قولدن سنت ولا يجوز استخدامها دون إذن كتابي.</p>
+
+          <h2>8. القانون المطبق</h2>
+          <p>تخضع هذه الشروط لأنظمة المملكة العربية السعودية، وأي نزاع يُحل عبر الجهات المختصة داخل المملكة.</p>
+        `
+      },
+
+      privacy: {
+        title: 'سياسة الخصوصية',
+        body: `
+          <h1>سياسة الخصوصية</h1>
+          <p>نحترم خصوصيتك ونلتزم بحماية بياناتك الشخصية وفقًا لأنظمة المملكة العربية السعودية.</p>
+
+          <h2>البيانات التي نجمعها</h2>
+          <ul>
+            <li>الاسم ورقم الجوال والبريد الإلكتروني.</li>
+            <li>عنوان التوصيل والمدينة.</li>
+            <li>سجل الطلبات وتفاصيل المشتريات.</li>
+          </ul>
+
+          <h2>كيف نستخدم بياناتك؟</h2>
+          <ul>
+            <li>تنفيذ الطلبات وتوصيلها في الوقت المحدد.</li>
+            <li>إرسال تحديثات الطلب ورسائل التأكيد.</li>
+            <li>تحسين تجربتك على الموقع وتقديم عروض مناسبة.</li>
+            <li>الرد على استفساراتك وطلبات الدعم.</li>
+          </ul>
+
+          <h2>مشاركة البيانات</h2>
+          <p>لا نبيع بياناتك أو نشاركها مع أي طرف ثالث لأغراض تجارية، وتُشارك فقط مع شركات الشحن وبوابات الدفع لإتمام طلبك.</p>
+
+          <h2>حماية البيانات</h2>
+          <p>نستخدم تشفير SSL ووسائل حماية تقنية وإدارية للحفاظ على بياناتك، ولا نحتفظ ببيانات البطاقات البنكية على الموقع.</p>
+
+          <h2>ملفات تعريف الارتباط (Cookies)</h2>
+          <p>نستخدم ملفات تعريف الارتباط لتحسين تجربة التصفح وتذكّر سلة المشتريات. ويمكنك تعطيلها من إعدادات المتصفح مع العلم أن ذلك قد يؤثر على بعض الخصائص.</p>
+
+          <h2>حقوقك</h2>
+          <p>يحق لك طلب الاطلاع على بياناتك أو تصحيحها أو حذفها بالتواصل معنا على care@goldenscent.com.</p>
+        `
+      },
+
+      affiliate: {
+        title: 'برنامج التسويق بالعمولة',
+        body: `
+          <h1>برنامج التسويق بالعمولة (الأفلييت)</h1>
+          <p>انضم إلى برنامج شركاء قولدن سنت واربح عمولة على كل طلب يتم من خلال رابطك.</p>
+
+          <h2>من يمكنه الانضمام؟</h2>
+          <p>المؤثرون، وأصحاب المتاجر الإلكترونية، وصنّاع المحتوى، وكل من لديه جمهور مهتم بالعناية بالشعر.</p>
+
+          <h2>كيف يعمل البرنامج؟</h2>
+          <ol>
+            <li>سجّل بياناتك عبر التواصل معنا.</li>
+            <li>ستصلك رابط الإحالة الخاص بك وكود خصم لمتابعيك.</li>
+            <li>شارك الرابط على منصاتك.</li>
+            <li>تُحسب عمولتك تلقائيًا على كل عملية شراء مكتملة.</li>
+          </ol>
+
+          <h2>نسبة العمولة</h2>
+          <p>تبدأ العمولة من 7% وتصل إلى 12% حسب حجم المبيعات الشهرية، وتُصرف شهريًا بعد انتهاء فترة الإرجاع (14 يومًا).</p>
+
+          <h2>مدة صلاحية الإحالة</h2>
+          <p>يبقى الرابط فعّالًا لمدة 30 يومًا من تاريخ آخر نقرة، ويُحسب الطلب لصالحك حتى لو تم الشراء لاحقًا خلال هذه المدة.</p>
+
+          <h2>كيف أتابع أرباحي؟</h2>
+          <p>نرسل لك تقريرًا شهريًا يوضح عدد الطلبات والعمولات المستحقة وطريقة التحويل.</p>
+
+          <h2>للتسجيل</h2>
+          <p>تواصل معنا على care@goldenscent.com أو عبر الواتساب واذكر كلمة «شراكة» وسنرد عليك خلال 48 ساعة.</p>
+        `
+      }
+
+    };
+
+    /* ============================================================
+       نظام السلة
+       ============================================================ */
+    let cart = [];
+
+    function loadCartFromLocalStorage() {
+        const savedCart = localStorage.getItem('jamalkCart');
+        if (savedCart) {
+            cart = JSON.parse(savedCart);
+            updateCartCount();
+        }
+    }
+
+    function saveCartToLocalStorage() {
+        localStorage.setItem('jamalkCart', JSON.stringify(cart));
+    }
+
+    function updateCartCount() {
+        const badge = document.getElementById('basketCounter');
+        const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+        if(badge) {
+            badge.textContent = totalItems;
+            badge.style.display = totalItems > 0 ? 'flex' : 'none';
+        }
+
+        const wrapper = document.getElementById('basketItemsWrapper');
+        if (!wrapper) return;
+
+        if (cart.length === 0) {
+            wrapper.innerHTML = '<div style="text-align:center; padding: 40px 0; color:#888; font-weight: 700;">السلة فارغة حالياً</div>';
+            document.getElementById('basketTotalPrice').textContent = '0';
+            return;
+        }
+
+        let html = '';
+        let totalPrice = 0;
+
+        cart.forEach((cartItem, index) => {
+            let priceNum = parseFloat(String(cartItem.price).replace(/[^\d.]/g, ''));
+            if(!isNaN(priceNum)) totalPrice += priceNum * cartItem.quantity;
+
+            html += `
+            <div class="basket-item">
+                <img src="${cartItem.image}">
+                <div class="basket-info">
+                <div class="basket-title">${cartItem.name}</div>
+                <div class="basket-price">${cartItem.price} (الكمية: ${cartItem.quantity})</div>
+                ${cartItem.selectedSize ? `<div style="font-size:11px; color:#666;">الحجم: ${cartItem.selectedSize}</div>` : ''}
+                </div>
+                <button class="basket-remove" onclick="removeFromCart(${index})">حذف</button>
+            </div>
+            `;
+        });
+
+        wrapper.innerHTML = html;
+        document.getElementById('basketTotalPrice').textContent = Math.round(totalPrice);
+    }
+
+    window.removeFromCart = function(index) {
+        cart.splice(index, 1);
+        saveCartToLocalStorage();
+        updateCartCount();
+    };
+
+    function addToCart(productId, size = null, price = null) {
+        let product = products.find(p => p.id == productId);
+        if (!product) return;
+        const finalPrice = price || product.price;
+
+        const existingItemIndex = cart.findIndex(item =>
+            item.id === product.id && (item.selectedSize || null) === (size || null)
+        );
+
+        if (existingItemIndex > -1) {
+            cart[existingItemIndex].quantity += 1;
+        } else {
+            cart.push({
+                id: product.id,
+                name: product.name,
+                price: finalPrice,
+                image: product.image,
+                quantity: 1,
+                selectedSize: size
+            });
+        }
+        saveCartToLocalStorage();
+        updateCartCount();
+        displayToast('تم إضافة المنتج للسلة بنجاح!');
+    }
+
+    /* ============================================================
+       أدوات مساعدة
+       ============================================================ */
+    function parsePrice(value) {
+        if (typeof value === 'number') return value;
+        const n = parseFloat(String(value).replace(/[^\d.]/g, ''));
+        return isNaN(n) ? 0 : n;
+    }
+
+    function formatPrice(n) {
+        return Math.round(n) + ' ر.س';
+    }
+
+    /* ============================================================
+       عرض المنتجات والفلترة والبحث
+       ============================================================ */
+    let activeType = null;   // null = كل منتجات العناية بالشعر
+    let searchQuery = '';
+
+    const typeTitles = {
+        'all': 'كل منتجات العناية بالشعر',
+        'شامبو': 'شامبو',
+        'زيوت': 'زيوت ومصول',
+        'ماسكات': 'ماسكات وعلاجات',
+        'تصفيف': 'منتجات تصفيف'
+    };
+
+    function getFilteredProducts() {
+        const q = searchQuery.trim().toLowerCase();
+        return products.filter(p => {
+            const subcategory = p.subcategory || '';
+            let matchType = true;
+            if (activeType) {
+                if (activeType === 'شامبو') {
+                    matchType = subcategory.includes('شامبو');
+                } else if (activeType === 'زيوت') {
+                    matchType = subcategory.includes('زيت') || subcategory.includes('مصل');
+                } else if (activeType === 'ماسكات') {
+                    matchType = subcategory.includes('ماسك') || subcategory.includes('علاج');
+                } else if (activeType === 'تصفيف') {
+                    matchType = subcategory.includes('تصفيف');
+                } else {
+                    matchType = subcategory.includes(activeType);
+                }
+            }
+            if (!matchType) return false;
+            if (!q) return true;
+            const haystack = (
+                (p.name || '') + ' ' +
+                (p.brand || '') + ' ' +
+                (p.description || '') + ' ' +
+                (p.category || '') + ' ' +
+                subcategory
+            ).toLowerCase();
+            return haystack.includes(q);
+        });
+    }
+
+    function applyFilters() {
+        renderProducts(getFilteredProducts(), 'featured-products');
+
+        const titleEl = document.getElementById('products-title');
+        if (searchQuery.trim()) {
+            titleEl.textContent = 'نتائج البحث: ' + searchQuery.trim();
+        } else {
+            titleEl.textContent = activeType ? (typeTitles[activeType] || 'كل منتجات العناية بالشعر') : 'كل منتجات العناية بالشعر';
+        }
+    }
+
+    function renderProducts(productsArray, containerId) {
+        const productsContainer = document.getElementById(containerId);
+        productsContainer.innerHTML = '';
+
+        if (!productsArray.length) {
+            productsContainer.innerHTML = '<div class="empty-results">لا توجد منتجات مطابقة لبحثك، جرّب كلمة أخرى.</div>';
+            return;
+        }
+
+        productsArray.forEach(product => {
+            const productCard = document.createElement('div');
+            productCard.className = 'item-card';
+            productCard.setAttribute('data-id', product.id);
+
+            let badgesHtml = '';
+            if (product.badges && product.badges.length > 0) {
+                let bg = product.badges[0].includes('خصم') ? '#c0392b' : '#2fb99e';
+                badgesHtml = `<span class="item-badge" style="background:${bg};">${product.badges[0]}</span>`;
+            }
+
+            let priceHtml = `<div class="item-prices"><span class="price-current">${product.price}</span>`;
+            if (product.originalPrice) {
+                priceHtml += ` <span class="price-old">${product.originalPrice}</span>`;
+            }
+            priceHtml += `</div>`;
+
+            productCard.innerHTML = `
+                ${badgesHtml}
+                <div class="item-img btn-view-product" data-id="${product.id}">
+                    <img src="${product.image}" alt="${product.name}">
+                </div>
+                ${priceHtml}
+                <div class="item-brand">${product.brand || product.category || 'قولدن سنت'}</div>
+                <div class="item-name btn-view-product" data-id="${product.id}">${product.name}</div>
+                <button class="btn-add" data-id="${product.id}">أضف +</button>
+            `;
+            productsContainer.appendChild(productCard);
+        });
+    }
+
+    /* ============================================================
+       صفحة تفاصيل المنتج + تسعير الأحجام (كل زيادة حجم = +15%)
+       ============================================================ */
+    function showProductPage(productId) {
+        const product = products.find(p => p.id == productId);
+        if (!product) return;
+
+        document.getElementById('products-section').style.display = 'none';
+        document.getElementById('article-page').style.display = 'none';
+        document.getElementById('product-page').style.display = 'block';
+
+        const sizes = Array.isArray(product["الحجم"]) ? product["الحجم"] : [];
+        const basePrice = parsePrice(product.price);
+        const imagesArray = (product.images && product.images.length) ? product.images : [product.image];
+
+        const thumbnailsHtml = imagesArray.map((img, i) =>
+            `<img src="${img}" class="product-thumbnail ${i === 0 ? 'active' : ''}" data-image="${img}" alt="${product.name}">`
+        ).join('');
+
+        let sizesHtml = '';
+        if (sizes.length) {
+            sizesHtml = `
+                <div class="product-options">
+                    <span class="option-title">اختر الحجم:</span>
+                    <div class="option-values" id="size-values">
+                        ${sizes.map((s, i) => `<span class="option-value ${i === 0 ? 'selected' : ''}" data-index="${i}">${s} مل</span>`).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        const oldPriceHtml = product.originalPrice
+            ? ` <span class="price-old" style="font-size:14px;font-weight:400;color:#888;">${product.originalPrice}</span>`
+            : '';
+
+        document.getElementById('product-details').innerHTML = `
+            <div class="product-gallery">
+                <img src="${imagesArray[0]}" class="main-product-image" id="main-product-image" alt="${product.name}">
+                <div class="product-thumbnails">${thumbnailsHtml}</div>
+            </div>
+            <div class="product-info-detail">
+                <h2 class="product-title-detail">${product.name}</h2>
+                <div style="color:#777;font-weight:700;margin-bottom:8px;">الماركة: ${product.brand || product.category || 'قولدن سنت'}</div>
+                ${product["النوع"] ? `<div style="color:#777;font-weight:700;margin-bottom:12px;">النوع: ${product["النوع"]}</div>` : ''}
+                <div class="product-price-detail" id="detail-price">${product.price}${oldPriceHtml}</div>
+                <p class="product-description">${product.description || 'منتج رائع يمنحك تجربة استثنائية للعناية بجمالك.'}</p>
+                ${sizesHtml}
+                <button id="add-to-cart-detail" class="btn-add" style="border:none;padding:14px;margin-top:10px;">إضافة إلى السلة</button>
+            </div>
+        `;
+
+        const priceEl = document.getElementById('detail-price');
+        let currentSize = sizes.length ? sizes[0] + ' مل' : null;
+        let currentPrice = product.price;
+
+        function updatePrice(index) {
+            const p = basePrice * Math.pow(1.15, index);
+            currentPrice = formatPrice(p);
+            currentSize = sizes[index] + ' مل';
+            priceEl.innerHTML = currentPrice + (index === 0 ? oldPriceHtml : '');
+        }
+
+        const sizeValues = document.querySelectorAll('#size-values .option-value');
+        sizeValues.forEach(el => {
+            el.addEventListener('click', function () {
+                sizeValues.forEach(o => o.classList.remove('selected'));
+                this.classList.add('selected');
+                updatePrice(parseInt(this.getAttribute('data-index'), 10));
+            });
+        });
+
+        document.querySelectorAll('.product-thumbnail').forEach(thumb => {
+            thumb.addEventListener('click', function () {
+                document.getElementById('main-product-image').src = this.getAttribute('data-image');
+                document.querySelectorAll('.product-thumbnail').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        document.getElementById('add-to-cart-detail').addEventListener('click', function (e) {
+            e.stopPropagation();
+            addToCart(product.id, currentSize, currentPrice);
+        });
+
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
+    /* ============================================================
+       التنقل بين الأقسام
+       ============================================================ */
+    function goHomeSection() {
+        document.getElementById('products-section').style.display = 'block';
+        document.getElementById('product-page').style.display = 'none';
+        document.getElementById('article-page').style.display = 'none';
+    }
+
+    function showHome(e) {
+        if (e && e.preventDefault) e.preventDefault();
+        goHomeSection();
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
+    function showArticle(key) {
+        const art = articles[key];
+        if (!art) return;
+        document.getElementById('products-section').style.display = 'none';
+        document.getElementById('product-page').style.display = 'none';
+        document.getElementById('article-page').style.display = 'block';
+        document.getElementById('article-body').innerHTML = art.body;
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
+    /* ============================================================
+       البحث
+       ============================================================ */
+    function toggleSearchPanel() {
+        const panel = document.getElementById('searchPanel');
+        const btn = document.getElementById('searchToggle');
+        const input = document.getElementById('searchInput');
+        const isOpen = panel.classList.toggle('open');
+        btn.classList.toggle('active', isOpen);
+
+        if (isOpen) {
+            goHomeSection();
+            applyFilters();
+            setTimeout(() => input.focus(), 60);
+        } else {
+            input.value = '';
+            searchQuery = '';
+            applyFilters();
+        }
+    }
+
+    /* ============================================================
+       النوافذ الجانبية والتنبيهات
+       ============================================================ */
+    function toggleDrawer(id) {
+        document.getElementById('backdrop').classList.add('active');
+        document.getElementById(id).classList.add('show');
+    }
+
+    function closeDrawers() {
+        document.getElementById('backdrop').classList.remove('active');
+        document.querySelectorAll('.drawer').forEach(el => el.classList.remove('show'));
+    }
+
+    let toastTimeout;
+    function displayToast(msg) {
+        const toast = document.getElementById('systemToast');
+        toast.textContent = msg;
+        toast.classList.add('visible');
+        clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => toast.classList.remove('visible'), 2500);
+    }
+
+    /* ============================================================
+       تهيئة الصفحة
+       ============================================================ */
+    document.addEventListener('DOMContentLoaded', function () {
+        loadCartFromLocalStorage();
+        renderProducts(products, 'featured-products');
+
+        const searchInput = document.getElementById('searchInput');
+        document.getElementById('searchToggle').addEventListener('click', toggleSearchPanel);
+
+        searchInput.addEventListener('input', function () {
+            searchQuery = this.value;
+            if (document.getElementById('article-page').style.display === 'block' ||
+                document.getElementById('product-page').style.display === 'block') {
+                goHomeSection();
+            }
+            applyFilters();
+        });
+
+        document.addEventListener('click', function (e) {
+
+            // روابط مقالات الفوتر
+            const articleLink = e.target.closest('[data-article]');
+            if (articleLink) {
+                e.preventDefault();
+                showArticle(articleLink.getAttribute('data-article'));
+                closeDrawers();
+                return;
+            }
+
+            // روابط قائمة التصنيفات
+            const filterLink = e.target.closest('[data-filter]');
+            if (filterLink) {
+                e.preventDefault();
+                const val = filterLink.getAttribute('data-filter');
+                activeType = (val === 'all') ? null : val;
+                searchQuery = '';
+                searchInput.value = '';
+                closeDrawers();
+                goHomeSection();
+                applyFilters();
+                window.scrollTo({top: 0, behavior: 'smooth'});
+                return;
+            }
+
+            // زر الإضافة للسلة من الشبكة
+            if (e.target.classList.contains('btn-add') && !e.target.id.includes('detail')) {
+                const productId = e.target.getAttribute('data-id');
+                addToCart(productId);
+                e.stopPropagation();
+                return;
+            }
+
+            // عرض تفاصيل المنتج
+            const clickableElement = e.target.closest('.btn-view-product');
+            if (clickableElement) {
+                showProductPage(clickableElement.getAttribute('data-id'));
+            }
+        });
+
+        document.getElementById('back-to-products').addEventListener('click', function () {
+            goHomeSection();
+        });
+    });
+</script>
+</body>
+</html>
